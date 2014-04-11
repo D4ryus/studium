@@ -1,0 +1,213 @@
+#include <stdio.h>
+EXEC SQL INCLUDE sqlca;
+EXEC SQL WHENEVER SQLERROR sqlprint;
+EXEC SQL WHENEVER NOT FOUND sqlprint;
+EXEC SQL WHENEVER SQLWARNING sqlprint;
+
+void print_error(int code){
+	printf("Fehler: %d\n", code);
+}
+
+void umzug(){
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		char mname[21];
+		char wohnsitz[21];
+	EXEC SQL END DECLARE SECTION;
+
+	printf("Wer zieht um?(mname):");
+	scanf("%s", &mname);
+	printf("wohin?(sname):");
+	scanf("%s", &wohnsitz);
+	
+	EXEC SQL UPDATE Mensch
+		SET wohnsitz = :wohnsitz
+		WHERE mname = :mname;
+
+	EXEC SQL COMMIT;
+}
+void beitritt(){
+	
+	EXEC SQL BEGIN DECLARE SECTION;
+		char mitgliedsname[21];
+		char vereinsname[21];
+		char kategorie[9];
+		int beitrag;
+	EXEC SQL END DECLARE SECTION;
+
+	printf("Wer soll Mitglied werden?(mname):");
+	scanf("%s",&mitgliedsname);
+	printf("Wo soll er/sie Mitglied werden?(vname):");
+	scanf("%s", &vereinsname);
+	printf("Kategorie?(junior/senior):");
+	scanf("%s", &kategorie);
+	printf("Beitrag?(int):");
+	scanf("%d", &beitrag);
+
+	EXEC SQL INSERT INTO mitgliedschaft(mitgliedsname, vereinsname, kategorie, beitrag)
+		values(:mitgliedsname, :vereinsname, :kategorie, :beitrag);
+
+	EXEC SQL COMMIT;
+
+}
+void austritt(){
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		char mitgliedsname[21];
+		char vereinsname[21];
+	EXEC SQL END DECLARE SECTION;
+
+	printf("Wer will austretten?(mname):");
+	scanf("%s",&mitgliedsname);
+	printf("Aus welchem Verein will er/sie austretten?(vname):");
+	scanf("%s", &vereinsname);
+
+	EXEC SQL DELETE FROM mitgliedschaft
+		WHERE mitgliedsname = :mitgliedsname AND vereinsname = :vereinsname;
+
+	EXEC SQL COMMIT;
+	
+}
+void jugendliche(){}
+void umzug_vwechsel(){}
+void vereinsmitglieder(){
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		char mitgliedsname[21];
+		char vereinsname[21];
+		char wohnsitz[21];
+		int rows = 0;
+	EXEC SQL END DECLARE SECTION;
+
+	printf("Mitglieder von?(vname):");
+	scanf("%s", vereinsname);
+	
+	EXEC SQL DECLARE c CURSOR FOR
+		SELECT mitgliedsname
+		FROM mitgliedschaft
+		WHERE vereinsname = :vereinsname;
+
+	EXEC SQL OPEN c;
+	EXEC SQL WHENEVER NOT FOUND DO BREAK;
+
+	for(;;){
+		EXEC SQL FETCH c INTO :mitgliedsname;
+
+		EXEC SQL SELECT wohnsitz
+				 INTO :wohnsitz
+				 FROM mensch
+				 WHERE mname = :mitgliedsname;
+
+		printf("%s\t%s\n",mitgliedsname,wohnsitz);
+		rows = rows +1;
+	}
+	EXEC SQL CLOSE c;
+	EXEC SQL WHENEVER NOT FOUND CONTINUE;
+
+	printf("(%d rows)",rows);
+		
+	EXEC SQL COMMIT;
+
+}
+void bambiniverein(){
+	EXEC SQL BEGIN DECLARE SECTION;
+		char vname[21];
+		char gruendungsdatum[11];
+		char vereinssitz[21];
+		char mname[21];
+		int  beitrag;
+		char answer;
+	EXEC SQL END DECLARE SECTION;
+
+	printf("Vereinsname?(vname):");
+	scanf("%s",&vname);
+	printf("Gründungsdatum?(dd.mm.yyyy):");
+	scanf("%s", &gruendungsdatum);
+	printf("Vereinssitz?(vereinssitz):");
+	scanf("%s", &vereinssitz);
+
+	EXEC SQL INSERT INTO verein(vname, gruendungsdatum, vereinssitz)
+		values(:vname, :gruendungsdatum, :vereinssitz);
+
+	EXEC SQL COMMIT;
+
+	EXEC SQL DECLARE cu CURSOR FOR
+		SELECT mname
+		FROM mensch
+		WHERE alter < 10;
+
+	EXEC SQL OPEN cu;
+	EXEC SQL WHENEVER NOT FOUND DO BREAK;
+
+	for(;;){
+		EXEC SQL FETCH cu INTO :mname;
+				 
+		printf("Tritt %s %s bei?(y/n)", mname, vname);
+		scanf("%s", &answer);
+
+		if(answer == 'y'){
+			printf("Beitrag?(beitrag)");
+			scanf("%d", &beitrag);
+			
+			EXEC SQL INSERT INTO mitgliedschaft(mitgliedsname, vereinsname, kategorie, beitrag)
+				values(:mname, :vname, 'junior', :beitrag);
+		}
+		
+	}
+	EXEC SQL CLOSE cu;
+	EXEC SQL WHENEVER NOT FOUND CONTINUE;
+	
+	EXEC SQL COMMIT;
+}
+
+int main () {
+
+	int input = 0;
+
+	printf ("Vereins-Anwendung starting.\n");
+	EXEC SQL CONNECT to vereine@localhost;
+	printf ("Vereins-Anwendung connected to Datenbank.\n");
+
+	printf ("\nEnter an application number (0 fuer exit): ");
+	scanf ("%d", &input);
+
+	while (input != 0) {
+
+		switch (input) {
+			case 1:
+				umzug();
+				break;
+			case 2:
+				beitritt();
+				break;
+			case 3:
+				austritt();
+				break;
+			case 4:
+				jugendliche();
+				break;
+			case 5:
+				umzug_vwechsel();
+				break;
+			case 6:
+				vereinsmitglieder();
+				break;
+			case 7:
+				bambiniverein();
+				break;
+			default:
+				printf (" Falsche Eingabe.\n");
+				break;
+
+		}
+
+		printf ("\nEnter an application number: ");
+		scanf ("%d", &input);
+
+	}
+
+	EXEC SQL DISCONNECT;
+	printf ("Vereins-Anwendung disconnected.\n");
+
+	return 0;
+}

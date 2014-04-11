@@ -1,0 +1,149 @@
+1.  Grundlagen der Datenkommunikation
+
+1.1 Rechennetze  und Protokolle
+
+    Rechennetzwerk: Menge von Rechnern, die miteinander durch austausch von
+        Daten kommunizieren, zusammen mit den sie verbindenden 
+        Übertragunsmedien steuert.
+
+    Beispiele: Internet, Ethernet, Vermittlungsnetz der Telekom,
+        Mobilfunknetzte für Rechennetzte
+
+    Rechner: Mainframes, Laptop, Smartphones, Vermittlungsstelle, Router,
+        Bridges, Repeater, Gateways, ...
+
+    Übertragunsmedien: Kupferkabel, Lichtwellenleiter, Funkstrecken, Infrarot, ...
+
+    Software:
+        Kommunikationsprotokoll (Protokoll):
+            Menge von Regeln, die die Kommunikation zwischen Rechnern festlegen.
+
+        Festgelegt werden:
+            - Formate von austauschenden Nachrichten
+            - Inhalte von Nachrichten, sofern sie zur Steuerung der 
+              Kommunikation dienen.
+            - zeitlichen Ablauf der Kommunikation
+
+        Protokolle werden implementiert: Protokollimplementierungen
+
+        Beispiele für Protokolle: TCP, IP, FTP, HTTP, SIP, HDLC, SNTP, ...
+
+
+1.2 Open Systems Interconnection (OSI) - Referenzmodell
+
+    ...ermöglicht die Kommunikation offener Systeme (Rechner) innerhalb
+    eines 7-Schichtmodells, unabhängig von:
+        - Hardware-Architekturen
+        - Betriebsystemen
+        - Programmiersprachen
+        - Administrationen
+
+    Zentrale Begriffe des OSI-Referrenzmodells (RM):
+        - Instanz
+        - Dienst: leitet Schicht n an Schicht n+1.
+        - Protocol Data Unit (PDU): Standartisiert "virtuelle" Kommunikation
+        - Service Data Unit (SDU): innerhalb eines offenen Systems
+                                   nicht standatisiert
+        - Dienst-Primitiv: Nachrichten, die zwishcen offenen Systemen
+          ausgetauscht werden, sind Standatisiert.
+
+1.3 Fluss- und Fehlerkontrolle Sei HDLC
+    Kommunikationsprotokoll im Datenlink Layer
+        HighlevelDataLinkControl
+    Anwendungsbereiche:
+        - Fluss- und Fehlerkontrolle bei lokalen Netzen
+        - ISDN
+        - GSM
+        - ...
+    Mehrere: HDLC-Konfigurationen
+        - Operationsmodi
+        - Variaten
+    Ausgetauscht werden bei HDLC: Frames (=DLPDUs)
+        Frames bestehen aus: Steuerdaten + Benutzerdaten
+        Flag: kennzeichnet Anfang/Ende eines Frames.
+              Inhalt 01111110.
+              Problem: Auftauchen dieses Musters 01111110. in Benutzerdaten
+              Lösung: Bitstuffing
+                Wann immer eine sendende HDLC-Instanz zwischen den Flags 5
+                aufeinanderfolgende 1en erkennt, fängt sie direkt dahinter eine
+                0 ein, die die empfangende Instanz wieder entfernt.
+                Beispiel: Zu senden: 
+                            011011101111011111011111101111110...
+                          Gesendet wird: (wegen Bitstuffing)
+                            0110111011110111110011111010111110110...
+                          der Empfänger nimmt die 0en wieder heraus.
+    Fehlerkontrolle: - Fehlererkennung
+                     - Fehlerkorrektur
+                     - Fehlermodifikation
+    Flusskontrolle: Schutz eines Empfängers von zu vielen Nachrichten vom
+                    Sender pro Zeitintervall
+    Kontrollfeld: Art des HDLC-Frames: U, I, S-Frames, SARM, UA, I RR-, ...
+                  Fehler- und Flusskontrolle: N(S), N(R)
+                  Mittel: Kenngrößen: W, M
+                          Fehler in HDLC-Frames: N(S), N(R)
+                          Daten in Seiten HDLC-Instanzen: V(S), V(R), B(R).
+                  Timer: TI (Retransmission Timer)
+
+1.4 Datenpräsentation und -coding mi ASN.1 und BER
+    (ASN.1 = Abstract Syntax Notation Number 1, Basic, Encoding Rules)
+    OSI-RM betrachtbar als aus zwei Hauptkomponenten bestehend:
+        - Anwendungskomponente (Schichten 6, 7)
+            Kommunikation über abstrakte Syntax:
+                Menge formaler Datentypen, von denen Werte zwischen zwei
+                Anwendungen ausgetauscht werden.
+        - Datentransferkomponente(Schiten 1 - 5)
+            Kommunikation über Transfersyntax:
+                Menge der möglichen Codierungen jedes Wortes jedes Datentypes
+                der abstrakten Syntax, festgelegt durch Codierungsregeln
+
+1.4.1 ASN.1
+    Aufgabe: - Syntax von Anwendungsdaten,
+             - Definition der APDU, PPDUs,
+             - Definition von MIB(Management Information Base)
+    Einteilung der ASN.1-Typen:
+             - Kalorien
+             - Klassen: UNIVERSAL, APPLICATION, context-specific, ...
+    ASN.1-Typen werden durch Tags gekennzeichnet, z.B.:
+        [UNIVERSAL 2]
+        [APPLICATION 1]
+        [2] (für context-specific Typen)
+    ASN.1 erlaubt die Definition neuer Typen:   ::=
+        Kundenzahl ::= INTEGER
+
+1.4.2 Basic Encoding Rules (BER)
+    Zweck: Codierung aller möglichen Worte aller möglichen Typen aus ASN.1
+    Codierung nach TCV-Prinuip: Typ Länge Wert
+        primitive: TLV
+        constructed: TL (TLV, TL(...), TLV)
+    Längencodierung: Ohne Probleme in einem oktett: Längen 0, ... 127
+        Mit 'Patches' in mehreren Oktetts: Längen >= 128
+
+2. Internet
+
+2.1 Architekturen und Protokolle
+    Schichtenprotokoll: TCP/IP-Stack
+        Besonderheit: Layer 2 hat 2 Sublayer: LLC Logic Link Control
+                                              MAC Medium Access Control
+        Enkapselierung
+    Ethernet-Frame: Steuerinfos + Nutzerdaten
+                        |-> physikalische Adressen (HW-Adressen, Ethernet-Adressen,
+                                                    Mac-Adressen)
+    Layer 2: IP = Internet Protokoll: IPv4 Nachrichten:IP-Datagramme
+                                      IPv6
+             Steuerinfos: z.B Logische Adressen (IP Adressen, ...)
+                                |-> Netz ID + Host ID Repräsentation: dezimale
+                                                   Punktpräsentation: a, b, c, d
+             IPv4 hat Probleme: zu wenig Adressen
+             => IPv6 mit sechs langen Adressen: 128 bits
+                - Erweiterungsheader
+             IPv6-Adressen: Hexadezimalnotation, einige Varianten zur
+                                                    Verkleinerung
+             IPv6-Adress-Arten: Global Unicast Adressen, ...
+    Layer: TCP-Segment \
+                        }->Steuerinfos + Nutzerdaten
+           UDP-Segment /       |->z.B. Portnummern, Nummer für Fluss- und
+                                       Fehlerkontrolle, Flags(SYN, FIN, ACK, ...)
+           TCP-Protokoll
+                - Verbindungsaufbau: 3 - Way - Handshake
+                - Datenaustausch (in beide Richtungen)
+                - Verbindungsabbau (2x getrennt in beiden Richtungen)

@@ -1,0 +1,4 @@
+just enter "make list" to fully compile the whole program, 
+all the *.o files and the final executable will be compiled
+to "./bin/" folder. if you want to recomplile completely, just 
+delete the bin folder, "make list" will autocreate it.
