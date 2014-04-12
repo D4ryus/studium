@@ -1,0 +1,85 @@
+/home/d4ryus/github/d4ryus/studium
+├── README
+├── sem_03/
+│   ├── ass_praktikum_02/
+│   │   └── HexDec.asm
+│   ├── ass_praktikum_03/
+│   │   └── LED.asm
+│   ├── cpp_praktikum_01/
+│   │   ├── interestCalc.cpp
+│   │   └── IO.cpp
+│   ├── cpp_praktikum_02/
+│   │   ├── log.cpp
+│   │   ├── logdynamic.cpp
+│   │   ├── passing.cpp
+│   │   └── vault/
+│   │       ├── dynLocation.cpp
+│   │       ├── location.cpp
+│   │       └── paramter.cpp
+│   ├── cpp_praktikum_03/
+│   │   ├── List/
+│   │   │   ├── makefile
+│   │   │   ├── README
+│   │   │   └── source/
+│   │   │       ├── car.cpp
+│   │   │       ├── car.h
+│   │   │       ├── element.cpp
+│   │   │       ├── element.h
+│   │   │       ├── list.cpp
+│   │   │       ├── list.h
+│   │   │       └── main.cpp
+│   │   └── Reise/
+│   │       ├── makefile
+│   │       ├── README
+│   │       └── source/
+│   │           ├── betrag.cpp
+│   │           ├── betrag.h
+│   │           ├── main.cpp
+│   │           ├── place.cpp
+│   │           ├── place.h
+│   │           ├── reise.cpp
+│   │           └── reise.h
+│   ├── cpp_praktikum_04/
+│   │   ├── List/
+│   │   │   ├── makefile
+│   │   │   ├── README
+│   │   │   └── source/
+│   │   │       ├── car.cpp
+│   │   │       ├── car.h
+│   │   │       ├── element.cpp
+│   │   │       ├── element.h
+│   │   │       ├── list.cpp
+│   │   │       ├── list.h
+│   │   │       └── main.cpp
+│   │   └── Mod/
+│   │       ├── makefile
+│   │       ├── README
+│   │       └── source/
+│   │           ├── main.cpp
+│   │           ├── mod.cpp
+│   │           └── mod.h
+│   ├── db_praktikum_02/
+│   │   ├── popstar_creates.sql
+│   │   ├── popstar_inserts.sql
+│   │   └── popstar_prints.sql
+│   ├── db_praktikum_03/
+│   │   ├── astronomie_creates.sql
+│   │   ├── astronomie_inserts.sql
+│   │   └── astronomie_solution.sql
+│   ├── db_praktikum_04/
+│   │   ├── creates.sql
+│   │   ├── inserts.sql
+│   │   └── Logistik_Solution.sql
+│   ├── db_praktikum_05/
+│   │   └── myprog.pgc
+│   └── db_praktikum_06/
+│       ├── Buchhandel.java
+│       └── Buchhdl.java
+└── sem_04/
+    ├── bs_praktikum_01/
+    │   └── simpleshell.c
+    ├── dk_mitschrift.txt
+    └── dk_praktikum_01/
+        └── abp.c
+
+24 directories, 58 files
