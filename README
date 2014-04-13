@@ -10,11 +10,7 @@
 │   ├── cpp_praktikum_02/
 │   │   ├── log.cpp
 │   │   ├── logdynamic.cpp
-│   │   ├── passing.cpp
-│   │   └── vault/
-│   │       ├── dynLocation.cpp
-│   │       ├── location.cpp
-│   │       └── paramter.cpp
+│   │   └── passing.cpp
 │   ├── cpp_praktikum_03/
 │   │   ├── List/
 │   │   │   ├── makefile
@@ -81,4 +77,4 @@
     └── dk_praktikum_01/
         └── abp.c
 
-24 directories, 58 files
+23 directories, 55 files
