@@ -71,10 +71,15 @@
 │       ├── Buchhandel.java
 │       └── Buchhdl.java
 └── sem_04/
+    ├── algo_dat_praktikum_01/
+    │   ├── algolib.c
+    │   ├── algolib.h
+    │   ├── algomain.c
+    │   └── Makefile
     ├── bs_praktikum_01/
     │   └── simpleshell.c
     ├── dk_mitschrift.txt
     └── dk_praktikum_01/
         └── abp.c
 
-23 directories, 55 files
+24 directories, 59 files
