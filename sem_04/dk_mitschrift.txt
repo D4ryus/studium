@@ -7,7 +7,7 @@
 1.1 Rechennetze  und Protokolle
 
     Rechennetzwerk: Menge von Rechnern, die miteinander durch austausch von
-        Daten kommunizieren, zusammen mit den sie verbindenden 
+        Daten kommunizieren, zusammen mit den sie verbindenden.
         Übertragunsmedien steuert.
 
     Beispiele: Internet, Ethernet, Vermittlungsnetz der Telekom,
@@ -16,7 +16,8 @@
     Rechner: Mainframes, Laptop, Smartphones, Vermittlungsstelle, Router,
         Bridges, Repeater, Gateways, ...
 
-    Übertragunsmedien: Kupferkabel, Lichtwellenleiter, Funkstrecken, Infrarot, ...
+    Übertragunsmedien: Kupferkabel, Lichtwellenleiter, Funkstrecken,
+                                                                  Infrarot, ...
 
     Software:
         Kommunikationsprotokoll (Protokoll):
@@ -52,8 +53,10 @@
           ausgetauscht werden, sind Standatisiert.
 
 1.3 Fluss- und Fehlerkontrolle Sei HDLC
+
     Kommunikationsprotokoll im Datenlink Layer
         HighlevelDataLinkControl
+
     Anwendungsbereiche:
         - Fluss- und Fehlerkontrolle bei lokalen Netzen
         - ISDN
@@ -62,6 +65,7 @@
     Mehrere: HDLC-Konfigurationen
         - Operationsmodi
         - Variaten
+
     Ausgetauscht werden bei HDLC: Frames (=DLPDUs)
         Frames bestehen aus: Steuerdaten + Benutzerdaten
         Flag: kennzeichnet Anfang/Ende eines Frames.
@@ -76,11 +80,14 @@
                           Gesendet wird: (wegen Bitstuffing)
                             0110111011110111110011111010111110110...
                           der Empfänger nimmt die 0en wieder heraus.
+
     Fehlerkontrolle: - Fehlererkennung
                      - Fehlerkorrektur
                      - Fehlermodifikation
+
     Flusskontrolle: Schutz eines Empfängers von zu vielen Nachrichten vom
                     Sender pro Zeitintervall
+
     Kontrollfeld: Art des HDLC-Frames: U, I, S-Frames, SARM, UA, I RR-, ...
                   Fehler- und Flusskontrolle: N(S), N(R)
                   Mittel: Kenngrößen: W, M
@@ -89,6 +96,7 @@
                   Timer: TI (Retransmission Timer)
 
 1.4 Datenpräsentation und -coding mi ASN.1 und BER
+
     (ASN.1 = Abstract Syntax Notation Number 1, Basic, Encoding Rules)
     OSI-RM betrachtbar als aus zwei Hauptkomponenten bestehend:
         - Anwendungskomponente (Schichten 6, 7)
@@ -101,53 +109,145 @@
                 der abstrakten Syntax, festgelegt durch Codierungsregeln
 
 1.4.1 ASN.1
+
     Aufgabe: - Syntax von Anwendungsdaten,
              - Definition der APDU, PPDUs,
              - Definition von MIB(Management Information Base)
+
     Einteilung der ASN.1-Typen:
              - Kalorien
              - Klassen: UNIVERSAL, APPLICATION, context-specific, ...
+
     ASN.1-Typen werden durch Tags gekennzeichnet, z.B.:
         [UNIVERSAL 2]
         [APPLICATION 1]
         [2] (für context-specific Typen)
+
     ASN.1 erlaubt die Definition neuer Typen:   ::=
         Kundenzahl ::= INTEGER
 
 1.4.2 Basic Encoding Rules (BER)
+
     Zweck: Codierung aller möglichen Worte aller möglichen Typen aus ASN.1
+
     Codierung nach TCV-Prinuip: Typ Länge Wert
         primitive: TLV
         constructed: TL (TLV, TL(...), TLV)
+
     Längencodierung: Ohne Probleme in einem oktett: Längen 0, ... 127
         Mit 'Patches' in mehreren Oktetts: Längen >= 128
+
 
 2. Internet
 
 2.1 Architekturen und Protokolle
+
     Schichtenprotokoll: TCP/IP-Stack
         Besonderheit: Layer 2 hat 2 Sublayer: LLC Logic Link Control
                                               MAC Medium Access Control
         Enkapselierung
+
     Ethernet-Frame: Steuerinfos + Nutzerdaten
-                        |-> physikalische Adressen (HW-Adressen, Ethernet-Adressen,
-                                                    Mac-Adressen)
+                        |-> physikalische Adressen (HW-Adressen,
+                                               Ethernet-Adressen, Mac-Adressen)
+
     Layer 2: IP = Internet Protokoll: IPv4 Nachrichten:IP-Datagramme
                                       IPv6
              Steuerinfos: z.B Logische Adressen (IP Adressen, ...)
                                 |-> Netz ID + Host ID Repräsentation: dezimale
-                                                   Punktpräsentation: a, b, c, d
+                                                  Punktpräsentation: a, b, c, d
              IPv4 hat Probleme: zu wenig Adressen
              => IPv6 mit sechs langen Adressen: 128 bits
                 - Erweiterungsheader
              IPv6-Adressen: Hexadezimalnotation, einige Varianten zur
                                                     Verkleinerung
              IPv6-Adress-Arten: Global Unicast Adressen, ...
+
     Layer: TCP-Segment \
                         }->Steuerinfos + Nutzerdaten
            UDP-Segment /       |->z.B. Portnummern, Nummer für Fluss- und
-                                       Fehlerkontrolle, Flags(SYN, FIN, ACK, ...)
+                                     Fehlerkontrolle, Flags(SYN, FIN, ACK, ...)
            TCP-Protokoll
                 - Verbindungsaufbau: 3 - Way - Handshake
                 - Datenaustausch (in beide Richtungen)
                 - Verbindungsabbau (2x getrennt in beiden Richtungen)
+
+2.2 Weiterleitung im Internet
+
+2.2.1 Brücken: Netzelement, das zwei oder mehr Rechnernetze auf der Ebene 2 des
+    OSI-RM's verbindet, dh. sie verarbeitet Steuerinformation der Ebene zwei,
+    zB. physikalische Adressen.
+
+                    |               |
+               +-------------------------+
+               |  Port            Port   |
+               |                         |
+               |      Adresstabelle      |
+               |                         |
+               |  Port            Port   |
+               +-------------------------+
+                    |               |
+
+    Adresstabelle mit Einträge folgender Form: (Z, P, T) mit:
+        Z: physikalische Zieladresse
+        P: Ausgangport
+        T: Zeitpunkt der letzten Aktualisierung
+
+    Interpretation: Ein eintreffender Frame mit physikalischer Zieladresse soll
+        auf Port P weitergeleitet werden, Der Eintrag wurde zum Zeitpunkt T
+        letztemal's aktualisiert.
+
+    Brücken führen aus: Weiterleitungsalgorithmus
+                        Lernalgorithmus
+
+    Problem Lernalgorithmus: Zyklen im Netz
+
+2.2.2 Spanning Tree Algorithmus für Brücken (SpTA)
+
+    Aufgabe: Eleminierung von Zyklen im Rechnernetz-VerSünden durch Errechnung
+             einer aktiven Baumtopologie
+
+    SpTA-Schritte: - Bestimmung einer sog. "Root-bridge"
+                   - Bestimmung der Root-Path-Cost's (RPC's)
+                   - Bestimmung der Root Port's
+                   - Bestimmung der Designated-Port-Cost's (DPC's)
+                   - Bestimmung der Designated Port's
+
+    SpTA-Ergebnis: Zyklenfreie Rechnernetzverbund-Topologie eines Segmenten und
+                   aktiven (nicht abgeschlossenen) Ports.
+
+    Bemerkungen: - aktive Baumtopologie ist anfällig gegen Ausfälle von Ports,
+                   Brücken und Segmenten
+                 - aktive Baumtopologie kann sich ändern, bei:
+                    - Änderung der Priorität einer Brücke (über SNMP)
+                    - Änderung der Kosten eines Netztes
+                    - Netzerweiterungen.
+                 - Implementierung von SpTA: Austausch von BPDU's (Bridge PDU's)
+                    zwischen den Bridges.
+
+    SpTA ist standatisiert: IEEE 807.1d
+
+    Verbesserung von SpTA: RSPT = Rapid Spamming Txe Protocol (IEEE 802.1w)
+
+2.2.3 Router
+
+    Ein Router ist ein Netzelement, das zwei oder mehrere Rechnernetze auf der
+        Ebene 3 des OSI-RM's verbindet, dh. er verarbeitet steuerinformation 
+        der Ebene 3 zB. IP-Adressen.
+
+    Eigenschafen von Routern:
+        - Verwendung logischer Adressen für die Weiterleitung, nicht von
+          physikalischen Adressen.
+        - Weiterleiung nur von IP-Datagrammen, deren umgeleiteter Frame
+          physikalisch an diesen Daten adressiert ist.
+        - Weiterleiung möglich zwischen verschiedenartigen Rechnernetzen.
+
+    Zentrale Datenstruktur eines Routers: Routingtabelle mit Einträgen.
+        (ipRootDest, ..., ipRootNextHop, ...)
+              |                 |
+       Netz-Teil einer   logische Router-Adresse
+         IP-Adresse
+
+    Interpretation: Ein eingehendes IP-Datagramm mit loischer Destination
+        Adresse ipRouteDest(nur Netz-ID berücksichtigen) soll zum Router mit IP-Adresse
+        ipRootNextHop weitergeleitet werden.
