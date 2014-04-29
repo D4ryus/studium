@@ -76,10 +76,12 @@
     │   ├── algolib.h
     │   ├── algomain.c
     │   └── Makefile
+    ├── algo_dat_praktikum_02/
+    │   └── Matrix.java
     ├── bs_praktikum_01/
     │   └── simpleshell.c
     ├── dk_mitschrift.txt
     └── dk_praktikum_01/
         └── abp.c
 
-24 directories, 59 files
+25 directories, 60 files
