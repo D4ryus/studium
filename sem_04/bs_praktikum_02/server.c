@@ -6,12 +6,11 @@
 
 int main()
 {
+    init();
+
     char msg_send[MAX_SIZE];
     char msg_received[MAX_SIZE];
     int client_pid;
-
-    if ((msqid = msgget(MQ_KEY, IPC_CREAT | 0770)) < 0)
-        error("could not execute msgget():");
 
     sprintf(msg_send, "%d", getpid());
 

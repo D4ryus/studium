@@ -25,6 +25,12 @@ void error(char *s)
   exit(1);
 }
 
+void init()
+{
+    if ((msqid = msgget(MQ_KEY, IPC_CREAT | 0770)) < 0)
+        error("could not execute msgget():");
+}
+
 void send(int msg_type, char* msg)
 {
     struct msgbuf buffer;
