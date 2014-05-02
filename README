@@ -80,8 +80,13 @@
     │   └── Matrix.java
     ├── bs_praktikum_01/
     │   └── simpleshell.c
+    ├── bs_praktikum_02/
+    │   ├── client.c
+    │   ├── Makefile
+    │   ├── mq.h
+    │   └── server.c
     ├── dk_mitschrift.txt
     └── dk_praktikum_01/
         └── abp.c
 
-25 directories, 60 files
+26 directories, 64 files
