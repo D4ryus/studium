@@ -232,7 +232,7 @@
 2.2.3 Router
 
     Ein Router ist ein Netzelement, das zwei oder mehrere Rechnernetze auf der
-        Ebene 3 des OSI-RM's verbindet, dh. er verarbeitet steuerinformation 
+        Ebene 3 des OSI-RM's verbindet, dh. er verarbeitet steuerinformation
         der Ebene 3 zB. IP-Adressen.
 
     Eigenschafen von Routern:
@@ -249,5 +249,65 @@
          IP-Adresse
 
     Interpretation: Ein eingehendes IP-Datagramm mit loischer Destination
-        Adresse ipRouteDest(nur Netz-ID berücksichtigen) soll zum Router mit IP-Adresse
-        ipRootNextHop weitergeleitet werden.
+        Adresse ipRouteDest(nur Netz-ID berücksichtigen) soll zum Router mit
+        IP-Adresse ipRootNextHop weitergeleitet werden.
+
+    Weiterleitungsalgorithmus von Routern:
+        - verwenden die logischen Adressen von IP-Datagrammen (IP Paket)
+        - Router berücksichtigen nur Frames (und die IP-Pakete darin), die
+          physikalisch an sie adressiert sind.
+
+2.2.4 Routing-Verfahren und Routing-Protokolle
+
+    Routing-Verfahren:
+        (Lern-)Verfahren, mit Hilfe dessen Router in Zusammenarbeit ihre
+        Routingtabellen so mit Einträgen füllen können, dass sie eintreffende
+        Pakete korrekt weiterleiten können.
+
+    Routing-Protokoll:
+        Kommunikationsprotokoll, das ein Routing-Verfahren durch den Austausch
+        von Routing-Informationen zwischen Routern implementiert.
+
+    Beispiele für Routing-Protokolle:
+        - RIP    für   Distanz-Vektor-Routing
+        - DSPF   für   Link State Shortest Path Routing
+          ^                  ^
+       Routing            Routing
+      Protokolle         Verfahren
+
+    Distanz-Vektor-Routing:
+
+        Motto: Teile deinem Nachbarn mit, wie für dich die Welt aussieht.
+
+        Verfahren: Router senden ihre Routing-Tabellen periodisch an ihre
+            Nachbarrouter.
+
+        DVR Verwendet: Verbindungstabellen (Adjazenztabellen) für direkte
+            Nachbarn (Router, Netzte).
+        läuft mehrere Lernrunden
+
+        Das Routing Information Protokoll RIP implementiert das DVR durch Austausch
+        von RIP-Paketen (Request, Reply) RFC=2543
+
+        RIP-Reply-Pakete:
+            - Kopf: Commend, insbesondere Replys
+            - mehrere Routing-Infos: - IP-Adresse(Netz-ID)
+                                     - Metrik(Distanz)
+
+    Link-State-Shortest-Path-Routing:
+
+        Motto: Teile der Welt mit, wer Deine Nachbarn sind.
+
+        Verfahren: Router senden bei bestimmten Ereignissen ihre
+            Verbindungstabellen an alle andren Router.
+
+        Verfahren läuft in zwei Schritten:
+            - der Link-State Algorithmus bestimmt die aktuelle Topologie des
+              Rechennetzverbundes.
+            - der Shortest-Path Algorithmus bestimmt danach den kürzesten Wege
+              zwischen diesen Routern, und allen andren Routern im Netz.
+
+        Das Protokoll Open Shortest Path First (OSPF) implementiert das LSSP
+            Routing-Verfahren.
+        OSPF verwendendet Nachrichten (Pakete) mit Link State Advertisements
+            (LSAs).
