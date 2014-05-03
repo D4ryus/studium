@@ -14,13 +14,14 @@
 #define BUF_LEN 3
 #define MSG_LEN 3
 
-char ss[] = "Sender sends: ";
-char rs[] = "Receiver sends: ";
+char message_sender[]    = "TheQuickBrownFoxOle";
+char message_responder[] = "JumpsOverTheLazyDog";
 
-char message_sender[] = "TheQuickBrownFoxOle";
-char message_receiver[] = "JumpsOverTheLazyDog";
+//int RANDOM = 10; /* 10% */
+//int RANDOM = 5;  /* 20% */
+int RANDOM = 2;  /* 50% */
 
-int state = 0;
+int state  = 0;
 int cursor = 0;
 
 /* child write, parrent read */
@@ -34,11 +35,6 @@ void error(char *msg)
     exit(1);
 }
 
-/*
- * parrent/sender will
- * write to first_pipe[1]
- * read from second_pipe[0] and
- */
 int sender(pid_t pid)
 {
     char control_bit;
@@ -52,6 +48,8 @@ int sender(pid_t pid)
     write(second_pipe[1], msg, MSG_LEN);
     kill(pid, SIGUSR1);
 
+    printf("Sender sends: %s\n", msg);
+
     state = 1;
     while(strlen(message_sender) > cursor)
     {
@@ -60,73 +58,60 @@ int sender(pid_t pid)
         {
             case 1:
                 control_bit = '1';
-                msg[0] = message_sender[cursor];
                 msg[1] = control_bit;
-                msg[2] = '\0';
-                state = 2;
                 break;
             case 2:
                 control_bit = '0';
-                msg[0] = message_sender[cursor];
                 msg[1] = control_bit;
-                msg[2] = '\0';
-                state = 1;
                 break;
         }
-        cursor++;
-        write(second_pipe[1], msg, MSG_LEN);
-        kill(pid, SIGUSR1);
+        msg[0] = message_sender[cursor];
+        msg[2] = '\0';
+        if(rand() % RANDOM != 1)
+        {
+            write(second_pipe[1], msg, MSG_LEN);
+            kill(pid, SIGUSR1);
+        }
+        printf("Sender sends: %s\n", msg);
         alarm(1);
     }
 }
 
-/*
- * child/receiver will
- * write to second_pipe[1]
- * read from first_pipe[0] and
- */
-int receiver()
+int responder()
 {
     char control_bit;
     char msg[MSG_LEN];
-    int ppid = getppid();
-    state = 1;
-    while(strlen(message_receiver) > cursor)
+    int pid = getppid();
+
+    state = 2;
+    while(strlen(message_responder) > cursor)
     {
         pause();
         switch(state)
         {
             case 1:
                 control_bit = '0';
-                msg[0] = message_receiver[cursor];
                 msg[1] = control_bit;
-                msg[2] = '\0';
-                state = 2;
                 break;
             case 2:
                 control_bit = '1';
-                msg[0] = message_receiver[cursor];
                 msg[1] = control_bit;
-                msg[2] = '\0';
-                state = 1;
                 break;
         }
-        cursor++;
-        if(rand() % 2 == 1)
+        msg[0] = message_responder[cursor];
+        msg[2] = '\0';
+        if(rand() % RANDOM != 1)
         {
             write(first_pipe[1], msg, MSG_LEN);
-            kill(ppid, SIGUSR2);
+            kill(pid, SIGUSR2);
         }
+        printf("Responder sends: %s\n", msg);
+        alarm(1);
     }
 }
 
-void abp_sender_alarm()
+void abp_alarm()
 {
-    cursor--;
-    if (state == 1)
-        state = 2;
-    else
-        state = 1;
 }
 
 void abp_sender()
@@ -136,40 +121,51 @@ void abp_sender()
     if(read(first_pipe[0], msg_buf, MSG_LEN) == -1)
         error("abp_sender read error");
 
-    write(STDIN_FILENO, rs, sizeof(rs)-1);
-    msg_buf[2] = '\n';
-    write(STDIN_FILENO, msg_buf, sizeof(msg_buf));
+    printf("Sender received: %s\n", msg_buf);
+
+    if ((state == 1) && (msg_buf[1] == '0'))
+    {
+        state = 2;
+        cursor++;
+    }
+    else if ((state == 2) && (msg_buf[1] == '1'))
+    {
+        state = 1;
+        cursor++;
+    }
 }
 
-void abp_receiver()
+void abp_responder()
 {
     char msg_buf[BUF_LEN];
 
     if(read(second_pipe[0], msg_buf, MSG_LEN) == -1)
-        error("abp_receiver read error");
+        error("abp_responder read error");
 
-    write(STDIN_FILENO, ss, sizeof(ss)-1);
-    msg_buf[2] = '\n';
-    write(STDIN_FILENO, msg_buf, sizeof(msg_buf));
+    printf("Responder received: %s\n", msg_buf);
 
-    if (msg_buf[1] == '0' && state == 2)
-    {
-        state = 1;
-        cursor--;
-    }
-    else if( msg_buf[1] == '1' && state == 1)
+    if ((state == 1) && (msg_buf[1] == '0'))
     {
         state = 2;
-        cursor--;
+        cursor++;
+    }
+    else if ((state == 2) && (msg_buf[1] == '1'))
+    {
+        state = 1;
+        cursor++;
     }
 }
 
 int main()
 {
 
-    struct sigaction actionsender       = {0};
-    struct sigaction actionsender_alarm = {0};
-    struct sigaction actionreceiver     = {0};
+    struct sigaction actionsender   = {0};
+    struct sigaction actionresponder = {0};
+
+    struct sigaction actionalarm = {0};
+
+    actionalarm.sa_handler = abp_alarm;
+    sigaction(SIGALRM, &actionalarm, 0);
 
     if(pipe(first_pipe) == -1 || pipe(second_pipe) == -1)
         error("Can't open pipe");
@@ -180,15 +176,14 @@ int main()
         error("unexpected fork error:");
     else if (pid == 0)
     {
-        /* child/receiver process */
+        /* child/responder process */
         close(first_pipe[0]);       /* close pipes from parent prozess */
         close(second_pipe[1]);
 
-        actionreceiver.sa_handler = abp_receiver;
+        actionresponder.sa_handler = abp_responder;
+        sigaction(SIGUSR1, &actionresponder, 0);
 
-        sigaction(SIGUSR1, &actionreceiver, 0);
-
-        receiver();
+        responder();
 
         sleep(2);
         close(first_pipe[1]);
@@ -202,10 +197,7 @@ int main()
         close(second_pipe[0]);
 
         actionsender.sa_handler       = abp_sender;
-        actionsender_alarm.sa_handler = abp_sender_alarm;
-
         sigaction(SIGUSR2, &actionsender,       0);
-        sigaction(SIGALRM, &actionsender_alarm, 0);
 
         sleep(1);
         sender(pid);

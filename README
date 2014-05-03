@@ -86,7 +86,10 @@
     │   ├── mq.h
     │   └── server.c
     ├── dk_mitschrift.txt
-    └── dk_praktikum_01/
-        └── abp.c
+    ├── dk_praktikum_01/
+    │   └── abp.c
+    ├── dk_praktikum_02/
+    │   └── abp.c
+    └── dk_praktikum_03/
 
-26 directories, 64 files
+28 directories, 65 files
