@@ -158,7 +158,6 @@ void abp_responder()
 
 int main()
 {
-
     struct sigaction actionsender   = {0};
     struct sigaction actionresponder = {0};
 
