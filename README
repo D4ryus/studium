@@ -85,15 +85,23 @@
     │   ├── Makefile
     │   ├── mq.h
     │   └── server.c
+    ├── bs_praktikum_03/
+    │   ├── client.c
+    │   ├── Makefile
+    │   ├── mq.h
+    │   └── server.c
     ├── dk_mitschrift.txt
     ├── dk_praktikum_01/
     │   └── abp.c
     ├── dk_praktikum_02/
-    │   └── abp.c
+    │   ├── abp.c
     └── dk_praktikum_03/
+        ├── DtgClient.class
         ├── DtgClient.java
+        ├── DtgHeader.class
         ├── DtgHeader.java
+        ├── DtgServer.class
         ├── DtgServer.java
         └── Makefile
 
-28 directories, 69 files
+29 directories, 79 files
