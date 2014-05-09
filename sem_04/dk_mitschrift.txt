@@ -1,12 +1,12 @@
 /* Datenkommunikation Mitschrift
  * author: d4ryus - https://github.com/d4ruys/
- * vim:tw=80:ai:ts=4:sw=4:
+ * vim:tw=80:ai:ts=4:sw=4:spell
 
 1.  Grundlagen der Datenkommunikation
 
 1.1 Rechennetze  und Protokolle
 
-    Rechennetzwerk: Menge von Rechnern, die miteinander durch austausch von
+    Rechennetzwerk: Menge von Rechnern, die miteinander durch Austausch von
         Daten kommunizieren, zusammen mit den sie verbindenden.
         Übertragunsmedien steuert.
 
@@ -48,9 +48,9 @@
         - Dienst: leitet Schicht n an Schicht n+1.
         - Protocol Data Unit (PDU): Standartisiert "virtuelle" Kommunikation
         - Service Data Unit (SDU): innerhalb eines offenen Systems
-                                   nicht standatisiert
-        - Dienst-Primitiv: Nachrichten, die zwishcen offenen Systemen
-          ausgetauscht werden, sind Standatisiert.
+                                   nicht standartisiert
+        - Dienst-Primitiv: Nachrichten, die zwischen offenen Systemen
+          ausgetauscht werden, sind Standartisiert.
 
 1.3 Fluss- und Fehlerkontrolle Sei HDLC
 
@@ -64,7 +64,7 @@
         - ...
     Mehrere: HDLC-Konfigurationen
         - Operationsmodi
-        - Variaten
+        - Varianten
 
     Ausgetauscht werden bei HDLC: Frames (=DLPDUs)
         Frames bestehen aus: Steuerdaten + Benutzerdaten
@@ -103,7 +103,7 @@
             Kommunikation über abstrakte Syntax:
                 Menge formaler Datentypen, von denen Werte zwischen zwei
                 Anwendungen ausgetauscht werden.
-        - Datentransferkomponente(Schiten 1 - 5)
+        - Datentransferkomponente(Schichten 1 - 5)
             Kommunikation über Transfersyntax:
                 Menge der möglichen Codierungen jedes Wortes jedes Datentypes
                 der abstrakten Syntax, festgelegt durch Codierungsregeln
@@ -130,7 +130,7 @@
 
     Zweck: Codierung aller möglichen Worte aller möglichen Typen aus ASN.1
 
-    Codierung nach TCV-Prinuip: Typ Länge Wert
+    Codierung nach TCV-Prinzip: Typ Länge Wert
         primitive: TLV
         constructed: TL (TLV, TL(...), TLV)
 
@@ -145,7 +145,7 @@
     Schichtenprotokoll: TCP/IP-Stack
         Besonderheit: Layer 2 hat 2 Sublayer: LLC Logic Link Control
                                               MAC Medium Access Control
-        Enkapselierung
+        Entkapselierung
 
     Ethernet-Frame: Steuerinfos + Nutzerdaten
                         |-> physikalische Adressen (HW-Adressen,
@@ -182,18 +182,18 @@
                +-------------------------+
                |  Port            Port   |
                |                         |
-               |      Adresstabelle      |
+               |      Addresstabelle     |
                |                         |
                |  Port            Port   |
                +-------------------------+
                     |               |
 
-    Adresstabelle mit Einträge folgender Form: (Z, P, T) mit:
-        Z: physikalische Zieladresse
-        P: Ausgangport
+    Addresstabelle mit Einträge folgender Form: (Z, P, T) mit:
+        Z: physikalische Zieladdresse
+        P: Ausgangsport
         T: Zeitpunkt der letzten Aktualisierung
 
-    Interpretation: Ein eintreffender Frame mit physikalischer Zieladresse soll
+    Interpretation: Ein eintreffender Frame mit physikalischer Zieladdresse soll
         auf Port P weitergeleitet werden, Der Eintrag wurde zum Zeitpunkt T
         letztemal's aktualisiert.
 
@@ -204,7 +204,7 @@
 
 2.2.2 Spanning Tree Algorithmus für Brücken (SpTA)
 
-    Aufgabe: Eleminierung von Zyklen im Rechnernetz-VerSünden durch Errechnung
+    Aufgabe: Eleminierung von Zyklen im Rechnernetz-Verbunden durch Errechnung
              einer aktiven Baumtopologie
 
     SpTA-Schritte: - Bestimmung einer sog. "Root-bridge"
@@ -220,22 +220,22 @@
                    Brücken und Segmenten
                  - aktive Baumtopologie kann sich ändern, bei:
                     - Änderung der Priorität einer Brücke (über SNMP)
-                    - Änderung der Kosten eines Netztes
+                    - Änderung der Kosten eines Netzes
                     - Netzerweiterungen.
                  - Implementierung von SpTA: Austausch von BPDU's (Bridge PDU's)
                     zwischen den Bridges.
 
-    SpTA ist standatisiert: IEEE 807.1d
+    SpTA ist standartisiert: IEEE 807.1d
 
     Verbesserung von SpTA: RSPT = Rapid Spamming Txe Protocol (IEEE 802.1w)
 
 2.2.3 Router
 
     Ein Router ist ein Netzelement, das zwei oder mehrere Rechnernetze auf der
-        Ebene 3 des OSI-RM's verbindet, dh. er verarbeitet steuerinformation
+        Ebene 3 des OSI-RM's verbindet, dh. er verarbeitet Steuerinformation
         der Ebene 3 zB. IP-Adressen.
 
-    Eigenschafen von Routern:
+    Eigenschaften von Routern:
         - Verwendung logischer Adressen für die Weiterleitung, nicht von
           physikalischen Adressen.
         - Weiterleiung nur von IP-Datagrammen, deren umgeleiteter Frame
@@ -290,7 +290,7 @@
         von RIP-Paketen (Request, Reply) RFC=2543
 
         RIP-Reply-Pakete:
-            - Kopf: Commend, insbesondere Replys
+            - Kopf: Commend, insbesondere Replies
             - mehrere Routing-Infos: - IP-Adresse(Netz-ID)
                                      - Metrik(Distanz)
 
@@ -309,5 +309,56 @@
 
         Das Protokoll Open Shortest Path First (OSPF) implementiert das LSSP
             Routing-Verfahren.
-        OSPF verwendendet Nachrichten (Pakete) mit Link State Advertisements
+        OSPF verwendet Nachrichten (Pakete) mit Link State Advertisements
             (LSAs).
+
+2.3 Anwendungsprotokoll im Internet
+
+    Beispiele: FTP, HTTP; DNS, SMTP, SNMP, SIP, DHCP, CDAP, ...
+
+2.3.1 File Transfer Protocol (FTP)
+
+    Zweck: Übertragung von Dateien:
+        - verschiedene Typen: ASCII, Sinarg, ...
+        - verschiedene Strukturen: File (kontinuierlichen Byte-Strom ohne
+          Struktur), Records, Page
+        - Transmission Modes: Stream, block, compressed
+
+    Gängige Implementierungen: {ASCII, Sinarg}, File Stream.
+    FTP-Befehle werden über FTP-Baukastenkommandos (nicht standartisiert)
+    einfügen.
+
+    FTP-Datenaustausch geschieht über zwei TCP Verbindungen:
+        - Steuerverbindung
+        - Datenverbindung
+
+    FTP-Kommunikation wird realisiert über (standartisierte) FTP-Kommandos.
+
+2.3.2 Hyper Text Transfer Protocol (HTTP)
+
+    Standartprotokoll zum Surfen!
+
+    C/S - Modell: ---> Request
+                  <--- Reply
+
+    Request: - Request line : Methoden, z.B. GET
+             - Hoster(s)
+             - Blank Line
+             - Message Ready
+
+    Benutzer-Request: GET <URL> HTTP/1.1
+                            |-> "Web-Adresse": Uniform Resource Locator
+
+    Beispiele: - Status Line
+               - Header(s)
+               - Blank Line
+               - Message Body
+
+        Beispiel (Status Line): HTTP/1.1 200 OK
+
+    Headers: Klassen: General, Request, Response, Entity
+
+2.3.3 Domain Name Systems (DNS)
+
+    Aufgabe: Abbildung: Symbolischer Name ---> Ressource
+                "           "         "   ---> logische Internet-Addresse
