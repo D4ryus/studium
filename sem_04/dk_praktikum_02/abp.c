@@ -18,8 +18,8 @@ char message_sender[]    = "TheQuickBrownFoxOle";
 char message_responder[] = "JumpsOverTheLazyDog";
 
 //int RANDOM = 10; /* 10% */
-//int RANDOM = 5;  /* 20% */
-int RANDOM = 2;  /* 50% */
+int RANDOM = 5;  /* 20% */
+//int RANDOM = 2;  /* 50% */
 
 int state  = 0;
 int cursor = 0;
@@ -37,12 +37,10 @@ void error(char *msg)
 
 int sender(pid_t pid)
 {
-    char control_bit;
     char msg[MSG_LEN];
 
-    control_bit = '0';
     msg[0] = message_sender[cursor];
-    msg[1] = control_bit;
+    msg[1] = '0';
     msg[2] = '\0';
     cursor++;
     write(second_pipe[1], msg, MSG_LEN);
@@ -57,31 +55,30 @@ int sender(pid_t pid)
         switch(state)
         {
             case 1:
-                control_bit = '1';
-                msg[1] = control_bit;
+                msg[1] = '1';
                 break;
             case 2:
-                control_bit = '0';
-                msg[1] = control_bit;
+                msg[1] = '0';
                 break;
         }
         msg[0] = message_sender[cursor];
-        msg[2] = '\0';
+        alarm(1);
+
         if(rand() % RANDOM != 1)
         {
             write(second_pipe[1], msg, MSG_LEN);
             kill(pid, SIGUSR1);
         }
+
         printf("Sender sends: %s\n", msg);
-        alarm(1);
     }
 }
 
 int responder()
 {
-    char control_bit;
     char msg[MSG_LEN];
     int pid = getppid();
+    msg[2] = '\0';
 
     state = 2;
     while(strlen(message_responder) > cursor)
@@ -90,23 +87,22 @@ int responder()
         switch(state)
         {
             case 1:
-                control_bit = '0';
-                msg[1] = control_bit;
+                msg[1] = '0';
                 break;
             case 2:
-                control_bit = '1';
-                msg[1] = control_bit;
+                msg[1] = '1';
                 break;
         }
         msg[0] = message_responder[cursor];
-        msg[2] = '\0';
+        alarm(1);
+
         if(rand() % RANDOM != 1)
         {
             write(first_pipe[1], msg, MSG_LEN);
             kill(pid, SIGUSR2);
         }
+
         printf("Responder sends: %s\n", msg);
-        alarm(1);
     }
 }
 
@@ -114,51 +110,47 @@ void abp_alarm()
 {
 }
 
-void abp_sender()
+void set_state(char* msg)
 {
-    char msg_buf[BUF_LEN];
-
-    if(read(first_pipe[0], msg_buf, MSG_LEN) == -1)
-        error("abp_sender read error");
-
-    printf("Sender received: %s\n", msg_buf);
-
-    if ((state == 1) && (msg_buf[1] == '0'))
+    if      ((state == 1) && (msg[1] == '0'))
     {
         state = 2;
         cursor++;
     }
-    else if ((state == 2) && (msg_buf[1] == '1'))
+    else if ((state == 2) && (msg[1] == '1'))
     {
         state = 1;
         cursor++;
     }
+}
+
+void abp_sender()
+{
+    char b[BUF_LEN];
+
+    if(read(first_pipe[0], b, MSG_LEN) == -1)
+        error("abp_sender read error");
+
+    printf("Sender received: %s\n", b);
+
+    set_state(b);
 }
 
 void abp_responder()
 {
-    char msg_buf[BUF_LEN];
+    char b[BUF_LEN];
 
-    if(read(second_pipe[0], msg_buf, MSG_LEN) == -1)
+    if(read(second_pipe[0], b, MSG_LEN) == -1)
         error("abp_responder read error");
 
-    printf("Responder received: %s\n", msg_buf);
+    printf("Responder received: %s\n", b);
 
-    if ((state == 1) && (msg_buf[1] == '0'))
-    {
-        state = 2;
-        cursor++;
-    }
-    else if ((state == 2) && (msg_buf[1] == '1'))
-    {
-        state = 1;
-        cursor++;
-    }
+    set_state(b);
 }
 
 int main()
 {
-    struct sigaction actionsender   = {0};
+    struct sigaction actionsender    = {0};
     struct sigaction actionresponder = {0};
 
     struct sigaction actionalarm = {0};
