@@ -1,3 +1,6 @@
+/* author: d4ryus - https://github.com/d4ryus/
+ * vim:noexpandtab:ft=java:foldmethod=syntax:foldcolumn=4:
+ */
 import java.net.*;
 import java.io.*;
 
