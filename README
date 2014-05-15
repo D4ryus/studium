@@ -79,7 +79,6 @@
     ├── algo_dat_praktikum_02/
     │   └── Matrix.java
     ├── algo_dat_praktikum_03/
-    │   ├── hash*
     │   ├── hash.c
     │   ├── HashNode.class
     │   ├── HashNode.java
@@ -92,21 +91,24 @@
     │   ├── mq.h
     │   └── server.c
     ├── bs_praktikum_03/
-    │   ├── client*
     │   ├── client.c
     │   ├── Makefile
     │   ├── mq.h
-    │   ├── server*
     │   └── server.c
     ├── dk_mitschrift.txt
     ├── dk_praktikum_01/
     │   └── abp.c
     ├── dk_praktikum_02/
     │   └── abp.c
-    └── dk_praktikum_03/
-        ├── DtgClient.java
-        ├── DtgHeader.java
-        ├── DtgServer.java
-        └── Makefile
+    ├── dk_praktikum_03/
+    │   ├── DtgClient.java
+    │   ├── DtgHeader.java
+    │   ├── DtgServer.java
+    │   └── Makefile
+    └── dk_praktikum_04/
+        ├── Client.java
+        ├── Header.java
+        ├── Makefile
+        └── Server.java
 
-30 directories, 80 files
+31 directories, 81 files
