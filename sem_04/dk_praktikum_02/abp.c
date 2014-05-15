@@ -18,8 +18,8 @@ char message_sender[]    = "TheQuickBrownFoxOle";
 char message_responder[] = "JumpsOverTheLazyDog";
 
 //int RANDOM = 10; /* 10% */
-int RANDOM = 5;  /* 20% */
-//int RANDOM = 2;  /* 50% */
+//int RANDOM = 5;  /* 20% */
+int RANDOM = 2;  /* 50% */
 
 int state  = 0;
 int cursor = 0;
