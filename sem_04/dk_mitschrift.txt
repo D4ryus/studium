@@ -361,4 +361,65 @@
 2.3.3 Domain Name Systems (DNS)
 
     Aufgabe: Abbildung: Symbolischer Name ---> Ressource
-                "           "         "   ---> logische Internet-Addresse
+                 "            "       "   ---> logische Internet-Adresse
+
+    Domain name Space: strukturreichen Namenservern.
+        Den Knoten sind Domain Names zugeordnet
+        Root Domain
+        Top Level Domains: generische Domains, Linker-Domains
+        Subdomains
+
+    Name Server: Program das Domain-Names logische Adressen zugeordnet
+
+    Name Server leisten den Name Service und sind für sogenannte Zonen (Teile)
+        des Domain Name Spaces zuständig.
+
+    Resolver: Programm auf Client-Seite, das in Reaktion auf Anwenderanfragen
+        Informationen von Name Servern beschafft.
+
+    Resource Record: Datenstruktur zur Speicherung von Namen und zugehörigen
+        Ressourcen auf einer Machine mit einem Name Server.
+
+        Komponenten: Domain Name als Argument
+                            ...
+                     Resource Daten
+
+        DNS-Messages:  ---> Queries   enthalten Questions Resource Record (RR)
+                       <--- Response  als Antworten
+
+    Ablauf einer Name Resolution (lokal):
+
+        - Client Application verwendet Resolver
+        - Resolver schafft von Name Servern die angeforderte Ressource (i. A.
+          lg. Adresse) heran
+        - Client Application und Server Application können miteinander
+          kommunizieren.
+
+    Ablauf einer Name Resolution (non-lokal):
+
+            2 wichtige Such-Typen
+                rekursiv: Resolver oder ein Name Server in Client-Rolle schicken
+                          eine Anfrage ab und erhält - nach spürbarer
+                          Verzögerung - die Antwort.
+                intensiv: Resource oder Name Server in Client-Rolle schickt
+                          Anfrage, erhält vorläufige Austausch-Schicht nächste
+                          Anfrage bis es die nächste und gute Antwort erhält.
+
+            Bemerkung: high level Name Server haben die Annahme rekursiven
+                Anfragen abgeschaltet.
+
+            Anhang: Adress Resolver Protocol ARP
+                ARP ist eine Layer-3-Protokoll für IPv4, nun logischen Adressen
+                physikalische Adressen zwecks Weiterleitung von IP-Datasegmenten
+                zuzuordnen.
+
+                Printing    ---> ARP Request (Broadcast)
+                            <--- ARP Reply   (Unicast von einem Rechner oder
+                                              einem Router (Proxy-ARP))
+
+    Nachbemerkung zu DNS/Java:
+
+        Namenauflösung in Java:
+            - static InetAddress   getlocalHost();
+            - static InetAddress   getByName(String);
+            - static InetAddress[] getAllByName(String);
