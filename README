@@ -79,10 +79,7 @@
     ├── algo_dat_praktikum_02/
     │   └── Matrix.java
     ├── algo_dat_praktikum_03/
-    │   ├── hash.c
-    │   ├── HashNode.class
-    │   ├── HashNode.java
-    │   └── SimpleHashList.java
+    │   └── hash.c
     ├── bs_praktikum_01/
     │   └── simpleshell.c
     ├── bs_praktikum_02/
@@ -111,4 +108,4 @@
         ├── Makefile
         └── Server.java
 
-31 directories, 81 files
+31 directories, 78 files
