@@ -3,8 +3,8 @@
 
 float c        = 0.6180339887;
 int   m        = 16384;
-int   length   = 50;
-int   datasets = 500;
+int   length   = 1000;
+int   datasets = 100000;
 
 typedef struct hash_node hash_node_t;
 
