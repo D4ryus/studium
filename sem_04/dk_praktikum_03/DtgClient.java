@@ -1,5 +1,5 @@
 /* author: d4ryus - https://github.com/d4ryus/
- * vim:noexpandtab:ft=java:foldmethod=syntax:foldcolumn=4:
+ * vim:ft=java:foldmethod=syntax:foldcolumn=4:
  */
 import java.net.*;
 import java.io.*;
@@ -10,7 +10,8 @@ class DtgClient
 
     private static String read() throws Exception
     {
-        BufferedReader userin = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader userin = new BufferedReader(
+                                            new InputStreamReader(System.in));
         return userin.readLine();
     }
 
@@ -29,14 +30,25 @@ class DtgClient
         header.send_port      = Integer.parseInt(args[1]);
         header.send_address   = InetAddress.getByName(args[0]);
 
-        String message = read();
+        String message;
 
-        System.out.println("sending message: " + message);
-        header.send_message(message);
+        while(true)
+        {
+            message = read();
+            if (message == null)
+                break;
 
-        message = header.get_message();
-        System.out.println("got message:     " + message);
+            System.out.println("sending message: \"" + message
+                                 + "\" to:   \""    + header.send_address.toString()
+                                 + ":"              + header.send_port + "\"");
+            header.send_message(message);
 
+            message = header.get_message();
+            System.out.println("got message:     \"" + message
+                                 + "\" from: \""    + header.dtgRecPacket.getPort()
+                                 + ":"              + header.dtgRecPacket.getAddress() + "\"");
+
+        }
         header.dtgSocket.close();
     }
 }

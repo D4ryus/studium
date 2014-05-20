@@ -23,13 +23,17 @@ class DtgServer
         while(true)
         {
             String message = header.get_message();
-            System.out.println("got message:     " + message);
+            System.out.println("got message:     \"" + message + "\""
+                                 + "\" from: \""    + header.dtgRecPacket.getPort()
+                                 + ":"              + header.send_port + "\"");
 
             header.send_port    = header.dtgRecPacket.getPort();
             header.send_address = header.dtgRecPacket.getAddress();
 
             message = message.toUpperCase();
-            System.out.println("sending message: " + message);
+            System.out.println("sending message: \"" + message
+                                 + "\" to: \""    + header.send_address.toString()
+                                 + ":"            + header.send_port + "\"");
             header.send_message(message);
         }
         //header.dtgSocket.close();
