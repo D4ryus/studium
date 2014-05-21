@@ -1,31 +1,56 @@
 /* author: d4ryus - https://github.com/d4ryus/
- * vim:noexpandtab:ft=java:foldmethod=syntax:
+ * vim:ft=java:foldmethod=syntax:foldcolumn=5:
  */
+
 import java.net.*;
+import java.io.IOException;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 
 class Header
 {
-    public Socket Socket;
-
     public int port;
+    public Socket socket;
 
-    public InetAddress send_address;
-
-    public String get_message() throws Exception
+    public String get_message()
     {
-        byte[] buffer = new byte[100];
-        dtgRecPacket  = new Packet(buffer, 100);
-        dtgSocket.receive(dtgRecPacket);
-
-        buffer = dtgRecPacket.getData();
-
-        return (new String(buffer));
+        String message = new String();
+        try
+        {
+            BufferedReader bufferedReader =
+                new BufferedReader(
+                        new InputStreamReader(
+                            socket.getInputStream()));
+            message = bufferedReader.readLine();
+        }
+        catch(IOException e)
+        {
+            System.out.println("IOException by get_message occured!! " + e);
+            System.exit(1);
+        }
+        return message;
     }
 
-    public void send_message(String message) throws Exception
+    public void send_message(String message)
     {
-        byte[] buffer = message.getBytes();
-        dtgSendPacket = new Packet(buffer, buffer.length, send_address, send_port);
-        dtgSocket.send(dtgSendPacket);
+        try
+        {
+            PrintWriter printWriter =
+                new PrintWriter(
+                        new OutputStreamWriter(
+                            socket.getOutputStream()));
+            printWriter.print(message + "\n");
+            printWriter.flush();
+        }
+        catch(IOException e)
+        {
+            System.out.println("IOException by send_message occured!! " + e);
+            System.exit(1);
+        }
     }
 }

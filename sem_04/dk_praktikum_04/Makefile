@@ -4,13 +4,10 @@
 
 CC=javac
 
-all: Header Server Client
+all: Server Client
 
-Header: Header.java
-	${CC} Header.java
-
-Server: Server.java Header
+Server: Server.java
 	${CC} Server.java
 
-Client: Client.java Header
+Client: Client.java
 	${CC} Client.java

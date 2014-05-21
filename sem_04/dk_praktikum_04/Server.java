@@ -1,55 +1,13 @@
 /* author: d4ryus - https://github.com/d4ryus/
  * vim:ft=java:foldmethod=syntax:foldcolumn=5:
  */
+
 import java.net.*;
 import java.io.IOException;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-import java.io.PrintWriter;
-import java.io.OutputStreamWriter;
 
 class Server
 {
     static String state = "Init";
-
-    private static String get_message(Socket socket)
-    {
-        String message = new String();
-        try
-        {
-            BufferedReader bufferedReader =
-                new BufferedReader(
-                        new InputStreamReader(
-                            socket.getInputStream()));
-            message = bufferedReader.readLine();
-        }
-        catch(IOException e)
-        {
-            System.out.println("IOException by get_message occured!! " + e);
-            System.exit(1);
-        }
-        return message;
-    }
-
-    private static void send_message(Socket socket, String message)
-    {
-        try
-        {
-            PrintWriter printWriter =
-                new PrintWriter(
-                        new OutputStreamWriter(
-                            socket.getOutputStream()));
-            printWriter.print(message + "\n");
-            printWriter.flush();
-        }
-        catch(IOException e)
-        {
-            System.out.println("IOException by send_message occured!! " + e);
-            System.exit(1);
-        }
-    }
 
     private static String state_automaton(String command)
     {
@@ -124,22 +82,23 @@ class Server
             System.exit(0);
         }
 
-        int port = Integer.parseInt(args[0]);
-        ServerSocket s_socket = new ServerSocket(port);
+        Header header  = new Header();
+        header.port    = Integer.parseInt(args[0]);
+        ServerSocket socket = new ServerSocket(header.port);
 
-        Socket client_socket = s_socket.accept();
+        header.socket = socket.accept();
         System.out.println("got client!");
 
         while(true)
         {
-            String command = get_message(client_socket);
+            String command = header.get_message();
             System.out.println("got command: " + command);
 
             String message = state_automaton(command);
             System.out.println("in state " + state + " now");
             System.out.println("sending message: " + message);
 
-            send_message(client_socket, message);
+            header.send_message(message);
         }
         //client_socket.close();
         //s_socket.close();
