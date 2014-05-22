@@ -36,9 +36,7 @@ class Client
         }
 
         Header header  = new Header();
-        String address = args[0];
-        header.port    = Integer.parseInt(args[1]);
-        header.socket  = new Socket(address, header.port);
+        header.socket  = new Socket(args[0], Integer.parseInt(args[1]));
 
         while(true)
         {

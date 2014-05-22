@@ -14,7 +14,6 @@ import java.io.OutputStreamWriter;
 
 class Header
 {
-    public int port;
     public Socket socket;
 
     public String get_message()

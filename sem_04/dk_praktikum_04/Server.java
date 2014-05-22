@@ -7,7 +7,7 @@ import java.io.IOException;
 
 class Server
 {
-    static String state = "Init";
+    static String state;
 
     private static String state_automaton(String command)
     {
@@ -82,9 +82,10 @@ class Server
             System.exit(0);
         }
 
+        state = "Init";
+
         Header header  = new Header();
-        header.port    = Integer.parseInt(args[0]);
-        ServerSocket socket = new ServerSocket(header.port);
+        ServerSocket socket = new ServerSocket(Integer.parseInt(args[0]));
 
         header.socket = socket.accept();
         System.out.println("got client!");
