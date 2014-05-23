@@ -25,7 +25,7 @@
 
         Festgelegt werden:
             - Formate von austauschenden Nachrichten
-            - Inhalte von Nachrichten, sofern sie zur Steuerung der 
+            - Inhalte von Nachrichten, sofern sie zur Steuerung der
               Kommunikation dienen.
             - zeitlichen Ablauf der Kommunikation
 
@@ -75,7 +75,7 @@
                 Wann immer eine sendende HDLC-Instanz zwischen den Flags 5
                 aufeinanderfolgende 1en erkennt, fängt sie direkt dahinter eine
                 0 ein, die die empfangende Instanz wieder entfernt.
-                Beispiel: Zu senden: 
+                Beispiel: Zu senden:
                             011011101111011111011111101111110...
                           Gesendet wird: (wegen Bitstuffing)
                             0110111011110111110011111010111110110...
@@ -423,3 +423,84 @@
             - static InetAddress   getlocalHost();
             - static InetAddress   getByName(String);
             - static InetAddress[] getAllByName(String);
+
+3. Lokale Netze
+
+3.1 Einführung
+
+    Lokales Netz: Rechnernetz mit einer Größe in maximal einstelligen
+        Kilometerbereich.
+
+    Eigenschaft: unterschiedliche Übergangsmedien: Kupfer/Glasfaser/Funk/
+                                                                      Infrarot
+
+    unterschiedliche Topologien: Bus, Stern, Ring
+
+    unterschiedliche Zugriffsverfahren: verteilt...
+
+    einheitliche meist private Administrierung
+
+    Backbone-Netz: Rechnernetz, das Rechnernetze nur bindet (hohe
+        Datenübertragungsraten, unterschiedliche Topologien)
+
+3.2 Ethernet
+
+    Es gilt:
+        Klassisches Ethernet: Bustopologie, IO Mbit/s
+
+    Einführung auf höhere Geschwindigkeiten:
+        -> Ethernet-Notation notwendig:
+    +-------------------+--------------+-----------------------+
+    | Datenrate in Mb/s | Medientyp    | maximale Segmentlänge |
+    |                   | BASE, (BROAD | oder Medien           |
+    +-------------------+--------------+-----------------------+
+             10              BASE               5
+            100              BASE               FX
+
+3.2.1 Klassisches Ethernet
+
+    Medium: Koaxial Kabel
+    HW "Transreceiver", gleichberechtigte Stationen
+
+    Eigenschaften: Bus, Broadcast, Halbduplex, CSMA/CD
+
+    Insg.-Struktur: Lager 1, Layer 2a, 2b (Medium Access Control, Logical Link
+                                           Control)
+
+    Zugriffsverfahren (Medium Access Control Sublagen 2a):
+        Corner Sense Multiple Access/ Collision Detect)
+                                      0
+    Mehrere Verbindungen von CSMA/CD. |--persistente Varianten.
+                                      p
+
+    Framestruktur: 2 Formale: V2-Format
+                              IEEE-Format
+                                           1
+    Logical Link Control: 3 Varianten: LCC 2
+                                           3
+    Kombination Klassischen Ethernets:
+        max. 5 Segmente(Basre) über max. 4 Repeater
+        max. 2500m (klassisches 10Mbit/s Ethernet.)
+
+    Eigenschaften vom klassischem Ethernet:
+        Mindestframelänge 64 bytes
+        errechnet aus: max. länge Ethernet (2500m mit Repeater)
+            Übertragungsgeschwindigkeit des Signals (...m/sec)
+            Übertragungsrate: Mbit/s
+
+3.2.2 Schnellere Ethernets
+
+    Fast Ethernet (100Mbit/s)
+        zusätzlich: Sterntopologie.
+            Hub    (Multiport-Repeater) im Zentrum: shared   Ethernet
+            Switch (Multiport-Bridge)   im Zentrum: switched Ethernet
+
+    Verschiedene Ethernets können kombiniert werden!
+
+    => Autonegotiation von der Kommunikation notwendig, um die
+        Übertragungspausen - mehr der Stationen auszutauschen (Übertragungsrate,
+        Übertragungsmodus [halb/voll duplex])
+
+    Gigabit-Ethernet (1000Mbit/s):
+        - Direkt-Verbindungen zwischen Stationen und/oder Switches
+        - immer noch die alten Ethernet-Frames!
