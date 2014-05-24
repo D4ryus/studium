@@ -227,8 +227,7 @@ learn_round(table* t1, table* t2, int size)
             for(iii = 0; iii < size; iii++)
             {
                 if(    (                    i != ii  )
-                    && (     t1[i].learn[iii] != '-' )
-                    && ( t1[iii].ddg[ii].dist >  -1  ) )
+                    && (     t1[i].learn[iii] != '-' ) )
                 {
                     if( t1[i].ddg[ii].dist > (t1[iii].ddg[ii].dist + t1[i].ddg[iii].dist) )
                     {
@@ -260,11 +259,9 @@ learn_something(table* t, int size)
             for(iii = 0; iii < size; iii++)
             {
                 if(    (                   i != ii  )
-                    && (     t[i].learn[iii] != '-' )
-                    && ( t[iii].ddg[ii].dist >  -1  ) )
+                    && (     t[i].learn[iii] != '-' ) )
                 {
-                    if(    ( t[i].ddg[ii].dist == -1 )
-                        ||   t[i].ddg[ii].dist > (t[iii].ddg[ii].dist + t[i].ddg[iii].dist) )
+                    if( t[i].ddg[ii].dist > (t[iii].ddg[ii].dist + t[i].ddg[iii].dist) )
                     {
                         t[i].ddg[ii].dist = t[iii].ddg[ii].dist + t[i].ddg[iii].dist;
                         t[i].ddg[ii].gate = t[iii].id;
@@ -288,31 +285,30 @@ main()
     table tbl1[size];
     table tbl2[size];
 
-  //printf("\ninit default tables...\n");
+    printf("\ninit default tables...");
     init(tbl1, size);
     init(tbl2, size);
     print_tables(tbl1, size);
 
-  //printf("\ninit adjanz tables...\n");
+    printf("\ninit adjanz tables...");
     init_adjanz(tbl1);
     init_adjanz(tbl2);
     print_tables(tbl1, size);
 
-    /*
+    printf("\nstart learn algorithm...");
     while(changes != 0)
     {
-      //changes = learn_something(tbl1, size);
         changes = learn_round(tbl1, tbl2, size);
         print_tables(tbl2, size);
         printf("%d changes.\n", changes);
         copy_table(tbl2, tbl1, size);
     }
-    */
+    /*
     while(changes != 0)
     {
         changes = learn_something(tbl1, size);
-      //changes = learn_round(tbl1, tbl2, size);
         print_tables(tbl1, size);
         printf("%d changes.\n", changes);
     }
+    */
 }
