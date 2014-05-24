@@ -7,6 +7,7 @@
 
 typedef struct table_def          table;
 typedef struct dest_dist_gate_def dest_dist_gate;
+#define SIZE 6
 
 struct
 dest_dist_gate_def
@@ -21,8 +22,8 @@ table_def
 {
     char id;
     int  round;
-    char learn[6];
-    dest_dist_gate ddg[6];
+    char learn[SIZE];
+    dest_dist_gate ddg[SIZE];
 };
 
 void
@@ -45,113 +46,70 @@ init(table* t, int size)
     }
 }
 
-void
-init_adjanz(table* t)
+int
+insert(table* tbl, char id, char dest, int dist)
 {
-    //TABLE A       //A
-    t[0].ddg[0].dist = 0;
-    t[0].ddg[0].gate = 'A';
-                    //B
-    t[0].ddg[1].dist = 2;
-    t[0].ddg[1].gate = 'B';
-    t[0].learn[1] = 'B';
-                    //C
-    t[0].ddg[2].dist = 5;
-    t[0].ddg[2].gate = 'C';
-    t[0].learn[2] = 'C';
-                    //D
-    t[0].ddg[3].dist = 1;
-    t[0].ddg[3].gate = 'D';
-    t[0].learn[3] = 'D';
+    int ID   = id   - 65;
+    int DEST = dest - 65;
+    tbl[ID].ddg[DEST].dist = dist;
+    tbl[ID].ddg[DEST].gate = dest;
+}
 
+void
+init_adjanz(table* t, int size)
+{
+    insert(t, 'A',   'B', 2);
+    insert(t, 'A',   'C', 5);
+    insert(t, 'A',   'D', 1);
 
-    //TABLE B       //A
-    t[1].ddg[0].dist = 2;
-    t[1].ddg[0].gate = 'A';
-    t[1].learn[0] = 'A';
-                    //B
-    t[1].ddg[1].dist = 0;
-    t[1].ddg[1].gate = 'B';
-                    //C
-    t[1].ddg[2].dist = 3;
-    t[1].ddg[2].gate = 'C';
-    t[1].learn[2] = 'C';
-                    //D
-    t[1].ddg[3].dist = 2;
-    t[1].ddg[3].gate = 'D';
-    t[1].learn[3] = 'D';
+    insert(t, 'B',   'A', 2);
+    insert(t, 'B',   'C', 3);
+    insert(t, 'B',   'D', 2);
 
-    //TABLE C       //A
-    t[2].ddg[0].dist = 5;
-    t[2].ddg[0].gate = 'A';
-    t[2].learn[0] = 'A';
-                    //B
-    t[2].ddg[1].dist = 3;
-    t[2].ddg[1].gate = 'B';
-    t[2].learn[1] = 'B';
-                    //C
-    t[2].ddg[2].dist = 0;
-    t[2].ddg[2].gate = 'C';
-                    //D
-    t[2].ddg[3].dist = 3;
-    t[2].ddg[3].gate = 'D';
-    t[2].learn[3] = 'D';
-                    //E
-    t[2].ddg[4].dist = 1;
-    t[2].ddg[4].gate = 'E';
-    t[2].learn[4] = 'E';
-                    //F
-    t[2].ddg[5].dist = 5;
-    t[2].ddg[5].gate = 'F';
-    t[2].learn[5] = 'F';
+    insert(t, 'C',   'A', 5);
+    insert(t, 'C',   'B', 3);
+    insert(t, 'C',   'D', 3);
+    insert(t, 'C',   'E', 1);
+    insert(t, 'C',   'F', 5);
 
-    //TABLE D       //A
-    t[3].ddg[0].dist = 1;
-    t[3].ddg[0].gate = 'A';
-    t[3].learn[0] = 'A';
-                    //B
-    t[3].ddg[1].dist = 2;
-    t[3].ddg[1].gate = 'B';
-    t[3].learn[1] = 'B';
-                    //C
-    t[3].ddg[2].dist = 3;
-    t[3].ddg[2].gate = 'C';
-    t[3].learn[2] = 'C';
-                    //D
-    t[3].ddg[3].dist = 0;
-    t[3].ddg[3].gate = 'D';
-                    //E
-    t[3].ddg[4].dist = 1;
-    t[3].ddg[4].gate = 'E';
-    t[3].learn[4] = 'E';
+    insert(t, 'D',   'A', 1);
+    insert(t, 'D',   'B', 2);
+    insert(t, 'D',   'C', 3);
+    insert(t, 'D',   'E', 1);
 
-    //TABLE E       //C
-    t[4].ddg[2].dist = 1;
-    t[4].ddg[2].gate = 'C';
-    t[4].learn[2] = 'C';
-                    //D
-    t[4].ddg[3].dist = 1;
-    t[4].ddg[3].gate = 'D';
-    t[4].learn[3] = 'D';
-                    //E
-    t[4].ddg[4].dist = 0;
-    t[4].ddg[4].gate = 'E';
-                    //F
-    t[4].ddg[5].dist = 2;
-    t[4].ddg[5].gate = 'F';
-    t[4].learn[5] = 'F';
+    insert(t, 'E',   'C', 1);
+    insert(t, 'E',   'D', 1);
+    insert(t, 'E',   'F', 2);
 
-    //TABLE F       //C
-    t[5].ddg[2].dist = 5;
-    t[5].ddg[2].gate = 'C';
-    t[5].learn[2] = 'C';
-                    //E
-    t[5].ddg[4].dist = 2;
-    t[5].ddg[4].gate = 'E';
-    t[5].learn[4] = 'E';
-                    //F
-    t[5].ddg[5].dist = 0;
-    t[5].ddg[5].gate = 'F';
+    insert(t, 'F',   'C', 5);
+    insert(t, 'F',   'E', 2);
+
+    int i;
+    int ii;
+    for(i = 0; i < size; i++)
+    {
+        for(ii = 0; ii < size; ii++)
+        {
+            if(i == ii)
+                insert(t, 65 + i, 65 + ii, 0);
+        }
+    }
+}
+
+void
+set_neighbor(table* t, int size)
+{
+    int i;
+    int ii;
+    for (i = 0; i < size; i++)
+    {
+        for (ii = 0; ii < size; ii++)
+        {
+            if(    (t[i].ddg[ii].gate != '-')
+                && (                i != ii ) )
+                t[i].learn[ii] = t[i].ddg[ii].gate;
+        }
+    }
 }
 
 void
@@ -159,36 +117,80 @@ print_tables(table* t, int size)
 {
     printf("\n");
     int i;
-    for (i = 0; i < size; i++)
-        printf("Table:       %c%d    ", t[i].id,t[i].round);
-    printf("\n");
-
+    int ii;
+    int iii;
     for (i = 0; i < size; i++)
     {
-        printf("Learning ");
-        int ii;
-        for (ii = 0; ii < size; ii++)
-            printf("%c", t[i].learn[ii]);
-        printf("    ");
+        printf("Table:      ");
+        if(size >= 9)
+        {
+            for(ii = 0; ii < size-9; ii++)
+            printf(" ");
+        }
+        printf("%c%2d  ", t[i].id,t[i].round);
     }
     printf("\n");
 
     for (i = 0; i < size; i++)
-        printf("---------------    ");
+    {
+        printf("%-6s", "Neig:");
+        for(ii = 0; ii < 15-6-size; ii++)
+                printf(" ");
+        for (ii = 0; ii < size; ii++)
+            printf("%c", t[i].learn[ii]);
+        printf("  ");
+    }
     printf("\n");
 
-    int ii;
-    for (ii = 0; ii < sizeof(t[i].ddg) / sizeof(dest_dist_gate); ii++)
+    for (i = 0; i < size; i++)
+    {
+        if(size >= 9)
+        {
+            for(ii = 0; ii < size-9; ii++)
+            printf("-");
+        }
+        printf("---------------  ");
+    }
+    printf("\n");
+
+    for (ii = 0; ii < size; ii++)
     {
         for (i = 0; i < size; i++)
-            printf("| %c | %3d | %c |    ", t[i].ddg[ii].dest,
-                    t[i].ddg[ii].dist,
-                    t[i].ddg[ii].gate);
+        {
+            printf("|");
+            if(size >= 9)
+            {
+                for(iii = 0; iii < size-9; iii++)
+                {
+                    if((iii % 2) == 0)
+                        printf(" ");
+                }
+            }
+            printf(" %c "           , t[i].ddg[ii].dest);
+            printf(    "| %3d |"    , t[i].ddg[ii].dist);
+            printf(           " %c ", t[i].ddg[ii].gate);
+            if(size >= 9)
+            {
+                for(iii = 0; iii < size-9; iii++)
+                {
+                    if((iii % 2) == 1)
+                        printf(" ");
+                }
+            }
+            printf("|  ");
+        }
         printf("\n");
     }
 
     for (i = 0; i < size; i++)
-        printf("---------------    ");
+    {
+        if(size >= 9)
+        {
+            for(ii = 0; ii < size-9; ii++)
+            printf("-");
+        }
+        printf("---------------  ");
+    }
     printf("\n");
 }
 
@@ -199,14 +201,13 @@ copy_table(table* t1, table* t2, int size)
     int ii;
     for (i = 0; i < size; i++)
     {
+        t2[i].id = t1[i].id;
         t2[i].round = t1[i].round;
         for (ii = 0; ii < size; ii++)
         {
             t2[i].ddg[ii].dest = t1[i].ddg[ii].dest;
             t2[i].ddg[ii].dist = t1[i].ddg[ii].dist;
             t2[i].ddg[ii].gate = t1[i].ddg[ii].gate;
-            t2[i].learn[ii]    = t1[i].learn[ii];
-            t2[i].learn[ii]    = t1[i].learn[ii];
             t2[i].learn[ii]    = t1[i].learn[ii];
         }
     }
@@ -279,7 +280,7 @@ learn_something(table* t, int size)
 int
 main()
 {
-    int size    = 6;
+    int size    = SIZE;
     int changes = 1;
 
     table tbl1[size];
@@ -287,15 +288,19 @@ main()
 
     printf("\ninit default tables...");
     init(tbl1, size);
-    init(tbl2, size);
     print_tables(tbl1, size);
 
     printf("\ninit adjanz tables...");
-    init_adjanz(tbl1);
-    init_adjanz(tbl2);
+    init_adjanz(tbl1, size);
+    print_tables(tbl1, size);
+
+    printf("\nsetting neighbors ...");
+    set_neighbor(tbl1, size);
     print_tables(tbl1, size);
 
     printf("\nstart learn algorithm...");
+    copy_table(tbl1, tbl2, size);
+    int i;
     while(changes != 0)
     {
         changes = learn_round(tbl1, tbl2, size);
