@@ -452,9 +452,9 @@
         -> Ethernet-Notation notwendig:
     +-------------------+--------------+-----------------------+
     | Datenrate in Mb/s | Medientyp    | maximale Segmentlänge |
-    |                   | BASE, (BROAD | oder Medien           |
+    |                   | BASE, BROAD  | oder Medien           |
     +-------------------+--------------+-----------------------+
-             10              BASE               5
+             10              BASE                5
             100              BASE               FX
 
 3.2.1 Klassisches Ethernet
