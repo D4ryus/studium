@@ -1,6 +1,6 @@
 # author: d4ryus - https://github.com/d4ryus/
 # file: Makefile
-# vim:noexpandtab
+# vim:noexpandtab:
 
 CC = gcc
 FLAGS = -lpthread
