@@ -163,9 +163,8 @@
                                                     Verkleinerung
              IPv6-Adress-Arten: Global Unicast Adressen, ...
 
-    Layer: TCP-Segment \
-                        }->Steuerinfos + Nutzerdaten
-           UDP-Segment /       |->z.B. Portnummern, Nummer für Fluss- und
+    Layer: TCP-Segment --->Steuerinfos + Nutzerdaten
+           UDP-Segment -´      `->z.B. Portnummern, Nummer für Fluss- und
                                      Fehlerkontrolle, Flags(SYN, FIN, ACK, ...)
            TCP-Protokoll
                 - Verbindungsaufbau: 3 - Way - Handshake
@@ -504,3 +503,79 @@
     Gigabit-Ethernet (1000Mbit/s):
         - Direkt-Verbindungen zwischen Stationen und/oder Switches
         - immer noch die alten Ethernet-Frames!
+
+3.3 Wireless LANs
+
+3.3.1 Einführung
+
+        LAN: lokales Funknetz(drahtloses Netz) zur Datenübertragung
+
+        Schichtenmodel: +---------------+
+                        | Layer 2 | CCC |
+                        |         | MAC |
+                        +---------------+
+                        | Layer 1 | PHY |
+                        +---------------+
+
+        Gruppen drahtlos Netz: WPANs (P = Personal) z.B. Bluetooth
+                               WLANs (L = local)    z.B. 802.11...
+                               WWANs (W = Wide)     z.B. GSM, UMTS, LTE,
+                                                         WiMAX,...
+
+3.3.2 WLAN - Netzwerkformen
+
+    - Ad-hoc: Drahtlos kommunizierende Rechner gleichberechtigt innerhalb einer
+              Funkzelle, sie bilden einen IBSS
+              spontan!
+
+    - Infrastruktur:
+        - Organisation von BSSs mit Access Points(APs)
+        - APs stellen bereit Zugang zu einer Infrastruktur:
+            DS = Distribution System (drahtlos, drahtgebunden).
+
+    - Mesh: irreguläres Distribution System, MAPs, MPs, MPPs
+
+    - Hotspot
+
+3.3.3 WLAN - Medienzugriff
+
+    Schichtenstruktur in den Endsystemen, im Access Point.
+
+    Grundlagen: 2 Zugriffsverfahren: DCF, PCF auf der Basis vom
+
+        Interframe Spacing: Short IFS (SIFS)
+                            PCF   IFS (PIFS)
+                            DCF   IFS (DIFS)
+        Spacing Times SIFS, ... repräsentieren Prioritäten beim Aussenden von
+        Frames (kurze Zeit = hohe Priorität)
+
+    DCS - Verfahren: implementiert: CSMA/CA -> Collision Avoidance
+
+    Grundszenarien: Medium frei:    DIFS (Warten), anschließend
+                        sofortige Frame Transmission
+                    Medium besetzt: DIFS (Warten), anschließend
+                        Contention Period(verschieden lang für verschiedene
+                           )                                        Stationen)
+                     ,----´
+                    (
+                     `-----> am Ende des Contention Period: Medium frei
+                                                         -> Frame Transmission
+        von Ende der Contention Period: Medien durch andere Stationen besetzt,
+        dessen Frames enthalten ein Duration-Feld (Reservierungszeit dieser
+        andreren Stationen) (empfangenes Duration-Feld wird im NAV gespeichert)
+
+    DCF reicht nicht aus, um Kollisionen vollständig zu vermeiden.
+
+    Einen der Gründe:
+        Hidden Station Problem.
+
+    Patch für Hidden station Problem:
+        vorheriger Austausch von RTS ---> Kontrollframes um Duration-Feldern
+                                 CTS -´
+                                  `->Request/Clear to Send
+
+    WLAN Frames: Daten-, Management-, Kontroll-Frames
+
+    DCF reicht nicht für Echtzeitanwendungen, insbes. nicht für Sprache.
+        => PCF(Point Coordination Function): Polling-Verfahren, gesteuert vom
+                                             Access Point.
