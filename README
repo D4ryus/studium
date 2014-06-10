@@ -1,3 +1,4 @@
+.
 ├── README
 ├── sem_03/
 │   ├── ass_praktikum_02/
@@ -81,7 +82,8 @@
     ├── algo_dat_praktikum_03/
     │   └── hash.c
     ├── bs_praktikum_01/
-    │   └── simpleshell.c
+    │   ├── simpleshell.c
+    │   └── src/
     ├── bs_praktikum_02/
     │   ├── client.c
     │   ├── Makefile
@@ -92,6 +94,11 @@
     │   ├── Makefile
     │   ├── mq.h
     │   └── server.c
+    ├── bs_praktikum_04/
+    │   ├── main.c
+    │   └── Makefile
+    ├── bs_praktikum_05/
+    │   └── mem.c
     ├── dk_mitschrift.txt
     ├── dk_praktikum_01/
     │   └── abp.c
@@ -110,4 +117,4 @@
     └── dk_praktikum_05/
         └── dvr.c
 
-32 directories, 79 files
+35 directories, 82 files
