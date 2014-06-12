@@ -7,6 +7,8 @@
 #include <sys/shm.h>
 #include <semaphore.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 #define MAX 30
 int shm_key = 828282;
@@ -128,7 +130,10 @@ main()
         // parent process
         int i;
         for (i = 0; i < 100; i++)
+        {
             add_entry(ptr, getpid(), i, "---");
+            printf("added entry %d\n", i);
+        }
         printf("exiting!\n");
         exit(0);
     }
