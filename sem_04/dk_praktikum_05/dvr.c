@@ -1,7 +1,7 @@
 /*
  * author: d4ryus - https://github.com/d4ryus/
  * file: dvr.c
- * vim:foldmethod=syntax:foldcolumn=7:
+ * vim:foldmethod=syntax:
  */
 #include <stdio.h>
 
@@ -301,6 +301,7 @@ main()
     printf("\nstart learn algorithm...");
     copy_table(tbl1, tbl2, size);
     int i;
+    /*
     while(changes != 0)
     {
         changes = learn_round(tbl1, tbl2, size);
@@ -308,12 +309,11 @@ main()
         printf("%d changes.\n", changes);
         copy_table(tbl2, tbl1, size);
     }
-    /*
+    */
     while(changes != 0)
     {
         changes = learn_something(tbl1, size);
         print_tables(tbl1, size);
         printf("%d changes.\n", changes);
     }
-    */
 }
