@@ -1,9 +1,8 @@
 /* Datenkommunikation Mitschrift
  * author: d4ryus - https://github.com/d4ruys/
- * vim:tw=80:ai:ts=4:sw=4:spell
+ * vim:tw=80:ai:ts=4:sw=4:spell:foldmethod=expr:nonumber:norelativenumber:
 
-1.  Grundlagen der Datenkommunikation
-
+1. Grundlagen der Datenkommunikation
 1.1 Rechennetze  und Protokolle
 
     Rechennetzwerk: Menge von Rechnern, die miteinander durch Austausch von
@@ -139,7 +138,6 @@
 
 
 2. Internet
-
 2.1 Architekturen und Protokolle
 
     Schichtenprotokoll: TCP/IP-Stack
@@ -172,8 +170,9 @@
                 - Verbindungsabbau (2x getrennt in beiden Richtungen)
 
 2.2 Weiterleitung im Internet
+2.2.1 Brücken
 
-2.2.1 Brücken: Netzelement, das zwei oder mehr Rechnernetze auf der Ebene 2 des
+    Netzelement, das zwei oder mehr Rechnernetze auf der Ebene 2 des
     OSI-RM's verbindet, dh. sie verarbeitet Steuerinformation der Ebene zwei,
     zB. physikalische Adressen.
 
@@ -424,7 +423,6 @@
             - static InetAddress[] getAllByName(String);
 
 3. Lokale Netze
-
 3.1 Einführung
 
     Lokales Netz: Rechnernetz mit einer Größe in maximal einstelligen
@@ -505,7 +503,6 @@
         - immer noch die alten Ethernet-Frames!
 
 3.3 Wireless LANs
-
 3.3.1 Einführung
 
         LAN: lokales Funknetz(drahtloses Netz) zur Datenübertragung
@@ -579,3 +576,59 @@
     DCF reicht nicht für Echtzeitanwendungen, insbes. nicht für Sprache.
         => PCF(Point Coordination Function): Polling-Verfahren, gesteuert vom
                                              Access Point.
+
+4. Telekommunikation
+4.1 ISDN Integrated Services Digital Network
+4.1.1 ISDN-Konzepte und Komponenten
+
+    Endgeräte: Telefon, Telefax, ...
+
+    Vermittlungsstellen: Telekom-, privat(NStAs)
+        `-->Koppelnetz zum physikalischen Durchschalten von Verbindungen
+            Software zur Systemsteuerung
+            Schnittstellen
+    Prinzipien: mehrere Dienste        ,--->Steuerung
+        Trennung: Benutzerdaten, Signalisierungsdaten
+        64 kbit/s
+        Protokoll-Schichtenmodell
+
+4.1.2 Dienste im ISDN
+
+    Trägerdienste (Bearer Services): stellen Mittel zur zuverlässigen
+        Informationsübertragung in Echtzeit bereit.
+    Teleservices: Transportieren verschiedenartige Infos zwischen Endgeräten
+        wichtig: Telefonie, Telefax
+    Zusatzdienste (Supplementary Services) (Leistungsmerkmale)
+        Beispiele: Reichrec            ---,--> mit mehreren Varianten
+                   Anrufweiterschaltung --
+
+4.1.3 ISDN-Kanäle
+
+    Logische Kanäle: B-Kanal zur Nutzdatenübertragung
+                     D-Kanal zur Signalisierung
+
+    Anschlüsse: Basisanschluss (2 B+D)
+                Primärmultiplexanschluss (30 B+D)
+
+    Konfigurierbarkeit von Anschlüssen:
+        Mehrgerätanschluss (nur Basisanschluss)
+        Anlagenanschluss
+    physikalische ISDN-Schnittstellen: S(0), S(2M), ...
+    logische Kanäle werden auf physikalische Kanäle (physikalische Rahmen) bei
+        der Übertragung) abgebildet.
+
+4.1.4 ISDN-Protokollsturktur
+
+    Blöcke: User Protokoll:    Nur physikalisches Durchschalten
+            Control Protokoll: Signalisierung-> D-Kanal-Protokoll
+
+    Protokoll auf Länge 2: D-Kanal-Protokoll für:
+            - Basis Call Control
+            - Supplementary Services
+
+    Messages: Kopf und (mehreren) Informationen Elements
+
+    D-Kanal-Messages Beispiele: SETUP, ALERTING, CONNECT, ...
+        `--> nur zwischen Endgerät und Netz(im Allgemeinen TVSt)
+
+
