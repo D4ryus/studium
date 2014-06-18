@@ -1,6 +1,6 @@
 /* Datenkommunikation Mitschrift
  * author: d4ryus - https://github.com/d4ruys/
- * vim:tw=80:ai:ts=4:sw=4:spell:foldmethod=expr:nonumber:norelativenumber:
+ * vim:tw=80:ai:ts=4:sw=4:spell:foldmethod=expr:nonumber:norelativenumber:foldexpr=MyFold():
 
 1. Grundlagen der Datenkommunikation
 1.1 Rechennetze  und Protokolle
