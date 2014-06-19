@@ -1,6 +1,6 @@
 /* file: sem_04/algo_dat_praktikum_03/hash.c
  * author: d4ryus - https://github.com/d4ryus/
- * vim:foldmethod=syntax:foldcolumn=4:
+ * vim:foldmethod=syntax:
  */
 #include <stdio.h>
 #include <stdlib.h>
