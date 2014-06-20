@@ -81,6 +81,7 @@
     │   └── Matrix.java
     ├── algo_dat_praktikum_03/
     │   └── hash.c
+    ├── algo_dat_praktikum_04/
     ├── bs_praktikum_01/
     │   ├── simpleshell.c
     │   └── src/
@@ -114,7 +115,12 @@
     │   ├── Header.java
     │   ├── Makefile
     │   └── Server.java
-    └── dk_praktikum_05/
-        └── dvr.c
+    ├── dk_praktikum_05/
+    │   └── dvr.c
+    └── dk_praktikum_06/
+        ├── client.c
+        ├── Makefile
+        ├── server.c
+        └── UDP.h
 
-35 directories, 82 files
+37 directories, 86 files
