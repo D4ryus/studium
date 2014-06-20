@@ -617,7 +617,7 @@
     logische Kanäle werden auf physikalische Kanäle (physikalische Rahmen) bei
         der Übertragung) abgebildet.
 
-4.1.4 ISDN-Protokollsturktur
+4.1.4 ISDN-Protokollstruktur
 
     Blöcke: User Protokoll:    Nur physikalisches Durchschalten
             Control Protokoll: Signalisierung-> D-Kanal-Protokoll
@@ -629,6 +629,75 @@
     Messages: Kopf und (mehreren) Informationen Elements
 
     D-Kanal-Messages Beispiele: SETUP, ALERTING, CONNECT, ...
-        `--> nur zwischen Endgerät und Netz(im Allgemeinen TVSt)
+        `--> nur zwischen Endgerät und Netz (im Allgemeinen T Vermittlungsstelle)
 
+    Bearer Capability IE (Info Element)
+        Spezifikation der Bereitstellung von eines Bearer Services durch das
+        Netz.
 
+    Low Layer High Layer Compatibility IE
+        Verträglichkeits-Überprüfung durch das angerufene Endgerät
+
+    Adressierung im ISDN-Netz
+        ISDN-Nummer:  identifiziert ISDN-Anschluss
+        ISDN-Adresse: ISDN-Nummer + ISDN-Subadresse
+                        `---> Country code                  +49
+                         |--> National Destination Code     871
+                         `--> ISDN Subscriber Number    1234567
+
+    Das D. Kanal Protokoll steuert zusätzlich die Supplementary Services
+        z.B. Rückruf, Rufumleitung
+
+4.1.5 Signalisierungssystem Nummer 7 (SS#7)
+
+    Aufgabe: Signalisierung zwischen Vermittlungsstellen
+    Eigene Nummernklautur SPs, STPs, Signaling links
+    Eigenes Schichtenmodell => Datenentkapselierung
+    ISDN Nachrichten: IAM, ACM, ANM, ...
+
+4.2 Mobile Kommunikation mit GSM
+4.2.1 Einführung
+
+    interpolation von DK mit TK
+    - Mobilität: - Gerätemobilität: Teilnehmer drahtlos angeschlossen
+                 - persönliche Mobilität: Teilnehmer kann Dienste über
+                                          Identifizierung an vielen Geräten
+                                          abgreifen.
+    Beispielsysteme: GSM, UMTS, LTE
+
+4.2.2 Physikalische Mobilfunkkanäle
+
+    Funkkanal:      Trägerfrequenz, auf die Signale aufmoduliert werden können.
+
+    Duplexfunktion: Verfahren zur gleichzeitigen Nutzung eines Mediums in beiden
+                    Kommunikationsrichtungen.
+        Beispiele: SPD, FDD, TDD
+
+    Vielfachzugriffsverfahren: Verfahren zur Mehrfachnutzung eines Mediums
+                    durch verschiedene
+        Beispiele: SDMA, FDMA, TDMA, (CDMA sei DMTS)
+
+    GSM kombiniert SDMA, FDD, FDMA, TDMA
+
+4.2.3 Zellulartechnik
+
+    Zentrales Konstrukt: Zelle: Geografisch separater Funkbereich, der von
+                                einer zentralen Funkstation (Basisstation)
+                                abgedeckt wird.
+    Characteristika: - Zellen, modelliert Hexagone, mit
+                           Teilnehmer-Dichte-abhängigen Radius
+                     - Frequenzkennung
+                     - Frequenzprotokoll-Mindestabstand
+                     - Handoms
+
+4.2.4 GSM-Netz-Organisation
+                                                   ,--> = Vermittlungsstelle
+    Organisation nach Komponenten: MS, BTS, ..., MSCs, HCR, VCR
+      `---> "unterorganisiert" nach                    `---.---'
+            Subsystemen: Funknetz ISSS          unterstützende Datenbasen
+            mobilvermittlungsnetz SMSS, ...
+
+    Organisation nach administrativen Bereichen
+        ...
+
+    Organisation nach Rufnummern, Kennziffern
