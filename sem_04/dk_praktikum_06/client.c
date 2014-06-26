@@ -24,7 +24,8 @@ int main(int argc, const char *argv[])
         buffer[strlen(buffer)-1] = '\0';
 
         printf("sending message: %s\n", buffer);
-        if( sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr*)&servaddr, sizeof(servaddr) ) == -1)
+        if( sendto(sockfd, buffer, strlen(buffer), 0,
+                         (struct sockaddr*)&servaddr, sizeof(servaddr) ) == -1)
             error("could not send message");
 
         int msg_size = recvfrom(sockfd, buffer, MAXLINE, 0, NULL, NULL);

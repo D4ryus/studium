@@ -20,7 +20,8 @@ int main()
 
     while(buffer[0] != '-') {
         int length = sizeof(cliaddr);
-        int msg_size = recvfrom(sockfd, buffer, MAXLINE, 0, (struct sockaddr*)&cliaddr, &length);
+        int msg_size = recvfrom(sockfd, buffer, MAXLINE, 0,
+                                          (struct sockaddr*)&cliaddr, &length);
         buffer[msg_size] = '\0';
         printf("got message: %s\n", buffer);
 
@@ -29,7 +30,8 @@ int main()
             buffer[i] = toupper(buffer[i]);
 
         printf("sending message: %s\n", buffer);
-        if( sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr*)&cliaddr, sizeof(cliaddr) ) == -1)
+        if( sendto(sockfd, buffer, strlen(buffer), 0,
+                           (struct sockaddr*)&cliaddr, sizeof(cliaddr) ) == -1)
             error("could not send message");
     }
     printf("exiting...\n");
