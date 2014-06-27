@@ -701,3 +701,84 @@
         ...
 
     Organisation nach Rufnummern, Kennziffern
+
+    Organisation des GSM-Moduls
+        - Komponenten und Subsysteme
+        - Administrative Bereiche:
+            ...
+            Location Area: aktueller Aufenthaltsbereich eines MS im Netz.
+                           (genauste gegenführe Info über seinen Aufenthalsort)
+            ...
+            Zelle.
+        - Kennziffern und Nummern
+            ISMI Identification: nicht öffentlich
+            MSISDN Rufnummern: öffentlich
+            CAI
+            ...
+
+4.2.5 Mobile Dienste
+
+    Trägerdineste
+    Teledienste: Telefone, SMS, ...
+    Zusatzdienste
+
+4.2.6 Logische Kanäle
+
+    Verkehrskanäle + Signalisierungskanäle
+       `--> "B-Kanal"       `--> "D-Kanal"
+
+    Diese logischen Kanäle werden z.B. beim Verbindungsaufbau verwendet. Sie
+    werden weiterhin auf physikalische Kanäle abgebildet.
+
+    Einführendes Beispiel:
+    Auf phys. Kanal werde eine Folge von TDMA-Zeitrahmen verschickt:
+
+        TDMA - Rahmen T = L1 L2 L1 L3 L1 L2 L1 L3
+                            Li = log. Kanal
+
+        Solche TDMA-Rahmen können zu Multirahmen zusammengefasst werden:
+
+                                   ,--> z.B. für logische Signalisierungskanäle
+            T T T T T T T T T T T -
+
+       GSM: TDMA-Rahmen, zusammengefast zu 26er- oder 51-Multirahmen
+
+4.2.7 Protokolle
+
+    Protokolle laufen an: Funkstelle: Um     - Schnittstelle
+                                      A      - Schnittstelle
+                                      A(bes) - Schnittstelle
+
+        für: Gesprächsdatenübertagung
+             Datenübertragung
+             Signalisierung:  +--> CM
+                              |`-> MM
+                              |`-> RR
+                               `-> LARDm
+
+        RR: Ressource Management
+
+            Protokoll zur Steuerung des Funkressourcen (Frequenz, physikalische
+            Kanäle) auf tz Funkschnittstelle
+
+            Aufgaben: z.B. Raging, Homdorse
+
+            Messages
+
+        MM: Mobility Management
+
+            Protokoll zur Bereitstellung der Gerätemobilität
+
+            Aufgaben: z.B. Location Update
+
+            Messages
+
+        CM: Connection Management
+
+            Protokoll für: Steuerung von Nutzerdatenverbindungen
+                Unterstützung von GSM-Zusatzdiensten
+                SMS-Unterstützung
+
+           Aufgaben:
+
+           Messages
