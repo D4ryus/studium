@@ -1,6 +1,6 @@
 /* Datenkommunikation Mitschrift
  * author: d4ryus - https://github.com/d4ruys/
- * vim:tw=80:ai:ts=4:sw=4:spell:foldmethod=expr:nonumber:norelativenumber:foldexpr=MyFold():
+ * vim:tw=80:ai:ts=4:sw=4:spell:foldmethod=expr:nonumber:norelativenumber:foldexpr=NumberFold():
 
 1. Grundlagen der Datenkommunikation
 1.1 Rechennetze  und Protokolle
@@ -692,7 +692,7 @@
 
 4.2.4 GSM-Netz-Organisation
                                                    ,--> = Vermittlungsstelle
-    Organisation nach Komponenten: MS, BTS, ..., MSCs, HCR, VCR
+    Organisation nach Komponenten: MS, BTS, ..., MSCs, HLR, VLR
       `---> "unterorganisiert" nach                    `---.---'
             Subsystemen: Funknetz ISSS          unterstützende Datenbasen
             mobilvermittlungsnetz SMSS, ...
@@ -782,3 +782,76 @@
            Aufgaben:
 
            Messages
+
+4.2.8 Mobilität
+
+    Micomobilität, realisiert durch Handover-Prozeduren.
+    Mediummobilität, realisiert durch Location-Update-Prozeduren
+    Makromobilität, realisiert durch Roaming-Abkommen.
+
+    Location Registration
+        `--> Vorgang des Einbuchens eines Teilnehmers in ein Mobilfunknetz
+                            `--> Anfordern + Erhalten eines Zugangs zum Netz.
+
+    Wesentliche Punkte:
+        - die Mobilstation (MS) gibt dem Netz IMSI und LAI an.
+        - Visited Location Register (VLR) teilt der MS eine Roaming Number MSRN
+          und eine temporäre Kennung TMSI zu.
+        - die MCR erhält MSRN und IMSI
+        - die MS enthält die TMSI
+
+    Ergebnisse:
+        - Benutzer (MS) angemeldet
+        - sie ist der VLR als in ihrem Bereich präsent bekannt.
+        - sie ist im HLR über ihre MSRN auffindbar
+        - sie hat eine TMSI erhalten.
+
+    Location Update:
+        `--> Vorgang zur Aufenthalsaktualisierung einer Mobilstation in den
+             Datenbasen VLR, HLR
+
+        Wesentlich:
+            - MS gibt dem Netz TMSI, CAI neu an.
+            - VLR: neue TMSI
+            - HLR: erhält neue zugeteilte MSRN
+            - MS: erhält neue zugeteilte TMSI
+
+        Ergebnisse: (analog zur Location Registration)
+            - neue VLR
+            - neue MSRN im HLR
+            - neue TMSI
+
+        Rufaufbau
+            2 Phasen: - Wegesuche zum gerufenen Teilnehmer,
+                      - eigentlicher Verbindungsaufbau.
+
+        Handover
+            `--> Umschaltung eines laufenden Gesprächs auf einen anderen
+                 Funkkanal ohne Unterbrechung, i.A. bei Zellenwechsel
+
+        Ablauf:
+            - Messungen
+            - Messungen schlecht -> Entscheidung zum Handover
+            - Veranlassung des Handovers
+            - Durchführung
+            - Abschluss
+            - Messungen
+
+        Inter-MSC-Handover:
+            - Anchor-MSC: MSC, über die eine Gesprächsverbindung bei
+                          Aufbau geschaltet wurde.
+            - bei weitreichender geografischer Bewegung:
+
+                              Inter-MSC-Handover
+                Anchor-MSC <----------------------> MSC: Basic Handover
+
+                bei weiterer weitreichender geografischer Bewegung:
+
+                              Inter-MSC-Handover
+                MSC        <----------------------> Anchor-MSC: Handback
+
+                              Inter-MSC-Handover
+                oder MSC   <----------------------> MSC: 1. Handback
+                                                          (zur Anchor-MSC)
+                                                         2. Basic Handover
+                                                          (von der Anchor-MSC)
