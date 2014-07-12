@@ -1,0 +1,29 @@
+osi referrenz model
+
+basic encoding module (nicht zu komplex)
+
+Internetprotokolle:
+    ipv4/6, dezimalnotation, compremieren von ipv6
+
+Bridges und router:
+    weiterleitungsalgo
+    lernalgo
+    spanning tree algo (costs)
+
+Internetanwendung:
+    http
+    ftp (change, put, mput, get, mget, ...)
+
+Ethernetprinzipien:
+    Abtasten
+    WLAN
+    CSMA CA
+    hidden station problem
+
+Telekommunikation
+    isdn
+    dienste, leistungsmerkmale
+
+Praktikumsaufgaben
+    Systemcalls
+    evtl kleines stück code erklären

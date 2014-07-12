@@ -1,0 +1,22 @@
+Themen:
+- Scheduling
+- Semaphoren (ganz wichtig)
+- Speicherverwaltung
+- Paging
+- Seitenersetzungsalgorithmen (zb Erleutern)
+- FIFO
+- Deadlocks
+- Synchronisation
+- Prozesse und Threads
+- Übungen in Moodle (von Wirtschafsinformatikern)
+- Praktikas
+- Definitionen (zb was ist ein Deadlock)
+- Prozesszustände
+- Unterschiede zwischen Threads und Prozessen
+- Ablauf mit Verklemmung
+- Deadlockerkennung
+
+Info:
+- keinen umfangreichen code schreiben
+- evtl Semaphoren up/down
+- nicht 1. Kapitel (Einführung)

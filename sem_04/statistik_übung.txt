@@ -1,0 +1,45 @@
+Parameterschätzung                -> Berechnung von Schätzwert eines Parameters
+                                     durch Stichprobe.
+Mittelwert einer Stichprobe       -> Schätzwert für den Erwartungswert.
+Varianz einer Stichprobe          -> Schätzwert für die Varianz einer Funktion.
+Irrtumswahrscheinlichkeit kleiner -> Ablehnungsbereich kleiner.
+"will 100% sicher sein"           -> Irrtumswahrscheinlichkeit 0
+                                  `> Ablehnungsbereich 0.
+"ist gleich"                      -> zweiseitiger Hypothesentest
+zweiseitiger Hypothesentest       -> zweiseitiger Ablehnungsbereich.
+"kleiner/größer"                  -> einseitiger Hypothesentest
+einseitiger Hypothesentest        -> einseitiger Ablehnungsbereich.
+
+a) Nach welcher exakten Verteilung berechnet sich die Wahrscheinlichkeit dafür,
+   dass das Ereignis "0 fällt" beim k-ten Versuch zum erstenmal eintritt:
+   - geometrische Verteilung
+
+b) Nach welcher exakten Verteilung berechnet sich die Wahrscheinlichkeit dafür,
+   dass bei 50 Versuchen das Ereignis "0 fällt" genau k-mal eintritt:
+   - Binomialverteilung
+
+c) Die Wahrscheinlichkeit dafür, dass bei 50 Versuchen das Ereignis genau k-mal
+   eintritt lässt sich (außer mit der Verteilung aus Antwort b) auch mit einer
+   Annäherung an diese Verteilung berechnen. Welche ist das und warum darf man
+   sie in diesem Fall verwenden?
+   - Die Näherungsverteilung heißt: Poissonverteilung
+   - Sie kann verwendet werden weil: n * p <= 10 && n > 1500 * p
+
+d) Die Wahrscheinlichkeit dafür, dass bei 500 Versuchen die Anzahl des
+   Eintretens des Ereignis zwischen k1 und k2 liegt, lässt sich (außer mit der
+   Verteilung aus Antwort b) auch mit einer Annäherung an diese Verteilung
+   berechnen. Welche ist das und warum darf man sie in diesem Fall verwenden?
+   - Die Näherungsverteilung heißt: Normalverteilung
+   - Sie kann verwendet werden weil: n * p > 5 && n * (1 - p) > 5
+
+e) Berechnen Sie mit der Verteilung aus c) die Wahrscheinlichkeit dafür, dass
+   bei 50 versuchen 0, 1 oder 2 mal die Zahl 0 fällt.
+   - p(X = k) = ...
+     p(X = 0) = ... = 0,2589...
+     p(X = 1) = ... = 0,3498...
+     p(X = 2) = ... = 0,2364...
+   - da Ereignisse disjunkt -> addieren -> 0,8451...
+
+f) Berechnen Sie mit der Verteilung aus d) die Wahrscheinlichkeit, dass 0
+   seltener als 40 mal fällt (bei 500 Versuchen)
+   - p(X < 40) = ... = ...
