@@ -95,7 +95,7 @@
                           Daten in Seiten HDLC-Instanzen: V(S), V(R), B(R).
                   Timer: TI (Retransmission Timer)
 
-1.4 Datenpräsentation und -coding mi ASN.1 und BER
+1.4 Datenrepräsentation und -coding mit ASN.1 und BER
 
     (ASN.1 = Abstract Syntax Notation Number 1, Basic, Encoding Rules)
     OSI-RM betrachtbar als aus zwei Hauptkomponenten bestehend:
@@ -147,13 +147,13 @@
         Entkapselierung
 
     Ethernet-Frame: Steuerinfos + Nutzerdaten
-                        |-> physikalische Adressen (HW-Adressen,
+                        `-> physikalische Adressen (HW-Adressen,
                                                Ethernet-Adressen, Mac-Adressen)
 
     Layer 2: IP = Internet Protokoll: IPv4 Nachrichten:IP-Datagramme
                                       IPv6
              Steuerinfos: z.B Logische Adressen (IP Adressen, ...)
-                                |-> Netz ID + Host ID Repräsentation: dezimale
+                                `-> Netz ID + Host ID Repräsentation: dezimale
                                                   Punktpräsentation: a, b, c, d
              IPv4 hat Probleme: zu wenig Adressen
              => IPv6 mit sechs langen Adressen: 128 bits
@@ -162,8 +162,8 @@
                                                     Verkleinerung
              IPv6-Adress-Arten: Global Unicast Adressen, ...
 
-    Layer: TCP-Segment --->Steuerinfos + Nutzerdaten
-           UDP-Segment -´      `->z.B. Portnummern, Nummer für Fluss- und
+    Layer: TCP-Segment ---> Steuerinfos + Nutzerdaten
+           UDP-Segment -´      `-> z.B. Portnummern, Nummer für Fluss- und
                                      Fehlerkontrolle, Flags(SYN, FIN, ACK, ...)
            TCP-Protokoll
                 - Verbindungsaufbau: 3 - Way - Handshake
@@ -243,11 +243,11 @@
 
     Zentrale Datenstruktur eines Routers: Routingtabelle mit Einträgen.
         (ipRootDest, ..., ipRootNextHop, ...)
-              |                 |
+              ^                 ^
        Netz-Teil einer   logische Router-Adresse
          IP-Adresse
 
-    Interpretation: Ein eingehendes IP-Datagramm mit loischer Destination
+    Interpretation: Ein eingehendes IP-Datagramm mit logischer Destination
         Adresse ipRouteDest(nur Netz-ID berücksichtigen) soll zum Router mit
         IP-Adresse ipRootNextHop weitergeleitet werden.
 
@@ -282,7 +282,7 @@
             Nachbarrouter.
 
         DVR Verwendet: Verbindungstabellen (Adjazenztabellen) für direkte
-            Nachbarn (Router, Netzte).
+            Nachbarn (Router, Netze).
         läuft mehrere Lernrunden
 
         Das Routing Information Protokoll RIP implementiert das DVR durch Austausch
@@ -295,7 +295,7 @@
 
     Link-State-Shortest-Path-Routing:
 
-        Motto: Teile der Welt mit, wer Deine Nachbarn sind.
+        Motto: Teile der Welt mit, wer deine Nachbarn sind.
 
         Verfahren: Router senden bei bestimmten Ereignissen ihre
             Verbindungstabellen an alle andren Router.
@@ -303,7 +303,7 @@
         Verfahren läuft in zwei Schritten:
             - der Link-State Algorithmus bestimmt die aktuelle Topologie des
               Rechennetzverbundes.
-            - der Shortest-Path Algorithmus bestimmt danach den kürzesten Wege
+            - der Shortest-Path Algorithmus bestimmt danach den kürzesten Weg
               zwischen diesen Routern, und allen andren Routern im Netz.
 
         Das Protokoll Open Shortest Path First (OSPF) implementiert das LSSP
@@ -325,7 +325,7 @@
 
     Gängige Implementierungen: {ASCII, Sinarg}, File Stream.
     FTP-Befehle werden über FTP-Baukastenkommandos (nicht standartisiert)
-    einfügen.
+    eingefügt.
 
     FTP-Datenaustausch geschieht über zwei TCP Verbindungen:
         - Steuerverbindung
@@ -346,7 +346,7 @@
              - Message Ready
 
     Benutzer-Request: GET <URL> HTTP/1.1
-                            |-> "Web-Adresse": Uniform Resource Locator
+                            `-> "Web-Adresse": Uniform Resource Locator
 
     Beispiele: - Status Line
                - Header(s)
@@ -362,15 +362,15 @@
     Aufgabe: Abbildung: Symbolischer Name ---> Ressource
                  "            "       "   ---> logische Internet-Adresse
 
-    Domain name Space: strukturreichen Namenservern.
-        Den Knoten sind Domain Names zugeordnet
+    Domain name Space: strukturreiche Namenserver.
+        Den Knoten sind Domain Names zuordnet
         Root Domain
         Top Level Domains: generische Domains, Linker-Domains
         Subdomains
 
-    Name Server: Program das Domain-Names logische Adressen zugeordnet
+    Name Server: Program das Domain-Names logische Adressen zuordnet.
 
-    Name Server leisten den Name Service und sind für sogenannte Zonen (Teile)
+    Name Server: leisten den Name Service und sind für sogenannte Zonen (Teile)
         des Domain Name Spaces zuständig.
 
     Resolver: Programm auf Client-Seite, das in Reaktion auf Anwenderanfragen
@@ -396,25 +396,25 @@
 
     Ablauf einer Name Resolution (non-lokal):
 
-            2 wichtige Such-Typen
-                rekursiv: Resolver oder ein Name Server in Client-Rolle schicken
-                          eine Anfrage ab und erhält - nach spürbarer
-                          Verzögerung - die Antwort.
-                intensiv: Resource oder Name Server in Client-Rolle schickt
-                          Anfrage, erhält vorläufige Austausch-Schicht nächste
-                          Anfrage bis es die nächste und gute Antwort erhält.
+        2 wichtige Such-Typen
+            rekursiv: Resolver oder ein Name Server in Client-Rolle schicken
+                      eine Anfrage ab und erhält - nach spürbarer
+                      Verzögerung - die Antwort.
+            intensiv: Resource oder Name Server in Client-Rolle schickt
+                      Anfrage, erhält vorläufige Austausch-Schicht nächste
+                      Anfrage bis es die nächste und gute Antwort erhält.
 
-            Bemerkung: high level Name Server haben die Annahme rekursiven
-                Anfragen abgeschaltet.
+        Bemerkung: high level Name Server haben die Annahme rekursiven
+            Anfragen abgeschaltet.
 
-            Anhang: Adress Resolver Protocol ARP
-                ARP ist eine Layer-3-Protokoll für IPv4, nun logischen Adressen
-                physikalische Adressen zwecks Weiterleitung von IP-Datasegmenten
-                zuzuordnen.
+        Anhang: Adress Resolver Protocol ARP
+            ARP ist eine Layer-3-Protokoll für IPv4, nun logischen Adressen
+            physikalische Adressen zwecks Weiterleitung von IP-Datasegmenten
+            zuzuordnen.
 
-                Printing    ---> ARP Request (Broadcast)
-                            <--- ARP Reply   (Unicast von einem Rechner oder
-                                              einem Router (Proxy-ARP))
+            Printing    ---> ARP Request (Broadcast)
+                        <--- ARP Reply   (Unicast von einem Rechner oder
+                                          einem Router (Proxy-ARP))
 
     Nachbemerkung zu DNS/Java:
 
@@ -426,7 +426,7 @@
 3. Lokale Netze
 3.1 Einführung
 
-    Lokales Netz: Rechnernetz mit einer Größe in maximal einstelligen
+    Lokales Netz: Rechnernetz mit einer Größe im maximal einstelligen
         Kilometerbereich.
 
     Eigenschaft: unterschiedliche Übergangsmedien: Kupfer/Glasfaser/Funk/
@@ -444,7 +444,7 @@
 3.2 Ethernet
 
     Es gilt:
-        Klassisches Ethernet: Bustopologie, IO Mbit/s
+        Klassisches Ethernet: Bustopologie, 1O Mbit/s
 
     Einführung auf höhere Geschwindigkeiten:
         -> Ethernet-Notation notwendig:
@@ -460,9 +460,9 @@
     Medium: Koaxial Kabel
     HW "Transreceiver", gleichberechtigte Stationen
 
-    Eigenschaften: Bus, Broadcast, Halbduplex, CSMA/CD
+    Eigenschaften: Bus, Broadcast, Halfduplex, CSMA/CD
 
-    Insg.-Struktur: Lager 1, Layer 2a, 2b (Medium Access Control, Logical Link
+    Insg.-Struktur: Layer 1, Layer 2a, 2b (Medium Access Control, Logical Link
                                            Control)
 
     Zugriffsverfahren (Medium Access Control Sublagen 2a):
@@ -471,13 +471,13 @@
     Mehrere Verbindungen von CSMA/CD. |--persistente Varianten.
                                       p
 
-    Framestruktur: 2 Formale: V2-Format
+    Framestruktur: 2 Formate: V2-Format
                               IEEE-Format
                                            1
     Logical Link Control: 3 Varianten: LCC 2
                                            3
     Kombination Klassischen Ethernets:
-        max. 5 Segmente(Basre) über max. 4 Repeater
+        max. 5 Segmente(10BASE5) über max. 4 Repeater
         max. 2500m (klassisches 10Mbit/s Ethernet.)
 
     Eigenschaften vom klassischem Ethernet:
@@ -567,10 +567,10 @@
     Einen der Gründe:
         Hidden Station Problem.
 
-    Patch für Hidden station Problem:
+    Patch für Hidden Station Problem:
         vorheriger Austausch von RTS ---> Kontrollframes um Duration-Feldern
                                  CTS -´
-                                  `->Request/Clear to Send
+                                  `-> Request/Clear to Send
 
     WLAN Frames: Daten-, Management-, Kontroll-Frames
 
@@ -585,10 +585,10 @@
     Endgeräte: Telefon, Telefax, ...
 
     Vermittlungsstellen: Telekom-, privat(NStAs)
-        `-->Koppelnetz zum physikalischen Durchschalten von Verbindungen
+        `--> Koppelnetz zum physikalischen Durchschalten von Verbindungen
             Software zur Systemsteuerung
             Schnittstellen
-    Prinzipien: mehrere Dienste        ,--->Steuerung
+    Prinzipien: mehrere Dienste        ,---> Steuerung
         Trennung: Benutzerdaten, Signalisierungsdaten
         64 kbit/s
         Protokoll-Schichtenmodell
@@ -719,7 +719,7 @@
 
 4.2.5 Mobile Dienste
 
-    Trägerdineste
+    Trägerdienste
     Teledienste: Telefone, SMS, ...
     Zusatzdienste
 
