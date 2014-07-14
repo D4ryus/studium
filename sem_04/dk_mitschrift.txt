@@ -7,15 +7,15 @@
 
     Rechennetzwerk: Menge von Rechnern, die miteinander durch Austausch von
         Daten kommunizieren, zusammen mit den sie verbindenden.
-        Übertragunsmedien steuert.
+        uebertragunsmedien steuert.
 
     Beispiele: Internet, Ethernet, Vermittlungsnetz der Telekom,
-        Mobilfunknetzte für Rechennetzte
+        Mobilfunknetzte fuer Rechennetzte
 
     Rechner: Mainframes, Laptop, Smartphones, Vermittlungsstelle, Router,
         Bridges, Repeater, Gateways, ...
 
-    Übertragunsmedien: Kupferkabel, Lichtwellenleiter, Funkstrecken,
+    uebertragunsmedien: Kupferkabel, Lichtwellenleiter, Funkstrecken,
                                                                   Infrarot, ...
 
     Software:
@@ -30,13 +30,13 @@
 
         Protokolle werden implementiert: Protokollimplementierungen
 
-        Beispiele für Protokolle: TCP, IP, FTP, HTTP, SIP, HDLC, SNTP, ...
+        Beispiele fuer Protokolle: TCP, IP, FTP, HTTP, SIP, HDLC, SNTP, ...
 
 
 1.2 Open Systems Interconnection (OSI) - Referenzmodell
 
-    ...ermöglicht die Kommunikation offener Systeme (Rechner) innerhalb
-    eines 7-Schichtmodells, unabhängig von:
+    ...ermoeglicht die Kommunikation offener Systeme (Rechner) innerhalb
+    eines 7-Schichtmodells, unabhaengig von:
         - Hardware-Architekturen
         - Betriebsystemen
         - Programmiersprachen
@@ -70,41 +70,41 @@
         Flag: kennzeichnet Anfang/Ende eines Frames.
               Inhalt 01111110.
               Problem: Auftauchen dieses Musters 01111110. in Benutzerdaten
-              Lösung: Bitstuffing
+              Loesung: Bitstuffing
                 Wann immer eine sendende HDLC-Instanz zwischen den Flags 5
-                aufeinanderfolgende 1en erkennt, fängt sie direkt dahinter eine
+                aufeinanderfolgende 1en erkennt, faengt sie direkt dahinter eine
                 0 ein, die die empfangende Instanz wieder entfernt.
                 Beispiel: Zu senden:
                             011011101111011111011111101111110...
                           Gesendet wird: (wegen Bitstuffing)
                             0110111011110111110011111010111110110...
-                          der Empfänger nimmt die 0en wieder heraus.
+                          der Empfaenger nimmt die 0en wieder heraus.
 
     Fehlerkontrolle: - Fehlererkennung
                      - Fehlerkorrektur
                      - Fehlermodifikation
 
-    Flusskontrolle: Schutz eines Empfängers von zu vielen Nachrichten vom
+    Flusskontrolle: Schutz eines Empfaengers von zu vielen Nachrichten vom
                     Sender pro Zeitintervall
 
     Kontrollfeld: Art des HDLC-Frames: U, I, S-Frames, SARM, UA, I RR-, ...
                   Fehler- und Flusskontrolle: N(S), N(R)
-                  Mittel: Kenngrößen: W, M
+                  Mittel: Kenngroeßen: W, M
                           Fehler in HDLC-Frames: N(S), N(R)
                           Daten in Seiten HDLC-Instanzen: V(S), V(R), B(R).
                   Timer: TI (Retransmission Timer)
 
-1.4 Datenpräsentation und -coding mi ASN.1 und BER
+1.4 Datenpraesentation und -coding mi ASN.1 und BER
 
     (ASN.1 = Abstract Syntax Notation Number 1, Basic, Encoding Rules)
     OSI-RM betrachtbar als aus zwei Hauptkomponenten bestehend:
         - Anwendungskomponente (Schichten 6, 7)
-            Kommunikation über abstrakte Syntax:
+            Kommunikation ueber abstrakte Syntax:
                 Menge formaler Datentypen, von denen Werte zwischen zwei
                 Anwendungen ausgetauscht werden.
         - Datentransferkomponente(Schichten 1 - 5)
-            Kommunikation über Transfersyntax:
-                Menge der möglichen Codierungen jedes Wortes jedes Datentypes
+            Kommunikation ueber Transfersyntax:
+                Menge der moeglichen Codierungen jedes Wortes jedes Datentypes
                 der abstrakten Syntax, festgelegt durch Codierungsregeln
 
 1.4.1 ASN.1
@@ -120,21 +120,21 @@
     ASN.1-Typen werden durch Tags gekennzeichnet, z.B.:
         [UNIVERSAL 2]
         [APPLICATION 1]
-        [2] (für context-specific Typen)
+        [2] (fuer context-specific Typen)
 
     ASN.1 erlaubt die Definition neuer Typen:   ::=
         Kundenzahl ::= INTEGER
 
 1.4.2 Basic Encoding Rules (BER)
 
-    Zweck: Codierung aller möglichen Worte aller möglichen Typen aus ASN.1
+    Zweck: Codierung aller moeglichen Worte aller moeglichen Typen aus ASN.1
 
-    Codierung nach TCV-Prinzip: Typ Länge Wert
+    Codierung nach TCV-Prinzip: Typ Laenge Wert
         primitive: TLV
         constructed: TL (TLV, TL(...), TLV)
 
-    Längencodierung: Ohne Probleme in einem oktett: Längen 0, ... 127
-        Mit 'Patches' in mehreren Oktetts: Längen >= 128
+    Laengencodierung: Ohne Probleme in einem oktett: Laengen 0, ... 127
+        Mit 'Patches' in mehreren Oktetts: Laengen >= 128
 
 
 2. Internet
@@ -152,8 +152,8 @@
     Layer 2: IP = Internet Protokoll: IPv4 Nachrichten:IP-Datagramme
                                       IPv6
              Steuerinfos: z.B Logische Adressen (IP Adressen, ...)
-                                |-> Netz ID + Host ID Repräsentation: dezimale
-                                                  Punktpräsentation: a, b, c, d
+                                |-> Netz ID + Host ID Repraesentation: dezimale
+                                                  Punktpraesentation: a, b, c, d
              IPv4 hat Probleme: zu wenig Adressen
              => IPv6 mit sechs langen Adressen: 128 bits
                 - Erweiterungsheader
@@ -162,7 +162,7 @@
              IPv6-Adress-Arten: Global Unicast Adressen, ...
 
     Layer: TCP-Segment --->Steuerinfos + Nutzerdaten
-           UDP-Segment -´      `->z.B. Portnummern, Nummer für Fluss- und
+           UDP-Segment -´      `->z.B. Portnummern, Nummer fuer Fluss- und
                                      Fehlerkontrolle, Flags(SYN, FIN, ACK, ...)
            TCP-Protokoll
                 - Verbindungsaufbau: 3 - Way - Handshake
@@ -170,7 +170,7 @@
                 - Verbindungsabbau (2x getrennt in beiden Richtungen)
 
 2.2 Weiterleitung im Internet
-2.2.1 Brücken
+2.2.1 Bruecken
 
     Netzelement, das zwei oder mehr Rechnernetze auf der Ebene 2 des
     OSI-RM's verbindet, dh. sie verarbeitet Steuerinformation der Ebene zwei,
@@ -186,7 +186,7 @@
                +-------------------------+
                     |               |
 
-    Addresstabelle mit Einträge folgender Form: (Z, P, T) mit:
+    Addresstabelle mit Eintraege folgender Form: (Z, P, T) mit:
         Z: physikalische Zieladdresse
         P: Ausgangsport
         T: Zeitpunkt der letzten Aktualisierung
@@ -195,12 +195,12 @@
         auf Port P weitergeleitet werden, Der Eintrag wurde zum Zeitpunkt T
         letztemal's aktualisiert.
 
-    Brücken führen aus: Weiterleitungsalgorithmus
+    Bruecken fuehren aus: Weiterleitungsalgorithmus
                         Lernalgorithmus
 
     Problem Lernalgorithmus: Zyklen im Netz
 
-2.2.2 Spanning Tree Algorithmus für Brücken (SpTA)
+2.2.2 Spanning Tree Algorithmus fuer Bruecken (SpTA)
 
     Aufgabe: Eleminierung von Zyklen im Rechnernetz-Verbunden durch Errechnung
              einer aktiven Baumtopologie
@@ -214,11 +214,11 @@
     SpTA-Ergebnis: Zyklenfreie Rechnernetzverbund-Topologie eines Segmenten und
                    aktiven (nicht abgeschlossenen) Ports.
 
-    Bemerkungen: - aktive Baumtopologie ist anfällig gegen Ausfälle von Ports,
-                   Brücken und Segmenten
-                 - aktive Baumtopologie kann sich ändern, bei:
-                    - Änderung der Priorität einer Brücke (über SNMP)
-                    - Änderung der Kosten eines Netzes
+    Bemerkungen: - aktive Baumtopologie ist anfaellig gegen Ausfaelle von Ports,
+                   Bruecken und Segmenten
+                 - aktive Baumtopologie kann sich aendern, bei:
+                    - aenderung der Prioritaet einer Bruecke (ueber SNMP)
+                    - aenderung der Kosten eines Netzes
                     - Netzerweiterungen.
                  - Implementierung von SpTA: Austausch von BPDU's (Bridge PDU's)
                     zwischen den Bridges.
@@ -234,55 +234,55 @@
         der Ebene 3 zB. IP-Adressen.
 
     Eigenschaften von Routern:
-        - Verwendung logischer Adressen für die Weiterleitung, nicht von
+        - Verwendung logischer Adressen fuer die Weiterleitung, nicht von
           physikalischen Adressen.
         - Weiterleiung nur von IP-Datagrammen, deren umgeleiteter Frame
           physikalisch an diesen Daten adressiert ist.
-        - Weiterleiung möglich zwischen verschiedenartigen Rechnernetzen.
+        - Weiterleiung moeglich zwischen verschiedenartigen Rechnernetzen.
 
-    Zentrale Datenstruktur eines Routers: Routingtabelle mit Einträgen.
+    Zentrale Datenstruktur eines Routers: Routingtabelle mit Eintraegen.
         (ipRootDest, ..., ipRootNextHop, ...)
               |                 |
        Netz-Teil einer   logische Router-Adresse
          IP-Adresse
 
     Interpretation: Ein eingehendes IP-Datagramm mit loischer Destination
-        Adresse ipRouteDest(nur Netz-ID berücksichtigen) soll zum Router mit
+        Adresse ipRouteDest(nur Netz-ID beruecksichtigen) soll zum Router mit
         IP-Adresse ipRootNextHop weitergeleitet werden.
 
     Weiterleitungsalgorithmus von Routern:
         - verwenden die logischen Adressen von IP-Datagrammen (IP Paket)
-        - Router berücksichtigen nur Frames (und die IP-Pakete darin), die
+        - Router beruecksichtigen nur Frames (und die IP-Pakete darin), die
           physikalisch an sie adressiert sind.
 
 2.2.4 Routing-Verfahren und Routing-Protokolle
 
     Routing-Verfahren:
         (Lern-)Verfahren, mit Hilfe dessen Router in Zusammenarbeit ihre
-        Routingtabellen so mit Einträgen füllen können, dass sie eintreffende
-        Pakete korrekt weiterleiten können.
+        Routingtabellen so mit Eintraegen fuellen koennen, dass sie eintreffende
+        Pakete korrekt weiterleiten koennen.
 
     Routing-Protokoll:
         Kommunikationsprotokoll, das ein Routing-Verfahren durch den Austausch
         von Routing-Informationen zwischen Routern implementiert.
 
-    Beispiele für Routing-Protokolle:
-        - RIP    für   Distanz-Vektor-Routing
-        - DSPF   für   Link State Shortest Path Routing
+    Beispiele fuer Routing-Protokolle:
+        - RIP    fuer   Distanz-Vektor-Routing
+        - DSPF   fuer   Link State Shortest Path Routing
           ^                  ^
        Routing            Routing
       Protokolle         Verfahren
 
     Distanz-Vektor-Routing:
 
-        Motto: Teile deinem Nachbarn mit, wie für dich die Welt aussieht.
+        Motto: Teile deinem Nachbarn mit, wie fuer dich die Welt aussieht.
 
         Verfahren: Router senden ihre Routing-Tabellen periodisch an ihre
             Nachbarrouter.
 
-        DVR Verwendet: Verbindungstabellen (Adjazenztabellen) für direkte
+        DVR Verwendet: Verbindungstabellen (Adjazenztabellen) fuer direkte
             Nachbarn (Router, Netzte).
-        läuft mehrere Lernrunden
+        laeuft mehrere Lernrunden
 
         Das Routing Information Protokoll RIP implementiert das DVR durch Austausch
         von RIP-Paketen (Request, Reply) RFC=2543
@@ -299,10 +299,10 @@
         Verfahren: Router senden bei bestimmten Ereignissen ihre
             Verbindungstabellen an alle andren Router.
 
-        Verfahren läuft in zwei Schritten:
+        Verfahren laeuft in zwei Schritten:
             - der Link-State Algorithmus bestimmt die aktuelle Topologie des
               Rechennetzverbundes.
-            - der Shortest-Path Algorithmus bestimmt danach den kürzesten Wege
+            - der Shortest-Path Algorithmus bestimmt danach den kuerzesten Wege
               zwischen diesen Routern, und allen andren Routern im Netz.
 
         Das Protokoll Open Shortest Path First (OSPF) implementiert das LSSP
@@ -316,21 +316,21 @@
 
 2.3.1 File Transfer Protocol (FTP)
 
-    Zweck: Übertragung von Dateien:
+    Zweck: uebertragung von Dateien:
         - verschiedene Typen: ASCII, Sinarg, ...
         - verschiedene Strukturen: File (kontinuierlichen Byte-Strom ohne
           Struktur), Records, Page
         - Transmission Modes: Stream, block, compressed
 
-    Gängige Implementierungen: {ASCII, Sinarg}, File Stream.
-    FTP-Befehle werden über FTP-Baukastenkommandos (nicht standartisiert)
-    einfügen.
+    Gaengige Implementierungen: {ASCII, Sinarg}, File Stream.
+    FTP-Befehle werden ueber FTP-Baukastenkommandos (nicht standartisiert)
+    einfuegen.
 
-    FTP-Datenaustausch geschieht über zwei TCP Verbindungen:
+    FTP-Datenaustausch geschieht ueber zwei TCP Verbindungen:
         - Steuerverbindung
         - Datenverbindung
 
-    FTP-Kommunikation wird realisiert über (standartisierte) FTP-Kommandos.
+    FTP-Kommunikation wird realisiert ueber (standartisierte) FTP-Kommandos.
 
 2.3.2 Hyper Text Transfer Protocol (HTTP)
 
@@ -369,13 +369,13 @@
 
     Name Server: Program das Domain-Names logische Adressen zugeordnet
 
-    Name Server leisten den Name Service und sind für sogenannte Zonen (Teile)
-        des Domain Name Spaces zuständig.
+    Name Server leisten den Name Service und sind fuer sogenannte Zonen (Teile)
+        des Domain Name Spaces zustaendig.
 
     Resolver: Programm auf Client-Seite, das in Reaktion auf Anwenderanfragen
         Informationen von Name Servern beschafft.
 
-    Resource Record: Datenstruktur zur Speicherung von Namen und zugehörigen
+    Resource Record: Datenstruktur zur Speicherung von Namen und zugehoerigen
         Ressourcen auf einer Machine mit einem Name Server.
 
         Komponenten: Domain Name als Argument
@@ -390,24 +390,24 @@
         - Client Application verwendet Resolver
         - Resolver schafft von Name Servern die angeforderte Ressource (i. A.
           lg. Adresse) heran
-        - Client Application und Server Application können miteinander
+        - Client Application und Server Application koennen miteinander
           kommunizieren.
 
     Ablauf einer Name Resolution (non-lokal):
 
             2 wichtige Such-Typen
                 rekursiv: Resolver oder ein Name Server in Client-Rolle schicken
-                          eine Anfrage ab und erhält - nach spürbarer
-                          Verzögerung - die Antwort.
+                          eine Anfrage ab und erhaelt - nach spuerbarer
+                          Verzoegerung - die Antwort.
                 intensiv: Resource oder Name Server in Client-Rolle schickt
-                          Anfrage, erhält vorläufige Austausch-Schicht nächste
-                          Anfrage bis es die nächste und gute Antwort erhält.
+                          Anfrage, erhaelt vorlaeufige Austausch-Schicht naechste
+                          Anfrage bis es die naechste und gute Antwort erhaelt.
 
             Bemerkung: high level Name Server haben die Annahme rekursiven
                 Anfragen abgeschaltet.
 
             Anhang: Adress Resolver Protocol ARP
-                ARP ist eine Layer-3-Protokoll für IPv4, nun logischen Adressen
+                ARP ist eine Layer-3-Protokoll fuer IPv4, nun logischen Adressen
                 physikalische Adressen zwecks Weiterleitung von IP-Datasegmenten
                 zuzuordnen.
 
@@ -417,18 +417,18 @@
 
     Nachbemerkung zu DNS/Java:
 
-        Namenauflösung in Java:
+        Namenaufloesung in Java:
             - static InetAddress   getlocalHost();
             - static InetAddress   getByName(String);
             - static InetAddress[] getAllByName(String);
 
 3. Lokale Netze
-3.1 Einführung
+3.1 Einfuehrung
 
-    Lokales Netz: Rechnernetz mit einer Größe in maximal einstelligen
+    Lokales Netz: Rechnernetz mit einer Groeße in maximal einstelligen
         Kilometerbereich.
 
-    Eigenschaft: unterschiedliche Übergangsmedien: Kupfer/Glasfaser/Funk/
+    Eigenschaft: unterschiedliche uebergangsmedien: Kupfer/Glasfaser/Funk/
                                                                       Infrarot
 
     unterschiedliche Topologien: Bus, Stern, Ring
@@ -438,17 +438,17 @@
     einheitliche meist private Administrierung
 
     Backbone-Netz: Rechnernetz, das Rechnernetze nur bindet (hohe
-        Datenübertragungsraten, unterschiedliche Topologien)
+        Datenuebertragungsraten, unterschiedliche Topologien)
 
 3.2 Ethernet
 
     Es gilt:
         Klassisches Ethernet: Bustopologie, IO Mbit/s
 
-    Einführung auf höhere Geschwindigkeiten:
+    Einfuehrung auf hoehere Geschwindigkeiten:
         -> Ethernet-Notation notwendig:
     +-------------------+--------------+-----------------------+
-    | Datenrate in Mb/s | Medientyp    | maximale Segmentlänge |
+    | Datenrate in Mb/s | Medientyp    | maximale Segmentlaenge |
     |                   | BASE, BROAD  | oder Medien           |
     +-------------------+--------------+-----------------------+
              10              BASE                5
@@ -476,36 +476,36 @@
     Logical Link Control: 3 Varianten: LCC 2
                                            3
     Kombination Klassischen Ethernets:
-        max. 5 Segmente(Basre) über max. 4 Repeater
+        max. 5 Segmente(Basre) ueber max. 4 Repeater
         max. 2500m (klassisches 10Mbit/s Ethernet.)
 
     Eigenschaften vom klassischem Ethernet:
-        Mindestframelänge 64 bytes
-        errechnet aus: max. länge Ethernet (2500m mit Repeater)
-            Übertragungsgeschwindigkeit des Signals (...m/sec)
-            Übertragungsrate: Mbit/s
+        Mindestframelaenge 64 bytes
+        errechnet aus: max. laenge Ethernet (2500m mit Repeater)
+            uebertragungsgeschwindigkeit des Signals (...m/sec)
+            uebertragungsrate: Mbit/s
 
 3.2.2 Schnellere Ethernets
 
     Fast Ethernet (100Mbit/s)
-        zusätzlich: Sterntopologie.
+        zusaetzlich: Sterntopologie.
             Hub    (Multiport-Repeater) im Zentrum: shared   Ethernet
             Switch (Multiport-Bridge)   im Zentrum: switched Ethernet
 
-    Verschiedene Ethernets können kombiniert werden!
+    Verschiedene Ethernets koennen kombiniert werden!
 
     => Autonegotiation von der Kommunikation notwendig, um die
-        Übertragungspausen - mehr der Stationen auszutauschen (Übertragungsrate,
-        Übertragungsmodus [halb/voll duplex])
+        uebertragungspausen - mehr der Stationen auszutauschen (uebertragungsrate,
+        uebertragungsmodus [halb/voll duplex])
 
     Gigabit-Ethernet (1000Mbit/s):
         - Direkt-Verbindungen zwischen Stationen und/oder Switches
         - immer noch die alten Ethernet-Frames!
 
 3.3 Wireless LANs
-3.3.1 Einführung
+3.3.1 Einfuehrung
 
-        LAN: lokales Funknetz(drahtloses Netz) zur Datenübertragung
+        LAN: lokales Funknetz(drahtloses Netz) zur Datenuebertragung
 
         Schichtenmodel: +---------------+
                         | Layer 2 | CCC |
@@ -530,7 +530,7 @@
         - APs stellen bereit Zugang zu einer Infrastruktur:
             DS = Distribution System (drahtlos, drahtgebunden).
 
-    - Mesh: irreguläres Distribution System, MAPs, MPs, MPPs
+    - Mesh: irregulaeres Distribution System, MAPs, MPs, MPPs
 
     - Hotspot
 
@@ -543,15 +543,15 @@
         Interframe Spacing: Short IFS (SIFS)
                             PCF   IFS (PIFS)
                             DCF   IFS (DIFS)
-        Spacing Times SIFS, ... repräsentieren Prioritäten beim Aussenden von
-        Frames (kurze Zeit = hohe Priorität)
+        Spacing Times SIFS, ... repraesentieren Prioritaeten beim Aussenden von
+        Frames (kurze Zeit = hohe Prioritaet)
 
     DCS - Verfahren: implementiert: CSMA/CA -> Collision Avoidance
 
     Grundszenarien: Medium frei:    DIFS (Warten), anschließend
                         sofortige Frame Transmission
                     Medium besetzt: DIFS (Warten), anschließend
-                        Contention Period(verschieden lang für verschiedene
+                        Contention Period(verschieden lang fuer verschiedene
                            )                                        Stationen)
                      ,----´
                     (
@@ -561,19 +561,19 @@
         dessen Frames enthalten ein Duration-Feld (Reservierungszeit dieser
         andreren Stationen) (empfangenes Duration-Feld wird im NAV gespeichert)
 
-    DCF reicht nicht aus, um Kollisionen vollständig zu vermeiden.
+    DCF reicht nicht aus, um Kollisionen vollstaendig zu vermeiden.
 
-    Einen der Gründe:
+    Einen der Gruende:
         Hidden Station Problem.
 
-    Patch für Hidden station Problem:
+    Patch fuer Hidden station Problem:
         vorheriger Austausch von RTS ---> Kontrollframes um Duration-Feldern
                                  CTS -´
                                   `->Request/Clear to Send
 
     WLAN Frames: Daten-, Management-, Kontroll-Frames
 
-    DCF reicht nicht für Echtzeitanwendungen, insbes. nicht für Sprache.
+    DCF reicht nicht fuer Echtzeitanwendungen, insbes. nicht fuer Sprache.
         => PCF(Point Coordination Function): Polling-Verfahren, gesteuert vom
                                              Access Point.
 
@@ -581,7 +581,7 @@
 4.1 ISDN Integrated Services Digital Network
 4.1.1 ISDN-Konzepte und Komponenten
 
-    Endgeräte: Telefon, Telefax, ...
+    Endgeraete: Telefon, Telefax, ...
 
     Vermittlungsstellen: Telekom-, privat(NStAs)
         `-->Koppelnetz zum physikalischen Durchschalten von Verbindungen
@@ -594,49 +594,49 @@
 
 4.1.2 Dienste im ISDN
 
-    Trägerdienste (Bearer Services): stellen Mittel zur zuverlässigen
-        Informationsübertragung in Echtzeit bereit.
-    Teleservices: Transportieren verschiedenartige Infos zwischen Endgeräten
+    Traegerdienste (Bearer Services): stellen Mittel zur zuverlaessigen
+        Informationsuebertragung in Echtzeit bereit.
+    Teleservices: Transportieren verschiedenartige Infos zwischen Endgeraeten
         wichtig: Telefonie, Telefax
     Zusatzdienste (Supplementary Services) (Leistungsmerkmale)
         Beispiele: Reichrec            ---,--> mit mehreren Varianten
                    Anrufweiterschaltung --
 
-4.1.3 ISDN-Kanäle
+4.1.3 ISDN-Kanaele
 
-    Logische Kanäle: B-Kanal zur Nutzdatenübertragung
+    Logische Kanaele: B-Kanal zur Nutzdatenuebertragung
                      D-Kanal zur Signalisierung
 
-    Anschlüsse: Basisanschluss (2 B+D)
-                Primärmultiplexanschluss (30 B+D)
+    Anschluesse: Basisanschluss (2 B+D)
+                Primaermultiplexanschluss (30 B+D)
 
-    Konfigurierbarkeit von Anschlüssen:
-        Mehrgerätanschluss (nur Basisanschluss)
+    Konfigurierbarkeit von Anschluessen:
+        Mehrgeraetanschluss (nur Basisanschluss)
         Anlagenanschluss
     physikalische ISDN-Schnittstellen: S(0), S(2M), ...
-    logische Kanäle werden auf physikalische Kanäle (physikalische Rahmen) bei
-        der Übertragung) abgebildet.
+    logische Kanaele werden auf physikalische Kanaele (physikalische Rahmen) bei
+        der uebertragung) abgebildet.
 
 4.1.4 ISDN-Protokollstruktur
 
-    Blöcke: User Protokoll:    Nur physikalisches Durchschalten
+    Bloecke: User Protokoll:    Nur physikalisches Durchschalten
             Control Protokoll: Signalisierung-> D-Kanal-Protokoll
 
-    Protokoll auf Länge 2: D-Kanal-Protokoll für:
+    Protokoll auf Laenge 2: D-Kanal-Protokoll fuer:
             - Basis Call Control
             - Supplementary Services
 
     Messages: Kopf und (mehreren) Informationen Elements
 
     D-Kanal-Messages Beispiele: SETUP, ALERTING, CONNECT, ...
-        `--> nur zwischen Endgerät und Netz (im Allgemeinen T Vermittlungsstelle)
+        `--> nur zwischen Endgeraet und Netz (im Allgemeinen T Vermittlungsstelle)
 
     Bearer Capability IE (Info Element)
         Spezifikation der Bereitstellung von eines Bearer Services durch das
         Netz.
 
     Low Layer High Layer Compatibility IE
-        Verträglichkeits-Überprüfung durch das angerufene Endgerät
+        Vertraeglichkeits-ueberpruefung durch das angerufene Endgeraet
 
     Adressierung im ISDN-Netz
         ISDN-Nummer:  identifiziert ISDN-Anschluss
@@ -645,8 +645,8 @@
                          |--> National Destination Code     871
                          `--> ISDN Subscriber Number    1234567
 
-    Das D. Kanal Protokoll steuert zusätzlich die Supplementary Services
-        z.B. Rückruf, Rufumleitung
+    Das D. Kanal Protokoll steuert zusaetzlich die Supplementary Services
+        z.B. Rueckruf, Rufumleitung
 
 4.1.5 Signalisierungssystem Nummer 7 (SS#7)
 
@@ -656,18 +656,18 @@
     ISDN Nachrichten: IAM, ACM, ANM, ...
 
 4.2 Mobile Kommunikation mit GSM
-4.2.1 Einführung
+4.2.1 Einfuehrung
 
     interpolation von DK mit TK
-    - Mobilität: - Gerätemobilität: Teilnehmer drahtlos angeschlossen
-                 - persönliche Mobilität: Teilnehmer kann Dienste über
-                                          Identifizierung an vielen Geräten
+    - Mobilitaet: - Geraetemobilitaet: Teilnehmer drahtlos angeschlossen
+                 - persoenliche Mobilitaet: Teilnehmer kann Dienste ueber
+                                          Identifizierung an vielen Geraeten
                                           abgreifen.
     Beispielsysteme: GSM, UMTS, LTE
 
-4.2.2 Physikalische Mobilfunkkanäle
+4.2.2 Physikalische Mobilfunkkanaele
 
-    Funkkanal:      Trägerfrequenz, auf die Signale aufmoduliert werden können.
+    Funkkanal:      Traegerfrequenz, auf die Signale aufmoduliert werden koennen.
 
     Duplexfunktion: Verfahren zur gleichzeitigen Nutzung eines Mediums in beiden
                     Kommunikationsrichtungen.
@@ -685,7 +685,7 @@
                                 einer zentralen Funkstation (Basisstation)
                                 abgedeckt wird.
     Characteristika: - Zellen, modelliert Hexagone, mit
-                           Teilnehmer-Dichte-abhängigen Radius
+                           Teilnehmer-Dichte-abhaengigen Radius
                      - Frequenzkennung
                      - Frequenzprotokoll-Mindestabstand
                      - Handoms
@@ -694,7 +694,7 @@
                                                    ,--> = Vermittlungsstelle
     Organisation nach Komponenten: MS, BTS, ..., MSCs, HLR, VLR
       `---> "unterorganisiert" nach                    `---.---'
-            Subsystemen: Funknetz ISSS          unterstützende Datenbasen
+            Subsystemen: Funknetz ISSS          unterstuetzende Datenbasen
             mobilvermittlungsnetz SMSS, ...
 
     Organisation nach administrativen Bereichen
@@ -707,38 +707,38 @@
         - Administrative Bereiche:
             ...
             Location Area: aktueller Aufenthaltsbereich eines MS im Netz.
-                           (genauste gegenführe Info über seinen Aufenthalsort)
+                           (genauste gegenfuehre Info ueber seinen Aufenthalsort)
             ...
             Zelle.
         - Kennziffern und Nummern
-            ISMI Identification: nicht öffentlich
-            MSISDN Rufnummern: öffentlich
+            ISMI Identification: nicht oeffentlich
+            MSISDN Rufnummern: oeffentlich
             CAI
             ...
 
 4.2.5 Mobile Dienste
 
-    Trägerdineste
+    Traegerdineste
     Teledienste: Telefone, SMS, ...
     Zusatzdienste
 
-4.2.6 Logische Kanäle
+4.2.6 Logische Kanaele
 
-    Verkehrskanäle + Signalisierungskanäle
+    Verkehrskanaele + Signalisierungskanaele
        `--> "B-Kanal"       `--> "D-Kanal"
 
-    Diese logischen Kanäle werden z.B. beim Verbindungsaufbau verwendet. Sie
-    werden weiterhin auf physikalische Kanäle abgebildet.
+    Diese logischen Kanaele werden z.B. beim Verbindungsaufbau verwendet. Sie
+    werden weiterhin auf physikalische Kanaele abgebildet.
 
-    Einführendes Beispiel:
+    Einfuehrendes Beispiel:
     Auf phys. Kanal werde eine Folge von TDMA-Zeitrahmen verschickt:
 
         TDMA - Rahmen T = L1 L2 L1 L3 L1 L2 L1 L3
                             Li = log. Kanal
 
-        Solche TDMA-Rahmen können zu Multirahmen zusammengefasst werden:
+        Solche TDMA-Rahmen koennen zu Multirahmen zusammengefasst werden:
 
-                                   ,--> z.B. für logische Signalisierungskanäle
+                                   ,--> z.B. fuer logische Signalisierungskanaele
             T T T T T T T T T T T -
 
        GSM: TDMA-Rahmen, zusammengefast zu 26er- oder 51-Multirahmen
@@ -749,8 +749,8 @@
                                       A      - Schnittstelle
                                       A(bes) - Schnittstelle
 
-        für: Gesprächsdatenübertagung
-             Datenübertragung
+        fuer: Gespraechsdatenuebertagung
+             Datenuebertragung
              Signalisierung:  +--> CM
                               |`-> MM
                               |`-> RR
@@ -759,7 +759,7 @@
         RR: Ressource Management
 
             Protokoll zur Steuerung des Funkressourcen (Frequenz, physikalische
-            Kanäle) auf tz Funkschnittstelle
+            Kanaele) auf tz Funkschnittstelle
 
             Aufgaben: z.B. Raging, Homdorse
 
@@ -767,7 +767,7 @@
 
         MM: Mobility Management
 
-            Protokoll zur Bereitstellung der Gerätemobilität
+            Protokoll zur Bereitstellung der Geraetemobilitaet
 
             Aufgaben: z.B. Location Update
 
@@ -775,19 +775,19 @@
 
         CM: Connection Management
 
-            Protokoll für: Steuerung von Nutzerdatenverbindungen
-                Unterstützung von GSM-Zusatzdiensten
-                SMS-Unterstützung
+            Protokoll fuer: Steuerung von Nutzerdatenverbindungen
+                Unterstuetzung von GSM-Zusatzdiensten
+                SMS-Unterstuetzung
 
            Aufgaben:
 
            Messages
 
-4.2.8 Mobilität
+4.2.8 Mobilitaet
 
-    Micomobilität, realisiert durch Handover-Prozeduren.
-    Mediummobilität, realisiert durch Location-Update-Prozeduren
-    Makromobilität, realisiert durch Roaming-Abkommen.
+    Micomobilitaet, realisiert durch Handover-Prozeduren.
+    Mediummobilitaet, realisiert durch Location-Update-Prozeduren
+    Makromobilitaet, realisiert durch Roaming-Abkommen.
 
     Location Registration
         `--> Vorgang des Einbuchens eines Teilnehmers in ein Mobilfunknetz
@@ -796,14 +796,14 @@
     Wesentliche Punkte:
         - die Mobilstation (MS) gibt dem Netz IMSI und LAI an.
         - Visited Location Register (VLR) teilt der MS eine Roaming Number MSRN
-          und eine temporäre Kennung TMSI zu.
-        - die MCR erhält MSRN und IMSI
-        - die MS enthält die TMSI
+          und eine temporaere Kennung TMSI zu.
+        - die MCR erhaelt MSRN und IMSI
+        - die MS enthaelt die TMSI
 
     Ergebnisse:
         - Benutzer (MS) angemeldet
-        - sie ist der VLR als in ihrem Bereich präsent bekannt.
-        - sie ist im HLR über ihre MSRN auffindbar
+        - sie ist der VLR als in ihrem Bereich praesent bekannt.
+        - sie ist im HLR ueber ihre MSRN auffindbar
         - sie hat eine TMSI erhalten.
 
     Location Update:
@@ -813,8 +813,8 @@
         Wesentlich:
             - MS gibt dem Netz TMSI, CAI neu an.
             - VLR: neue TMSI
-            - HLR: erhält neue zugeteilte MSRN
-            - MS: erhält neue zugeteilte TMSI
+            - HLR: erhaelt neue zugeteilte MSRN
+            - MS: erhaelt neue zugeteilte TMSI
 
         Ergebnisse: (analog zur Location Registration)
             - neue VLR
@@ -826,19 +826,19 @@
                       - eigentlicher Verbindungsaufbau.
 
         Handover
-            `--> Umschaltung eines laufenden Gesprächs auf einen anderen
+            `--> Umschaltung eines laufenden Gespraechs auf einen anderen
                  Funkkanal ohne Unterbrechung, i.A. bei Zellenwechsel
 
         Ablauf:
             - Messungen
             - Messungen schlecht -> Entscheidung zum Handover
             - Veranlassung des Handovers
-            - Durchführung
+            - Durchfuehrung
             - Abschluss
             - Messungen
 
         Inter-MSC-Handover:
-            - Anchor-MSC: MSC, über die eine Gesprächsverbindung bei
+            - Anchor-MSC: MSC, ueber die eine Gespraechsverbindung bei
                           Aufbau geschaltet wurde.
             - bei weitreichender geografischer Bewegung:
 
