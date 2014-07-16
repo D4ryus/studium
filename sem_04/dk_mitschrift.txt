@@ -689,7 +689,7 @@
                            Teilnehmer-Dichte-abhängigen Radius
                      - Frequenzkennung
                      - Frequenzprotokoll-Mindestabstand
-                     - Handoms
+                     - Handovers
 
 4.2.4 GSM-Netz-Organisation
                                                    ,--> = Vermittlungsstelle
