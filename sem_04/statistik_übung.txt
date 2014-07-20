@@ -43,3 +43,13 @@ e) Berechnen Sie mit der Verteilung aus c) die Wahrscheinlichkeit dafür, dass
 f) Berechnen Sie mit der Verteilung aus d) die Wahrscheinlichkeit, dass 0
    seltener als 40 mal fällt (bei 500 Versuchen)
    - p(X < 40) = ... = ...
+
+
+Stichprobe größer -> Konfidenzintervall kleiner
+Konfidenzniveau höher -> Konfidenzintervall größer
+
+Nullhypothese: Hypothese welche ich ablehnen möchte.
+
+Fehler erster Art: Hypothese richtig, wird jedoch abgeleht.
+                   (durch Irrtumswarscheinlichkeit alpha)
+Fehler zweiter Art: Hypothese nicht abgeleht obwohl falsch.
