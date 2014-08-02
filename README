@@ -1,4 +1,3 @@
-.
 ├── README
 ├── sem_03/
 │   ├── ass_praktikum_02/
@@ -100,6 +99,7 @@
     │   └── Makefile
     ├── bs_praktikum_05/
     │   └── mem.c
+    ├── bs_themen.txt
     ├── dk_mitschrift.txt
     ├── dk_praktikum_01/
     │   └── abp.c
@@ -117,10 +117,12 @@
     │   └── Server.java
     ├── dk_praktikum_05/
     │   └── dvr.c
-    └── dk_praktikum_06/
-        ├── client.c
-        ├── Makefile
-        ├── server.c
-        └── UDP.h
+    ├── dk_praktikum_06/
+    │   ├── client.c
+    │   ├── Makefile
+    │   ├── server.c
+    │   └── UDP.h
+    ├── dk_themen.txt
+    └── statistik_übung.txt
 
-37 directories, 86 files
+37 directories, 89 files
