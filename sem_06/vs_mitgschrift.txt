@@ -1,0 +1,82 @@
+/**
+ * Verteilte Systeme Mitschrift
+ * author: d4ryus - https://github.com/d4ruys/
+ * vim:tw=80:ai:ts=4:sw=4:spell:foldmethod=expr:nonumber:norelativenumber:foldexpr=NumberFold():
+ */
+
+0. Einführung
+
+    Verteiltes System (SW-Orientiert):
+    System voneinander unabhängige Prozesse
+    (SW-Komponenten), die auf verschiedenen vernetzten Rechnern zusammenarbeiten
+    und einem Benutzer wie ein einziges System erscheinen.
+
+    Verteiltes System (HW-Orientiert):
+    Menge voneinander unabhängiger Kooperierenden Rechner, die einem Benutzer
+    wie ein einziges System erscheinen.
+
+    Transparenz!
+
+    Client-Server-Modell
+
+    Entferntes Objekt (Remote Object):
+        - läuft auf Server-Machine
+        - wird vom Object auf Client-Maschine benutzt über eine Schnittstelle
+
+    Entfernte Methode: Methode eines entfernten Objektes
+    Entfernte Prozedur: Prozedur/Funktionen die auf einer Server Maschine aufgerufen wird.
+
+1. Remote Method Invocation (RMI)
+1.1 Einführung
+
+    CIS-Modell
+
+    Server-Aufgaben: erzeugt entfernte Objekte
+                     macht ihre Existenz bekannt
+                     macht den Zugang zu ihnen möglich
+                     wartet auf Clients, die sie benutzen
+
+    Client-Aufgaben: Verschafft sich Zugang zu entfernten Objekten, und benutzt
+                     sie
+
+1.2 RMI-Architektur
+
+    Kommunikationsachitektur: Protokollstack
+    Ablaufmodell: 1. Registrierung: bind(), ...
+                  2. Lokalisierung: lookup(), ...
+                  3. Aufruf
+
+    RMI-Registry: ein auf einer Server-Maschine laufendes Programm zur
+                  Verwaltung entfernter Objekte. Realisiert einen Namensdienst:
+                  Name -> Objektreferenz (Abbildung).
+
+    Name: rmi://<server-maschine>:port/<remote object name>
+           |     ||                ||
+      ,---´      \/                \/
+      |      optional,          optional,
+      | default: localhost     default 1099
+      |
+      `-> nur, wenn server-maschine oder port angegeben.
+
+    Objektreferenz:  maschinenlesbarer Wort, der den Zugriff auf ein Objekt
+                     möglich macht.
+                     Inhalt (im Allgemeinen): Server_Adresse
+                                              Portnummer
+                                              Object-ID
+              ,->--------------------->-.
+              |                         |
+    Serialisierung/Deserialisierung: Umwandlung eines Objektes in einen
+                     |               Byte-Strom.
+                     `->umgesetzt
+
+1.3 RMI-Entwicklung
+
+    4 Komponenten: - Schnittstellendefinition
+                   - Schnittstellenimplementierung
+                   - Server ( main() )
+                   - Client ( main() )
+
+    JDK stellt zur Verfügung:
+        Interfaces: Remote, Serializable
+        Classes: Remote Object, Unicast Remote Object
+        Exceptions: Remote
