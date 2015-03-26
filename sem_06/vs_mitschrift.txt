@@ -39,7 +39,7 @@
     Client-Aufgaben: Verschafft sich Zugang zu entfernten Objekten, und benutzt
                      sie
 
-1.2 RMI-Architektur
+1.2 RMI - Architektur
 
     Kommunikationsachitektur: Protokollstack
     Ablaufmodell: 1. Registrierung: bind(), ...
@@ -69,7 +69,7 @@
                      |               Byte-Strom.
                      `->umgesetzt
 
-1.3 RMI-Entwicklung
+1.3 RMI - Entwicklung
 
     4 Komponenten: - Schnittstellendefinition
                    - Schnittstellenimplementierung
@@ -80,3 +80,64 @@
         Interfaces: Remote, Serializable
         Classes: Remote Object, Unicast Remote Object
         Exceptions: Remote
+
+2. Remote Procedure Calls (RPC)
+2.1 Einführung
+
+    RFC 5521,4506,1833
+        RPCv2 XDR Postmapper
+    CIS-Modell
+    Remote Procedure Call: Aufruf einer Prozedur in einem anderen Adressraum als
+                           dem des Aufrufers.
+    Remote Procedure
+    Remote Programms: Logisch zusammenhängende Remote Procedures
+
+2.2 RPC - Program-Modell
+
+    C: main() mit Prozeduren, die entfernt sein können
+    Normale C-Philosophie von Prozedur-Aufrufen, und über das Netzwerk hinweg:
+    "single thread of control across a network"
+    Request-Reply-Mechanismus.
+    Unterschied entfernter <-> lokaler Aufruf:
+        - keine Zeiger-Übergabe
+        - keine gemeinsame globale Variablen
+        - Performance
+        - nur ein Parameter bei Aufruf von entfernten Prozeduren
+               `--> kann struct sein
+
+    Identifizierung von Remote Prozeduren
+        - Internet-Adresse des Server Rechners
+          (pros, vers, proc)
+            |     |     `--> Prozedurnummer
+            |     `-->Versionsnummer von Prozedur
+            `--> Programm Nummer
+
+2.3 RPC - Ablaufmodell
+
+    1. Registrierung von entfernten Prozeduren durch den Server
+    2. Lokalisierung von entfernten Prozeduren durch den Client
+    3. Aufruf
+
+2.4 Kommunikationsmodell
+
+    Stack gemäß Schichtenmodell
+    Middleware: Stubs
+
+2.5 externe Datenmanipulation mit Codierung
+
+    Informationen + Parameter von Remote Prozedures müssen zur Übertragung
+    codiert/decodiert werden (= ASM1 + BER)
+
+    IDD - Datentype werden mit Hilfe von RPC-Routinen codiert/decodiert
+
+2.6 RPC - Messages
+
+    Call (Request) | spezifiziert in RPC-Language (C-ähnlich)
+    Reply          | codiert mit Hilfe von XDR.
+
+2.7 RPC - Entwicklungsprozess
+
+    Zu entwickeln durch Anwender: Client, Server Prozeduren
+
+    Im System generiert: Communication Stacks durch -> rpcgen <-
+                         auf der Basis einer Schnittstellendefinition: *.x
