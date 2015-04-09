@@ -141,3 +141,97 @@
 
     Im System generiert: Communication Stacks durch -> rpcgen <-
                          auf der Basis einer Schnittstellendefinition: *.x
+
+3.0 Synchronisation im VS
+3.1 Grundbegriffe
+
+    Problem: - gemeinsame physikalische Zeit für Komponenten eines VS,
+             - oder: allgemein im VS akzeptierte Ordnung von Aktionen und
+               Ereignissen
+
+    Lösung: Synchronisation
+
+    Sync: Beeinflussung parallel arbeitender Prozesse dahingehen, dass ihre
+          Aktionen/Ereignisse hinsichtlich ihres zeitlichen Ablaufs in eine von
+          allen Prozessen akzeptierte Reihenfolge gebraucht werden.
+
+    Zeitdienst: leitet die Sync von Prozessen in einem VS.
+        `--> geleistet von einem Zeitserver.
+
+3.2 Synchronisation physikalischer Rechneruhren
+3.2.1 Systemmodell für physikalische Uhren
+
+    Vorausgesetzt: C utc (t): Universelle Zeit, ausgegeben von einem zentralen
+                              Zeitserver, z.B. NIST, PTB
+                   C i (t)  : lokale Zeit eines Rechners i.
+    Charakterisierung einer Rechneruhr: μ : universelle Abweichungsrate einer
+                                           Rechneruhr
+    Rechnerstellen gibt an:  mit: 1 - <= dc/dt <= 1t 
+
+    Bedeutung: nach 1 Zeitintervall (z.B. 1 sec) weicht die Rechneruhr um maximal
+               Zeiteinheiten von der physikalischen Uhr ab.
+    Bedeutung: nach 1 Zeitintervall (z.B. 1 sec) weichen 2 Rechneruhren maximal
+               2 μ Zeiteinheiten voneinander ab.
+
+    Sollen zwei Uhren mit μ nie mehr als A Sekunden auseinander liegen dann
+    müssen sie spätestens mit < Δt Sek. synchronisiert werden.
+
+    Es gilt: A = 2 μ Δt
+        => Δt = A/2 μ
+            `--> nach dieser Zeit muss in einem VS auf 2 Komponenten
+                 synchronisiert werden!
+                 Δ μ
+
+3.2.2 Algorithmen zum Sync physikalischen Rechneruhren
+
+    Possium Zeitserver zentraler Algorithmus:
+
+    Possium: C utc, I , To, T, ...
+    Neu Setzten der Uhr des Zeitclients: neue zeit = C utc + (Ti - To - I)/2
+                                                                 (Übertrag)
+    Probleme: - Zentraler Server: Überlastung, Ausfall
+              - Endl. Verarbeitungszeit ( >0 ) bei Zeitclient und Zeitserver
+                Abhängigkeiten der Übertragunszeiten von Zeitanfrage und antwort
+                von der Netzbelastung
+              - n. Cl. Zeitübersetzung der Zeitclient-Uhr:
+                => Zeitgesuchte nicht mehr eindeutig.
+
+    Aktiver Zeitserver, zentraler Algorithmus
+
+    - beruht auf Durchschnittsbildung von Zeiten.
+    - Zeitserver sendet periodisch: Zeit requests
+    - Zeitclient sendet daraufhin:  Zeit replies
+    - Zeitserver sendet daraufhin:  Zeitkorrekturen (Δ abhängig)
+
+    Wesentliches Problem: "Driften" der Zeit im gesamten VS.
+
+3.2.3 Protokolle zur Sync. physikalischer Rechneruhren
+
+    Network Time Protokoll NTP (RFC 1205)
+
+    NTP: Anforderungen
+         Architektur besteht aus Schichten (Strata).
+         Operationsmodi
+         Nachrichten
+
+    Vereinfachung: SNTP (Simple NTP) (RFC 4320)
+        Nachrichten: enthalten Zeitstempel:
+
+            0                        31
+            +-------------------------+
+            | Sekunden, seit 1.1.1900 |
+            |-------------------------|
+            |   Sekundenbruchteile    |
+            +-------------------------+
+
+        Nachrichtenaustausch:
+
+           |  ---- Zeitrequest  ----> |
+           | <---- Zeitresponse ----  |
+
+        mit den Zeitstempeln T1, T2, T3.
+
+        Berechnet werden: - Offset: Gangunterschied der Zeitclientuhr zu
+                                  Zeitserveruhr
+                          - Round Trip Delay : Zur Ermittlung der Qualität der
+                                               Zeitinfo vom Zeitserver
