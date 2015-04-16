@@ -235,3 +235,76 @@
                                   Zeitserveruhr
                           - Round Trip Delay : Zur Ermittlung der Qualität der
                                                Zeitinfo vom Zeitserver
+
+4. CORBA
+4.1 Einführung
+
+    CIS-Systeme: - RMI
+                 - RPC
+                 - CORBA
+                 - ESB
+
+    CORBA-Spezifikation: OMG spezifizierte die OMA (Object Mgt. Arch.)
+
+    OMA ---> Core Object Modell
+         `-> Reference Modell ORB (Object Request Broker) und 
+
+    Architektur des ORBs: CORBA: Common ORB Architecture
+
+    CORBA ---> IDC Schnittstelle
+           `-> Komponenten
+
+4.2 Interface Description Language IDC
+
+    Definition: IDC ist eine Spezifikation für Schnittstellen.
+
+    IDC-Eigenschaften:
+
+        - Unabhängigkeit von: Programmiersprachen,
+                              Betriebssystemen,
+                              HW-Architekturen
+
+        - Reine Spez. Sprache: keine Statements
+                               keine Variablen
+
+    IDC-Grundkonstrukte: Types, ..., Operations, ..., Interfaces, ...
+
+        Typen: Menge von Werten.
+
+            - Objektreferenzen
+            - Basistypen
+            - benutzerdefinierte Typen - können z.T. zum Aufbau komplexer
+                                         Typen verwendet werden
+
+            Neue Typen definieren: typedef (typedef alter_typ neuer_typ)
+
+        Beispiel: typedef long Kennziffer;
+
+        Sequenzen: Arrays variabler Länge, maximale länge ist definierbar.
+
+        Konstanten: Werte, die sich nicht ändern können.
+
+        Exceptions: Typen, deren Werte dem Aufrufer einer Operation das
+                    Auftreten von Fehlern mitteilen.
+
+        Operations: Spezifikation von zu implementierenden Methoden bestehend aus:
+
+                    - Rückgabetype, auch void möglich
+                    - Name
+                    - Argumentteile (in Liste von Argumenten mit jeweils Mode, Typ)
+                    - Exceptions (optional)
+                    Spezialfall angegebene Operationen: Operationen
+
+        Attributes: Eigenschaften von Schnittstellen
+                    Nicht unbedingt Notwendig.
+                    Keine Variablen
+
+        Interface: Typbeschreibungen
+                   Vererbung zwischen Interfaces möglich
+                     `--> sogar Mehrfachvererbung
+                   Interfaces können nicht geschachtelt werden.
+
+        Modules: dienen der Definition von Narmensbereichen, z.B. für mehrere
+                 Interfaces
+                 ! Jedem IDC-Konstante entsprechende Programmsprachen Konstrukte
+                    zugeordnet, von daher: IDC Language Mapping.
