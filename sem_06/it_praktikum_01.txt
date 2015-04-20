@@ -1,0 +1,78 @@
+1.
+       a)
+              1. Die Internet Corporation for Assigned Names and Numbers
+                 koordiniert die Vergabe von einmaligen Namen und Adressen im
+                 Internet.
+              2. - Genehmigt die IESG-Wahlen des NomCom
+                 - Nimmt Beschwerden über IESG-Aktionen an und prüft diese
+                 - Genehmigt die Ernennung der IANA
+                 - Beaufsichtigt die Verbindungen zu anderen
+                   Standardisierungsgremien
+              3. The mission of the IETF is to make the Internet work better by
+                 producing high quality, relevant technical documents that
+                 influence the way people design, use, and manage the Internet.
+       b)
+              1. - erste version:  https://tools.ietf.org/html/rfc114
+                 - neuste version: https://tools.ietf.org/html/rfc959
+              2. - erste version:  https://tools.ietf.org/html/rfc918
+                 - neuste version: https://tools.ietf.org/html/rfc937
+              3. - erste version:  https://tools.ietf.org/html/rfc1883
+                 - neuste version: https://tools.ietf.org/html/rfc2460
+
+       c)
+              übertragen via tauben
+              status: living/experimental
+
+       d)
+             1. http://whois.domaintools.com/haw-landshut.de
+             2. http://whois.domaintools.com/saturn.de
+             3. http://whois.domaintools.com/mediamarkt.de
+             4. http://whois.domaintools.com/microsoft.com
+
+2.
+       a)
+              http://en.wikipedia.org/wiki/Internet_protocol_suite
+       b)
+              http://www.rvs.uni-bielefeld.de/~heiko/tcpip/tcpip_html_alt/abbildungen/osi-tcpip.gif
+       c)
+              OSI ist nur eine Abstraktion eines Models, keine
+              Spezification.
+       d)
+              netstat -r:
+
+              Kernel IP routing table
+              Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+              default         zs1.fh-landshut 0.0.0.0         UG        0 0          0 wlp3s0
+              172.17.0.0      *               255.255.0.0     U         0 0          0 wlp3s0
+
+              route add abc.de metric 500
+              route del abc.de
+
+       e)
+              ping www.haw-landshut.de
+              ping www.heise.de
+              ping www.posttestserver.com
+
+       f)
+              traceroute www.haw-landshut.de
+              traceroute www.heise.de
+              traceroute www.posttestserver.com
+       g)
+              www.haw-landshut.de 193.175.141.150
+              www.spiegel.de      62.138.116.3
+
+       h)
+              netcat www.posttestserver.com 80
+              GET /index.html HTTP/1.1
+              Host: www.posttestserver.com
+              User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0
+              Content-Type: text/html; charset=utf-8
+              <empty-line>
+
+              netcat http://posttestserver.com/ 80
+              POST /post.php HTTP/1.1
+              Host: www.posttestserver.com
+              Content-Type: application/x-www-form-urlencoded
+              Content-Length: 28
+
+              organisation=HawLA&name=WoWa
