@@ -308,3 +308,56 @@
                  Interfaces
                  ! Jedem IDC-Konstante entsprechende Programmsprachen Konstrukte
                     zugeordnet, von daher: IDC Language Mapping.
+
+4.3 Inter-ORB-Kommunikation
+4.3.1 Interoperable Object References
+
+    Notwendig für CIS-Kommunikation unter CORBA: IORs
+
+    Bestandteile: Schnittstelleninformation
+                  Profildaten (häufig über Server-Objekte: Adressen...Object
+                     `-->vielfach möglich                              Key.)
+
+4.3.2 GIOP und IIOP
+       |        `--> Internet über ORB Protocol (Spezialisierung von GOP auf
+       |                                         Internet Kommunikation))
+       `--> gesendet über ORB-Protocol
+
+    IIOP spezifiziert: Nachrichtenformate
+                       Codierungsregeln: CDR Common Data Representation
+
+    Ablauf der CORBA-Kommunikation mit Hilfe eines IOR:
+        Ein Client besitzt die IOR eines Server-Objekts, das es ansprechen
+        möchte. Dann baut er mit Hilfe von Internet-Adresse und
+        Post-Nummer in der IOR eine TCP-Verbindung auf. Danach auf diese
+        TCP-Verbindung Austausch von Request und Reply. Dabei enthalten die
+        Requests: Object Key des Server Objekts, die Operation und ihre
+                  Argumente.
+
+4.4 CORBA Namensdienst
+
+    Namensdienst realisiert eine Abbildung: Name -> Menge von Attributen
+                                       z.B. Name -> {Objektreferenz}
+                                            Name -> {Adresse}
+
+    Begriffe:
+
+        Namenskomponente: 2 Strings, der 2 wird nicht benutzt.
+
+        Namensbindung:    Paar: Namenskomponente, Objektreferenz
+
+        Namenskontext:    Menge von Namensbindungen
+
+        Objektrefnummern können referenzieren: Anwendungsobjekte, weitere
+                                               Namensobjekte
+            => Namensgraphen
+
+        Name: Folge von Namenskomponenten: Kontextname, .... Kontextname
+                                           (elementarer Name)
+
+        Namensdienst unterstützt:
+            - resolve() von Client: finden einer Objektreferenz
+            - send(), rebind() vom Server: Erschaffung eines Namensbindung
+
+        Zusätzlich um eine Referenz auf den Namensdienst zu erlangen:
+            resolve_initial_references()

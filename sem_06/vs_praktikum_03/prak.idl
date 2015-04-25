@@ -1,0 +1,55 @@
+module prak {
+        enum Paper {id, travel_id};
+
+        enum Leave_place_err {not_living_there,
+                              did_not_pay_taxes,
+                              boke_bad};
+
+        enum Move_place_err  {to_loud,
+                              to_stressy};
+
+        exception Move_place_ex {
+                Move_place_err err;
+        };
+
+        exception Leave_place_ex {
+                Leave_place_err err;
+        };
+
+        struct Name{
+                string lastname;
+                sequence <string> firstname;
+        };
+
+        struct Place {
+                string name;
+                string state;
+                short zip_code[8];
+        };
+
+        union id_or_name switch (boolean) {
+                case FALSE: Name name;
+                case TRUE: Paper pap;
+        };
+
+        interface person {
+                attribute Name p_name;
+                attribute Paper p_paper;
+        };
+
+        interface reporter : person {
+        };
+
+        interface prominent : person {
+                typedef sequence <Place> p_places;
+                attribute p_places living_places;
+                void move_place(in Place new_place) raises (Move_place_ex);
+                void leave_place(in Place remove_place) raises (Leave_place_ex);
+                string interview (in reporter rep);
+        };
+
+        interface reg_office {
+                prominent find_vip(in id_or_name idName);
+                void move_vip(in prominent vip);
+        };
+};
