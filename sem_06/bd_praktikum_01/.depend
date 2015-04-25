@@ -1,0 +1,3 @@
+bloom.o: bloom.c bloom.h hashes.h
+hashes.o: hashes.c hashes.h
+main.o: main.c hashes.h bloom.h
