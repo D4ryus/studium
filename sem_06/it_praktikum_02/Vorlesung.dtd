@@ -1,0 +1,24 @@
+<?xml version ="1.0" encoding ="UTF - 8"?>
+<!DOCTYPE Vorlesung SYSTEM "Vorlesung.dtd">
+<!--
+  Ein Beispiel Dokument zur Veranstaltung Internettechnolgien !
+  Autor: Seel
+  Wie alles ist auch dieser Kommentar endlich!
+-->
+<Vorlesung>
+  <Titel>Seminar</Titel>
+  <Semester>Sommersemester</Semester>
+  <Hochschule>HAW Landshut</Hochschule>
+  <SWS>4</SWS>
+  <!-- Anweisung an myTool -->
+  <? myTool align = left ?>
+  <Kapitel nummer ="1">
+    <Name>Einführung</Name>
+    <Termin>1</Termin>
+  </Kapitel>
+  <Kapitel nummer ="2"
+           quelle ="Q1">
+    <Name>Grundlagen von Netzwerk</Name>
+    <Termin>2</Termin>
+  </Kapitel>
+</Vorlesung>
