@@ -8,7 +8,6 @@ LFLAGS = -lbsd
 EXECUTABLE = main
 
 CFLAGS = -Wall \
-         -O2 \
          -Wstrict-prototypes \
          -Wmissing-prototypes \
          -Wno-main \
@@ -39,8 +38,9 @@ CFLAGS = -Wall \
          -Wstack-protector \
          -Woverlength-strings \
          -Waddress \
-         -ggdb \
-         -g3
+         -O3 \
+       # -ggdb \
+       # -g3 \
        # -Werror \
        # -pg \
        # -g3 \
