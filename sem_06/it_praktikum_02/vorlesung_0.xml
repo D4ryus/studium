@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Vorlesung SYSTEM "vorlesung_0.dtd">
+<Vorlesung>
+  <Titel>Seminar</Titel>
+  <Semester>Sommersemester</Semester>
+  <Hochschule>HAW Landshut</Hochschule>
+  <SWS>4</SWS>
+  <?myTool align = left ?>
+  <Kapitel nummer="1">
+    <Name>Einführung</Name>
+    <Termin>1</Termin>
+  </Kapitel>
+  <Kapitel nummer="2" quelle="Q1">
+    <Name>Grundlagen von Netzwerk</Name>
+    <Termin>2</Termin>
+  </Kapitel>
+  <Quelle>
+    <Author>someone</Author>
+    <Titel>Lehrbuch 1.23</Titel>
+  </Quelle>
+</Vorlesung>

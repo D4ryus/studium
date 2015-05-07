@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!ELEMENT Vorlesung (Titel, Hochschule+, SWS, Semester, Kapitel+, Quelle+)>
+        <!ELEMENT Titel (#PCDATA)>
+        <!ELEMENT Hochschule (#PCDATA)>
+        <!ELEMENT SWS (#PCDATA)>
+        <!ELEMENT Semester (#PCDATA)>
+        <!ELEMENT Kapitel (#PCDATA)>
+                <!ATTLIST Kapitel bewertung CDATA #REQUIRED "1">
+        <!ELEMENT Quelle >
+                <!ATTLIST Quelle quelleID ID #REQUIRED>
+                <!ATTLIST Quelle type (Monographie|Artikel|Dissertation|Abschlussarbeit)>
