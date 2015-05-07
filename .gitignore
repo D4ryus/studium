@@ -1,5 +1,5 @@
 *.class
 *.o
-build/*
-bin/*
+**/build/*
+**/bin/*
 

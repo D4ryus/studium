@@ -32,23 +32,23 @@ insert_key(char *key, size_t length)
 
         if (HASHES & FNV) {
                 hash = hash_fnv(key, length);
-                bloom_filter[(hash % bloom_size) >> 3] |= 1 << (hash & 0x7);
+                bloom_filter[(hash & (bloom_size - 1)) >> 3] |= 1 << (hash & 0x7);
         }
         if (HASHES & MURMUR64) {
                 hash = hash_murmur64(key, length, 0);
-                bloom_filter[(hash % bloom_size) >> 3] |= 1 << (hash & 0x7);
+                bloom_filter[(hash & (bloom_size - 1)) >> 3] |= 1 << (hash & 0x7);
         }
         if (HASHES & JENKINS) {
                 hash = hash_jenkins(key, length);
-                bloom_filter[(hash % bloom_size) >> 3] |= 1 << (hash & 0x7);
+                bloom_filter[(hash & (bloom_size - 1)) >> 3] |= 1 << (hash & 0x7);
         }
         if (HASHES & ELF) {
                 hash = hash_elf(key, length);
-                bloom_filter[(hash % bloom_size) >> 3] |= 1 << (hash & 0x7);
+                bloom_filter[(hash & (bloom_size - 1)) >> 3] |= 1 << (hash & 0x7);
         }
         if (HASHES & BERNSTEIN) {
                 hash = hash_bernstein(key, length);
-                bloom_filter[(hash % bloom_size) >> 3] |= 1 << (hash & 0x7);
+                bloom_filter[(hash & (bloom_size - 1)) >> 3] |= 1 << (hash & 0x7);
         }
 }
 
@@ -59,31 +59,31 @@ is_member(char *key, size_t length)
 
         if (HASHES & FNV) {
                 hash = hash_fnv(key, length);
-                if ((bloom_filter[(hash % bloom_size) >> 3] & 1 << (hash & 0x7)) == 0) {
+                if ((bloom_filter[(hash & (bloom_size - 1)) >> 3] & 1 << (hash & 0x7)) == 0) {
                         return 0;
                 }
         }
         if (HASHES & MURMUR64) {
                 hash = hash_murmur64(key, length, 0);
-                if ((bloom_filter[(hash % bloom_size) >> 3] & 1 << (hash & 0x7)) == 0) {
+                if ((bloom_filter[(hash & (bloom_size - 1)) >> 3] & 1 << (hash & 0x7)) == 0) {
                         return 0;
                 }
         }
         if (HASHES & JENKINS) {
                 hash = hash_jenkins(key, length);
-                if ((bloom_filter[(hash % bloom_size) >> 3] & 1 << (hash & 0x7)) == 0) {
+                if ((bloom_filter[(hash & (bloom_size - 1)) >> 3] & 1 << (hash & 0x7)) == 0) {
                         return 0;
                 }
         }
         if (HASHES & ELF) {
                 hash = hash_elf(key, length);
-                if ((bloom_filter[(hash % bloom_size) >> 3] & 1 << (hash & 0x7)) == 0) {
+                if ((bloom_filter[(hash & (bloom_size - 1)) >> 3] & 1 << (hash & 0x7)) == 0) {
                         return 0;
                 }
         }
         if (HASHES & BERNSTEIN) {
                 hash = hash_bernstein(key, length);
-                if ((bloom_filter[(hash % bloom_size) >> 3] & 1 << (hash & 0x7)) == 0) {
+                if ((bloom_filter[(hash & (bloom_size - 1)) >> 3] & 1 << (hash & 0x7)) == 0) {
                         return 0;
                 }
         }

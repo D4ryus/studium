@@ -437,3 +437,59 @@
 
         Zusätzlich um eine Referenz auf den Namensdienst zu erlangen:
             resolve_initial_references()
+
+5. Verteilte Datenbanken und verteilte Transaktionen
+5.1. Grundbegriffe
+
+    Def. Eine Verteilte DB ist eine DB deren Daten physisch auf mehrere
+         Standorte (Rechner) verteilt sind, währen logisch gesehen dem Benutzer
+         eine einzige DB präsentiert wird.
+
+    An den einzelnen Standorten: lokale Datenbanken bzw. "Datenbankteile"
+
+    Def. Eine verteilte Transaktion ist eine Transaktion, die auf den
+         Datenbestand einer Verteilten DB arbeitet.
+
+        Nachricht von verteilten DB: Komplexität!
+
+    Def. Replication ist die mehrfache Speicherung von Daten an verschiedenen
+         Standorten einer verteilten DB.
+         Diese Daten heißen: Replikate, Duplikate, Kopie, Primary Copies, Slave
+                             Copies
+
+5.2. Entwurf von verteilten DBs
+
+    mehrere Schritte:
+        - normales: DB-Schema
+        - Fragmentation: die Aufteilung von Daten einer DB in logische Einheiten
+                         (Fragmente), beschreiben durch ein Fragmentationsschema
+        - Allokation: Zuweisung von Fragmenten der physisch verschiedene
+                      Standorte ein verteilten DB -> Allokationsschema
+        - Replication: Erstellung und Verwaltung von Replikaten
+                            -> Replikationsschema.
+
+    zu Fragmentation bei relationalen Datenbanken:
+
+        horizontale Fragmente: Zeilen, definiert durch (sigma)
+            Beispiel: (sigma) (MITARBEITER)
+
+        vertikale Fragmente: Spalten, definiert durch (pi)
+            Beispiel: (pi vname nname) (MITARBEITER)
+
+        gemischte Fragmente: definiert durch (pi), (sigma):
+            Beispiel: (sigma)(pi) (MITARBEITER)
+
+        +------------------------------------------------------+
+        | Verteilung: Fragmentation + Allokation + Replikation |
+        +------------------------------------------------------+
+
+    Die Fragmentation ist eine Menge von Metadaten in Form von
+        Guard Conditions + Attribute-Listen
+          (sigma)                    (pi)
+             |                        |
+             +---> rel. Algebra >-----+
+
+5.3. Anfragen in verteilte Datenbanken
+
+    Problem: Minimierung von Datentransferkosten von Anfragen
+    Problem: Dekomprition von Anfragen
