@@ -1,23 +1,19 @@
-
 /****************** parsemain.cxx ******************/
 
 #ifndef GLOBAL_H
 #include "global.h"
 #endif
 
-
 // Mainprogramm für Parser
-
-int main()
+int
+main()
 {
-
-
 	// Compiler  intialisieren
 	initialize();
 	// Analyse PROGRAM
 	program();
 	// Analyse korrekt beendet --> ST ausgeben; Abschlussarbeiten
 	stop ();
-	exit(0); 			// Erfolg
+	exit(0); // Erfolg
 }
 
