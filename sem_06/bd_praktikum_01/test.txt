@@ -1,157 +1,124 @@
-bloomsize: 536870912 (2^29) insert_size 67108864 (2^26)
-
-hashes: [ fnv ]
-counting: ins time:  2.843490 false pos:   0.43% (    288720) fill factor:   3.16% (  16966752) err rate:  74.72% (  50142112)
-random  : ins time:  8.483689 false pos:  11.74% (   7881076) fill factor:  11.75% (  63084623) err rate:   6.00% (   4024241)
-un/even : ins time:  2.869118 false pos:   1.20% (    805376) fill factor:   3.20% (  17163008) err rate:  74.43% (  49945856)
-
-hashes: [ jenkins ]
-counting: ins time:  5.853514 false pos:  33.82% (  22698901) fill factor:  10.62% (  57040083) err rate:  15.00% (  10068781)
-random  : ins time:  8.188947 false pos:  11.75% (   7886481) fill factor:  11.75% (  63084596) err rate:   6.00% (   4024268)
-un/even : ins time:  5.876635 false pos:  33.23% (  22300362) fill factor:  10.55% (  56613480) err rate:  15.64% (  10495384)
-
-hashes: [ murmur64 ]
-counting: ins time:  3.875842 false pos:  11.74% (   7880186) fill factor:  11.75% (  63085647) err rate:   6.00% (   4023217)
-random  : ins time:  7.499202 false pos:  11.75% (   7883770) fill factor:  11.75% (  63082823) err rate:   6.00% (   4026041)
-un/even : ins time:  3.518624 false pos:  11.75% (   7883468) fill factor:  11.75% (  63084506) err rate:   6.00% (   4024358)
-
-hashes: [ elf ]
-counting: ins time:  2.212532 false pos:   0.00% (         0) fill factor:   0.06% (    297664) err rate:  99.56% (  66811200)
-random  : ins time:  9.340392 false pos:  22.12% (  14847036) fill factor:  11.06% (  59380121) err rate:  11.52% (   7728743)
-un/even : ins time:  2.235    false pos:  99.95% (  67074048) fill factor:   0.11% (    591232) err rate:  99.12% (  66517632)
-
-hashes: [ bernstein ]
-counting: ins time:  1.910872 false pos:   0.00% (         0) fill factor:   0.21% (   1115136) err rate:  98.34% (  65993728)
-random  : ins time:  7.420791 false pos:  11.75% (   7887926) fill factor:  11.75% (  63084415) err rate:   6.00% (   4024449)
-un/even : ins time:  2.450165 false pos: 100.00% (  67108864) fill factor:   0.42% (   2230272) err rate:  96.68% (  64878592)
-
-hashes: [ fnv murmur64 ]
-counting: ins time:  6.699140 false pos:   1.76% (   1182730) fill factor:  14.54% (  78057635) err rate:  41.84% (  56160093)
-random  : ins time:  9.270488 false pos:   4.90% (   3286736) fill factor:  22.12% ( 118757229) err rate:  11.52% (  15460499)
-un/even : ins time:  6.707177 false pos:   1.86% (   1251190) fill factor:  14.57% (  78228222) err rate:  41.72% (  55989506)
-
-hashes: [ fnv jenkins ]
-counting: ins time:  7.656256 false pos:   3.95% (   2649519) fill factor:  13.45% (  72204044) err rate:  46.20% (  62013684)
-random  : ins time: 13.289064 false pos:   4.89% (   3284473) fill factor:  22.12% ( 118760649) err rate:  11.52% (  15457079)
-un/even : ins time:  7.526819 false pos:   4.08% (   2738404) fill factor:  13.40% (  71964777) err rate:  46.38% (  62252951)
-
-hashes: [ fnv elf ]
-counting: ins time:  5.195491 false pos:   0.02% (     10296) fill factor:   3.21% (  17254967) err rate:  87.14% ( 116962761)
-random  : ins time: 12.704390 false pos:   6.73% (   4514204) fill factor:  21.51% ( 115480780) err rate:  13.96% (  18736948)
-un/even : ins time:  5.173886 false pos:   1.31% (    877641) fill factor:   3.30% (  17735383) err rate:  86.79% ( 116482345)
-
-hashes: [ fnv bernstein ]
-counting: ins time:  4.883351 false pos:   0.02% (     13584) fill factor:   3.36% (  18046662) err rate:  86.55% ( 116171066)
-random  : ins time:  9.315247 false pos:   4.89% (   3284695) fill factor:  22.12% ( 118763471) err rate:  11.51% (  15454257)
-un/even : ins time:  4.909349 false pos:   1.61% (   1080750) fill factor:   3.60% (  19321997) err rate:  85.60% ( 114895731)
-
-hashes: [ jenkins elf ]
-counting: ins time:  7.462347 false pos:   3.62% (   2427904) fill factor:  10.67% (  57306122) err rate:  57.30% (  76911606)
-random  : ins time: 13.175682 false pos:   6.72% (   4512812) fill factor:  21.51% ( 115475867) err rate:  13.96% (  18741861)
-un/even : ins time:  7.469373 false pos:  33.29% (  22341216) fill factor:  10.64% (  57142375) err rate:  57.43% (  77075353)
-
-hashes: [ jenkins bernstein ]
-counting: ins time:  7.845776 false pos:   3.60% (   2417551) fill factor:  10.81% (  58036683) err rate:  56.76% (  76181045)
-random  : ins time: 10.628553 false pos:   4.89% (   3284820) fill factor:  22.12% ( 118762209) err rate:  11.52% (  15455519)
-un/even : ins time:  7.976141 false pos:  33.51% (  22486434) fill factor:  10.92% (  58608172) err rate:  56.33% (  75609556)
-
-hashes: [ elf bernstein ]
-counting: ins time:  4.312190 false pos:   0.00% (        98) fill factor:   0.26% (   1412175) err rate:  98.95% ( 132805553)
-random  : ins time: 11.260065 false pos:   6.73% (   4515957) fill factor:  21.51% ( 115477529) err rate:  13.96% (  18740199)
-un/even : ins time:  4.743312 false pos:  99.95% (  67074189) fill factor:   0.53% (   2819030) err rate:  97.90% ( 131398698)
-
-hashes: [ murmur64 jenkins ]
-counting: ins time:  8.650673 false pos:   8.79% (   5895584) fill factor:  21.13% ( 113426085) err rate:  15.49% (  20791643)
-random  : ins time: 13.991724 false pos:   4.89% (   3284780) fill factor:  22.12% ( 118761092) err rate:  11.52% (  15456636)
-un/even : ins time:  8.295110 false pos:   8.65% (   5803621) fill factor:  21.06% ( 113045408) err rate:  15.77% (  21172320)
-
-hashes: [ murmur64 elf ]
-counting: ins time:  6.871813 false pos:   1.37% (    920579) fill factor:  11.80% (  63348386) err rate:  52.80% (  70869342)
-random  : ins time: 13.260378 false pos:   6.73% (   4514759) fill factor:  21.51% ( 115482027) err rate:  13.96% (  18735701)
-un/even : ins time:  6.891612 false pos:  11.84% (   7944888) fill factor:  11.85% (  63606475) err rate:  52.61% (  70611253)
-
-hashes: [ murmur64 bernstein ]
-counting: ins time:  6.637206 false pos:   1.40% (    937815) fill factor:  11.93% (  64069711) err rate:  52.26% (  70148017)
-random  : ins time:  9.314827 false pos:   4.89% (   3282864) fill factor:  22.12% ( 118756295) err rate:  11.52% (  15461433)
-un/even : ins time:  6.863230 false pos:  12.11% (   8129241) fill factor:  12.12% (  65053050) err rate:  51.53% (  69164678)
-
-hashes: [ fnv jenkins elf ]
-counting: ins time: 10.895927 false pos:   0.54% (    360014) fill factor:  13.50% (  72461572) err rate:  64.01% ( 128865020)
-random  : ins time: 18.217097 false pos:   3.72% (   2495062) fill factor:  30.73% ( 165003604) err rate:  18.04% (  36322988)
-un/even : ins time: 10.848707 false pos:   4.12% (   2766300) fill factor:  13.50% (  72476804) err rate:  64.00% ( 128849788)
-
-hashes: [ fnv jenkins bernstein ]
-counting: ins time: 11.486305 false pos:   0.54% (    362889) fill factor:  13.63% (  73169124) err rate:  63.66% ( 128157468)
-random  : ins time: 16.520189 false pos:   3.06% (   2052908) fill factor:  31.27% ( 167888876) err rate:  16.61% (  33437716)
-un/even : ins time: 11.302529 false pos:   4.24% (   2847385) fill factor:  13.76% (  73895688) err rate:  63.30% ( 127430904)
-
-hashes: [ fnv murmur64 jenkins ]
-counting: ins time: 12.201458 false pos:   2.20% (   1478744) fill factor:  23.62% ( 126806775) err rate:  37.01% (  74519817)
-random  : ins time: 15.380448 false pos:   3.06% (   2053413) fill factor:  31.27% ( 167883249) err rate:  16.61% (  33443343)
-un/even : ins time: 13.231374 false pos:   2.22% (   1492620) fill factor:  23.58% ( 126590737) err rate:  37.12% (  74735855)
-
-hashes: [ fnv murmur64 elf ]
-counting: ins time:  8.338739 false pos:   0.26% (    171151) fill factor:  14.59% (  78312034) err rate:  61.10% ( 123014558)
-random  : ins time: 14.855931 false pos:   3.71% (   2492153) fill factor:  30.74% ( 165009677) err rate:  18.04% (  36316915)
-un/even : ins time:  8.263022 false pos:   1.89% (   1268064) fill factor:  14.67% (  78733499) err rate:  60.89% ( 122593093)
-
-hashes: [ fnv murmur64 bernstein ]
-counting: ins time:  9.35530  false pos:   0.26% (    176407) fill factor:  14.72% (  79010609) err rate:  60.76% ( 122315983)
-random  : ins time: 14.49379  false pos:   3.06% (   2050722) fill factor:  31.27% ( 167879187) err rate:  16.61% (  33447405)
-un/even : ins time:  8.712490 false pos:   1.96% (   1318350) fill factor:  14.93% (  80133748) err rate:  60.20% ( 121192844)
-
-hashes: [ fnv elf bernstein ]
-counting: ins time:  7.115010 false pos:   0.00% (       499) fill factor:   3.42% (  18334273) err rate:  90.89% ( 182992319)
-random  : ins time: 16.470476 false pos:   3.72% (   2496683) fill factor:  30.73% ( 165001413) err rate:  18.04% (  36325179)
-un/even : ins time:  7.321699 false pos:   1.72% (   1152585) fill factor:   3.71% (  19891986) err rate:  90.12% ( 181434606)
-
-hashes: [ jenkins elf bernstein ]
-counting: ins time: 10.56416  false pos:   0.39% (    264287) fill factor:  10.86% (  58302163) err rate:  71.04% ( 143024429)
-random  : ins time: 16.946983 false pos:   3.72% (   2496018) fill factor:  30.73% ( 164993051) err rate:  18.05% (  36333541)
-un/even : ins time: 10.25219  false pos:  33.57% (  22527041) fill factor:  11.01% (  59134840) err rate:  70.63% ( 142191752)
-
-hashes: [ murmur64 jenkins elf ]
-counting: ins time: 12.413494 false pos:   1.86% (   1245758) fill factor:  21.17% ( 113661023) err rate:  43.54% (  87665569)
-random  : ins time: 17.999568 false pos:   3.72% (   2494721) fill factor:  30.73% ( 165004119) err rate:  18.04% (  36322473)
-un/even : ins time: 12.358354 false pos:   8.69% (   5834901) fill factor:  21.14% ( 113512346) err rate:  43.62% (  87814246)
-
-hashes: [ murmur64 jenkins bernstein ]
-counting: ins time: 12.667915 false pos:   1.87% (   1256605) fill factor:  21.29% ( 114305479) err rate:  43.22% (  87021113)
-random  : ins time: 15.538398 false pos:   3.06% (   2052484) fill factor:  31.27% ( 167891894) err rate:  16.61% (  33434698)
-un/even : ins time: 12.168784 false pos:   8.83% (   5928863) fill factor:  21.38% ( 114806254) err rate:  42.98% (  86520338)
-
-hashes: [ murmur64 elf bernstein ]
-counting: ins time:  8.808309 false pos:   0.17% (    111921) fill factor:  11.98% (  64331900) err rate:  68.05% ( 136994692)
-random  : ins time: 15.722001 false pos:   3.72% (   2493560) fill factor:  30.73% ( 164996908) err rate:  18.05% (  36329684)
-un/even : ins time:  8.616794 false pos:  12.20% (   8190257) fill factor:  12.21% (  65572840) err rate:  67.43% ( 135753752)
-
-hashes: [ fnv murmur64 jenkins elf ]
-counting: ins time: 13.972730 false pos:   0.52% (    348949) fill factor:  23.66% ( 127034206) err rate:  52.68% ( 141401250)
-random  : ins time: 20.42279  false pos:   2.73% (   1833384) fill factor:  38.87% ( 208702405) err rate:  22.25% (  59733051)
-un/even : ins time: 14.40984  false pos:   2.24% (   1505466) fill factor:  23.66% ( 127042731) err rate:  52.67% ( 141392725)
-
-hashes: [ fnv murmur64 jenkins bernstein ]
-counting: ins time: 14.742216 false pos:   0.53% (    354683) fill factor:  23.78% ( 127658348) err rate:  52.44% ( 140777108)
-random  : ins time: 18.79120  false pos:   2.39% (   1607146) fill factor:  39.35% ( 211245146) err rate:  21.31% (  57190310)
-un/even : ins time: 14.920208 false pos:   2.30% (   1543353) fill factor:  23.90% ( 128295236) err rate:  52.21% ( 140140220)
-
-hashes: [ fnv murmur64 elf bernstein ]
-counting: ins time: 10.221528 false pos:   0.04% (     25850) fill factor:  14.76% (  79264476) err rate:  70.47% ( 189170980)
-random  : ins time: 17.192259 false pos:   2.73% (   1833763) fill factor:  38.87% ( 208690223) err rate:  22.26% (  59745233)
-un/even : ins time: 11.624168 false pos:   1.99% (   1335541) fill factor:  15.02% (  80636921) err rate:  69.96% ( 187798535)
-
-hashes: [ fnv jenkins elf bernstein ]
-counting: ins time: 12.478125 false pos:   0.07% (     50238) fill factor:  13.68% (  73426108) err rate:  72.65% ( 195009348)
-random  : ins time: 21.127895 false pos:   2.73% (   1831064) fill factor:  38.87% ( 208684948) err rate:  22.26% (  59750508)
-un/even : ins time: 12.365724 false pos:   4.28% (   2875463) fill factor:  13.86% (  74405569) err rate:  72.28% ( 194029887)
-
-hashes: [ murmur64 jenkins elf bernstein ]
-counting: ins time: 13.940644 false pos:   0.40% (    268147) fill factor:  21.33% ( 114539929) err rate:  57.33% ( 153895527)
-random  : ins time: 20.476886 false pos:   2.73% (   1831740) fill factor:  38.87% ( 208695472) err rate:  22.25% (  59739984)
-un/even : ins time: 13.864493 false pos:   8.88% (   5960223) fill factor:  21.47% ( 115271230) err rate:  57.06% ( 153164226)
-
-hashes: [ fnv murmur64 jenkins elf bernstein ]
-counting: ins time: 16.142377 false pos:   0.13% (     84428) fill factor:  23.82% ( 127885303) err rate:  61.89% ( 207659017)
-random  : ins time: 22.626221 false pos:   2.38% (   1594372) fill factor:  46.06% ( 247261375) err rate:  26.31% (  88282945)
-un/even : ins time: 17.72729  false pos:   2.32% (   1556393) fill factor:  23.98% ( 128745337) err rate:  61.63% ( 206798983)
-
+hashes: [ fnv ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  2.69240  false pos:   0.43% (    288720) fill factor:   3.16% (  16966752) err rate:  74.72% (  50142112)
+random  : ins time:  7.2092   false pos:  11.75% (   7883802) fill factor:  11.75% (  63085872) err rate:   5.99% (   4022992)
+un/even : ins time:  1.953100 false pos:   1.20% (    805376) fill factor:   3.20% (  17163008) err rate:  74.43% (  49945856)
+hashes: [ murmur64 ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  2.618672 false pos:  11.74% (   7880186) fill factor:  11.75% (  63085647) err rate:   6.00% (   4023217)
+random  : ins time:  6.732115 false pos:  11.75% (   7883668) fill factor:  11.75% (  63085276) err rate:   6.00% (   4023588)
+un/even : ins time:  2.641561 false pos:  11.75% (   7883468) fill factor:  11.75% (  63084506) err rate:   6.00% (   4024358)
+hashes: [ fnv murmur64 ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  4.17071  false pos:   1.76% (   1182730) fill factor:  14.54% (  78057635) err rate:  41.84% (  56160093)
+random  : ins time:  7.614664 false pos:   4.89% (   3282769) fill factor:  22.12% ( 118758615) err rate:  11.52% (  15459113)
+un/even : ins time:  4.183600 false pos:   1.86% (   1251190) fill factor:  14.57% (  78228222) err rate:  41.72% (  55989506)
+hashes: [ jenkins ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  3.244865 false pos:  33.82% (  22698901) fill factor:  10.62% (  57040083) err rate:  15.00% (  10068781)
+random  : ins time:  7.402804 false pos:  11.75% (   7888505) fill factor:  11.75% (  63082703) err rate:   6.00% (   4026161)
+un/even : ins time:  3.208626 false pos:  33.23% (  22300362) fill factor:  10.55% (  56613480) err rate:  15.64% (  10495384)
+hashes: [ fnv jenkins ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  5.805310 false pos:   3.95% (   2649519) fill factor:  13.45% (  72204044) err rate:  46.20% (  62013684)
+random  : ins time:  8.188348 false pos:   4.89% (   3281047) fill factor:  22.12% ( 118755004) err rate:  11.52% (  15462724)
+un/even : ins time:  5.823304 false pos:   4.08% (   2738404) fill factor:  13.40% (  71964777) err rate:  46.38% (  62252951)
+hashes: [ murmur64 jenkins ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  5.649596 false pos:   8.79% (   5895584) fill factor:  21.13% ( 113426085) err rate:  15.49% (  20791643)
+random  : ins time:  8.45174  false pos:   4.89% (   3284516) fill factor:  22.12% ( 118754975) err rate:  11.52% (  15462753)
+un/even : ins time:  5.643250 false pos:   8.65% (   5803621) fill factor:  21.06% ( 113045408) err rate:  15.77% (  21172320)
+hashes: [ fnv murmur64 jenkins ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  6.765845 false pos:   2.20% (   1478744) fill factor:  23.62% ( 126806775) err rate:  37.01% (  74519817)
+random  : ins time: 12.97939  false pos:   3.06% (   2054215) fill factor:  31.27% ( 167891109) err rate:  16.61% (  33435483)
+un/even : ins time:  7.281719 false pos:   2.22% (   1492620) fill factor:  23.58% ( 126590737) err rate:  37.12% (  74735855)
+hashes: [ elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  1.557643 false pos:   0.00% (         0) fill factor:   0.06% (    297664) err rate:  99.56% (  66811200)
+random  : ins time:  7.642738 false pos:  22.13% (  14848597) fill factor:  11.06% (  59374457) err rate:  11.53% (   7734407)
+un/even : ins time:  1.559767 false pos:  99.95% (  67074048) fill factor:   0.11% (    591232) err rate:  99.12% (  66517632)
+hashes: [ fnv elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  4.801998 false pos:   0.02% (     10296) fill factor:   3.21% (  17254967) err rate:  87.14% ( 116962761)
+random  : ins time: 12.169551 false pos:   6.73% (   4516593) fill factor:  21.51% ( 115479974) err rate:  13.96% (  18737754)
+un/even : ins time:  4.507523 false pos:   1.31% (    877641) fill factor:   3.30% (  17735383) err rate:  86.79% ( 116482345)
+hashes: [ murmur64 elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  6.120324 false pos:   1.37% (    920579) fill factor:  11.80% (  63348386) err rate:  52.80% (  70869342)
+random  : ins time: 11.864391 false pos:   6.73% (   4514627) fill factor:  21.51% ( 115480696) err rate:  13.96% (  18737032)
+un/even : ins time:  6.134496 false pos:  11.84% (   7944888) fill factor:  11.85% (  63606475) err rate:  52.61% (  70611253)
+hashes: [ fnv murmur64 elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  6.892079 false pos:   0.26% (    171151) fill factor:  14.59% (  78312034) err rate:  61.10% ( 123014558)
+random  : ins time: 12.749485 false pos:   3.72% (   2493477) fill factor:  30.73% ( 165005172) err rate:  18.04% (  36321420)
+un/even : ins time:  6.825919 false pos:   1.89% (   1268064) fill factor:  14.67% (  78733499) err rate:  60.89% ( 122593093)
+hashes: [ jenkins elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  6.991123 false pos:   3.62% (   2427904) fill factor:  10.67% (  57306122) err rate:  57.30% (  76911606)
+random  : ins time: 12.554374 false pos:   6.73% (   4515944) fill factor:  21.51% ( 115486872) err rate:  13.96% (  18730856)
+un/even : ins time:  6.622431 false pos:  33.29% (  22341216) fill factor:  10.64% (  57142375) err rate:  57.43% (  77075353)
+hashes: [ fnv jenkins elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  8.178285 false pos:   0.54% (    360014) fill factor:  13.50% (  72461572) err rate:  64.01% ( 128865020)
+random  : ins time: 13.876200 false pos:   3.72% (   2493387) fill factor:  30.73% ( 164995116) err rate:  18.05% (  36331476)
+un/even : ins time:  7.461345 false pos:   4.12% (   2766300) fill factor:  13.50% (  72476804) err rate:  64.00% ( 128849788)
+hashes: [ murmur64 jenkins elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  7.339881 false pos:   1.86% (   1245758) fill factor:  21.17% ( 113661023) err rate:  43.54% (  87665569)
+random  : ins time: 13.214931 false pos:   3.72% (   2494174) fill factor:  30.73% ( 164990849) err rate:  18.05% (  36335743)
+un/even : ins time:  7.356515 false pos:   8.69% (   5834901) fill factor:  21.14% ( 113512346) err rate:  43.62% (  87814246)
+hashes: [ fnv murmur64 jenkins elf ] bloomsize: 536870912 insert_size 67108864
+counting: ins time: 11.186927 false pos:   0.52% (    348949) fill factor:  23.66% ( 127034206) err rate:  52.68% ( 141401250)
+random  : ins time: 17.237693 false pos:   2.73% (   1832188) fill factor:  38.87% ( 208692258) err rate:  22.26% (  59743198)
+un/even : ins time: 11.124684 false pos:   2.24% (   1505466) fill factor:  23.66% ( 127042731) err rate:  52.67% ( 141392725)
+hashes: [ bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  1.137570 false pos:   0.00% (         0) fill factor:   0.21% (   1115136) err rate:  98.34% (  65993728)
+random  : ins time:  6.702707 false pos:  11.75% (   7888346) fill factor:  11.75% (  63080473) err rate:   6.00% (   4028391)
+un/even : ins time:  1.394706 false pos: 100.00% (  67108864) fill factor:   0.42% (   2230272) err rate:  96.68% (  64878592)
+hashes: [ fnv bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  4.74470  false pos:   0.02% (     13584) fill factor:   3.36% (  18046662) err rate:  86.55% ( 116171066)
+random  : ins time:  7.728334 false pos:   4.89% (   3279633) fill factor:  22.12% ( 118757062) err rate:  11.52% (  15460666)
+un/even : ins time:  3.780983 false pos:   1.61% (   1080750) fill factor:   3.60% (  19321997) err rate:  85.60% ( 114895731)
+hashes: [ murmur64 bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  5.285904 false pos:   1.40% (    937815) fill factor:  11.93% (  64069711) err rate:  52.26% (  70148017)
+random  : ins time:  7.454022 false pos:   4.89% (   3283104) fill factor:  22.12% ( 118754603) err rate:  11.52% (  15463125)
+un/even : ins time:  5.196046 false pos:  12.11% (   8129241) fill factor:  12.12% (  65053050) err rate:  51.53% (  69164678)
+hashes: [ fnv murmur64 bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  6.206213 false pos:   0.26% (    176407) fill factor:  14.72% (  79010609) err rate:  60.76% ( 122315983)
+random  : ins time:  8.429546 false pos:   3.06% (   2054614) fill factor:  31.27% ( 167884949) err rate:  16.61% (  33441643)
+un/even : ins time:  6.198497 false pos:   1.96% (   1318350) fill factor:  14.93% (  80133748) err rate:  60.20% ( 121192844)
+hashes: [ jenkins bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  5.782057 false pos:   3.60% (   2417551) fill factor:  10.81% (  58036683) err rate:  56.76% (  76181045)
+random  : ins time:  8.133344 false pos:   4.90% (   3284980) fill factor:  22.12% ( 118754879) err rate:  11.52% (  15462849)
+un/even : ins time:  5.812755 false pos:  33.51% (  22486434) fill factor:  10.92% (  58608172) err rate:  56.33% (  75609556)
+hashes: [ fnv jenkins bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  7.169964 false pos:   0.54% (    362889) fill factor:  13.63% (  73169124) err rate:  63.66% ( 128157468)
+random  : ins time: 12.88690  false pos:   3.06% (   2050438) fill factor:  31.27% ( 167876659) err rate:  16.61% (  33449933)
+un/even : ins time:  7.274822 false pos:   4.24% (   2847385) fill factor:  13.76% (  73895688) err rate:  63.30% ( 127430904)
+hashes: [ murmur64 jenkins bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  7.45915  false pos:   1.87% (   1256605) fill factor:  21.29% ( 114305479) err rate:  43.22% (  87021113)
+random  : ins time: 11.863443 false pos:   3.06% (   2053855) fill factor:  31.27% ( 167893649) err rate:  16.61% (  33432943)
+un/even : ins time:  7.313899 false pos:   8.83% (   5928863) fill factor:  21.38% ( 114806254) err rate:  42.98% (  86520338)
+hashes: [ fnv murmur64 jenkins bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time: 10.320695 false pos:   0.53% (    354683) fill factor:  23.78% ( 127658348) err rate:  52.44% ( 140777108)
+random  : ins time: 13.697141 false pos:   2.40% (   1607874) fill factor:  39.34% ( 211226427) err rate:  21.31% (  57209029)
+un/even : ins time: 10.53563  false pos:   2.30% (   1543353) fill factor:  23.90% ( 128295236) err rate:  52.21% ( 140140220)
+hashes: [ elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  2.735322 false pos:   0.00% (        98) fill factor:   0.26% (   1412175) err rate:  98.95% ( 132805553)
+random  : ins time:  9.300817 false pos:   6.72% (   4512194) fill factor:  21.51% ( 115484342) err rate:  13.96% (  18733386)
+un/even : ins time:  3.466112 false pos:  99.95% (  67074189) fill factor:   0.53% (   2819030) err rate:  97.90% ( 131398698)
+hashes: [ fnv elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  5.934343 false pos:   0.00% (       499) fill factor:   3.42% (  18334273) err rate:  90.89% ( 182992319)
+random  : ins time: 13.71026  false pos:   3.71% (   2491789) fill factor:  30.73% ( 164997674) err rate:  18.04% (  36328918)
+un/even : ins time:  5.251776 false pos:   1.72% (   1152585) fill factor:   3.71% (  19891986) err rate:  90.12% ( 181434606)
+hashes: [ murmur64 elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  6.663270 false pos:   0.17% (    111921) fill factor:  11.98% (  64331900) err rate:  68.05% ( 136994692)
+random  : ins time: 12.803335 false pos:   3.72% (   2493588) fill factor:  30.73% ( 164999092) err rate:  18.04% (  36327500)
+un/even : ins time:  6.693377 false pos:  12.20% (   8190257) fill factor:  12.21% (  65572840) err rate:  67.43% ( 135753752)
+hashes: [ fnv murmur64 elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  7.565920 false pos:   0.04% (     25850) fill factor:  14.76% (  79264476) err rate:  70.47% ( 189170980)
+random  : ins time: 13.718546 false pos:   2.73% (   1831149) fill factor:  38.87% ( 208691976) err rate:  22.26% (  59743480)
+un/even : ins time:  7.435865 false pos:   1.99% (   1335541) fill factor:  15.02% (  80636921) err rate:  69.96% ( 187798535)
+hashes: [ jenkins elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  7.598242 false pos:   0.39% (    264287) fill factor:  10.86% (  58302163) err rate:  71.04% ( 143024429)
+random  : ins time: 13.841734 false pos:   3.71% (   2490697) fill factor:  30.73% ( 164994492) err rate:  18.05% (  36332100)
+un/even : ins time:  7.221314 false pos:  33.57% (  22527041) fill factor:  11.01% (  59134840) err rate:  70.63% ( 142191752)
+hashes: [ fnv jenkins elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  8.767650 false pos:   0.07% (     50238) fill factor:  13.68% (  73426108) err rate:  72.65% ( 195009348)
+random  : ins time: 14.323579 false pos:   2.73% (   1830743) fill factor:  38.87% ( 208693292) err rate:  22.26% (  59742164)
+un/even : ins time:  9.150514 false pos:   4.28% (   2875463) fill factor:  13.86% (  74405569) err rate:  72.28% ( 194029887)
+hashes: [ murmur64 jenkins elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time:  8.592099 false pos:   0.40% (    268147) fill factor:  21.33% ( 114539929) err rate:  57.33% ( 153895527)
+random  : ins time: 14.1786   false pos:   2.73% (   1833399) fill factor:  38.87% ( 208690481) err rate:  22.26% (  59744975)
+un/even : ins time:  9.7405   false pos:   8.88% (   5960223) fill factor:  21.47% ( 115271230) err rate:  57.06% ( 153164226)
+hashes: [ fnv murmur64 jenkins elf bernstein ] bloomsize: 536870912 insert_size 67108864
+counting: ins time: 11.708186 false pos:   0.13% (     84428) fill factor:  23.82% ( 127885303) err rate:  61.89% ( 207659017)
+random  : ins time: 18.104870 false pos:   2.37% (   1590659) fill factor:  46.06% ( 247263065) err rate:  26.31% (  88281255)
+un/even : ins time: 11.461337 false pos:   2.32% (   1556393) fill factor:  23.98% ( 128745337) err rate:  61.63% ( 206798983)
