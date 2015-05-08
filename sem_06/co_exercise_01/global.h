@@ -32,7 +32,7 @@ using namespace std;
 #define CONST 		258			/* Schlüsselwort const */
 #define VAR		259			/* Schlüsselwort var */
 #define PROCEDURE	260			/* Procedure */
-#define CAL		261			/* call */
+#define CALL		261			/* call */
 #define BEGIN 		262			/* begin */
 #define END		263			/* end */
 #define IF		264			/* if */
@@ -114,7 +114,7 @@ extern char idname[];				/* Zeiger auf Namen bei Identifikator */
 extern int num;					/* Wert einer integer-Konstanten/ Zahl */
 extern double realnum; 				/* Wert einer Real-Konstanten */
 extern int lineno;				/* Zeilennummer */
-extern symtable *actsym,			/* Zeiger auf aktuelle Symboltabelle */
+extern symtable *actsym;			/* Zeiger auf aktuelle Symboltabelle */
 extern symtable *firstsym;			/* Zeiger auf oberste (globale) Symboltabelle */
 extern int tracesw;				/* Kennung, ob Trace gewünscht */
 
