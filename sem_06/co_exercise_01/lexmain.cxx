@@ -1,13 +1,13 @@
 
 /****************** lexmain.cxx *********************/
 
-/* Hauptprogramm zum Test der lexikalischen Analyse */ 
+/* Hauptprogramm zum Test der lexikalischen Analyse */
 /****************************************************/
 
 
-#ifndef GLOBAL_H 
+#ifndef GLOBAL_H
 #include "global.h"
-#endif 
+#endif
 
 
 
@@ -16,20 +16,20 @@
 
 int main()
 {
-	int lookahead = -1; 
+	int lookahead = -1;
 
 	/* Initialisierungen durchführen */
-	initialize(); 
+	initialize();
 
-	/* Symbole aus Eingabedatei lesen bis Dateiende */ 
+	/* Symbole aus Eingabedatei lesen bis Dateiende */
   lookahead = nextsymbol();
-  fout << "		Tokentyp=    " <<lookahead; 
-  
- 
+  fout << "		Tokentyp=    " <<lookahead;
+
+
   while (lookahead != DONE)
-	{ 	
+	{
 		lookahead = nextsymbol();
-		fout << "		Tokentyp=    " <<lookahead; 
+		fout << "		Tokentyp=    " <<lookahead;
 
  	}
 
@@ -37,9 +37,9 @@ int main()
 }
 
 
-  
 
- 
+
+
 
 
 

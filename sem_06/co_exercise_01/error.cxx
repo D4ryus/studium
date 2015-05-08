@@ -1,28 +1,28 @@
 /****************** error.cxx *************************/
 /* enthält eine Reihe von Fehlertexten, die über ihre
 Nummer verwendet werden können und jederzeit erweitert
-werden können. 
+werden können.
 
-Zur Ausgabe der Fehlertexte wird die Funktion 
+Zur Ausgabe der Fehlertexte wird die Funktion
 
-	error ( int nr) 
+	error ( int nr)
 
   verwendet, der die Fehlernummer zu übergeben ist.
-Die Funktion error führt ein exit durch. 
+Die Funktion error führt ein exit durch.
 
-Alternativ kann die Funktion 
+Alternativ kann die Funktion
 
-	errortext (char *) 
+	errortext (char *)
 
 verwendet werden, die den angebebenen Text ausgibt
 
 *****************************************************/
 
-#ifndef GLOBAL_H 
+#ifndef GLOBAL_H
 #include "global.h"
-#endif 
+#endif
 
-                                          
+
 /***************** Fehlertexte **********************/
 
 
@@ -70,38 +70,38 @@ char * errtxt[]=
 };
 
 
-	
-	
+
+
 /***************** Fehlerfunktion **********************/
 
-                                          
-                                          
-void error( int nr) 
+
+
+void error( int nr)
 /* Funktion gibt den der Nummer nr entsprechenden Fehlertext aus */
 {
-	ferr<< "Zeile" << lineno << errtxt[nr]; 
+	ferr<< "Zeile" << lineno << errtxt[nr];
 
-	exit(1); 
+	exit(1);
 }
 
 
 
-void errortext ( char * text) 
+void errortext ( char * text)
 /* Funktion gibt den angegebenen  Fehlertext aus */
 {
-	ferr<< "Zeile" << lineno << text; 
-	
-	exit(1); 
+	ferr<< "Zeile" << lineno << text;
+
+	exit(1);
 }
 
 
 
 
 
-void warningtext ( char * text) 
+void warningtext ( char * text)
 /* Funktion gibt den angegebenen  Warnungstext aus */
 {
-	ferr<< "Zeile" << lineno << text; 
-	
+	ferr<< "Zeile" << lineno << text;
+
 }
 

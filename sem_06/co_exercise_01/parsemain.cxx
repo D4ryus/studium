@@ -3,7 +3,7 @@
 
 #ifndef GLOBAL_H
 #include "global.h"
-#endif 
+#endif
 
 
 // Mainprogramm für Parser
@@ -12,12 +12,12 @@ int main()
 {
 
 
-	// Compiler  intialisieren 
-	initialize();			
+	// Compiler  intialisieren
+	initialize();
 	// Analyse PROGRAM
-	program();		
-	// Analyse korrekt beendet --> ST ausgeben; Abschlussarbeiten 
-	stop ();				
-	exit(0); 			// Erfolg 
+	program();
+	// Analyse korrekt beendet --> ST ausgeben; Abschlussarbeiten
+	stop ();
+	exit(0); 			// Erfolg
 }
 

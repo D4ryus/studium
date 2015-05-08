@@ -15,6 +15,6 @@
 		n := c;
 		call fak
 	end.
-	
-	
-		
+
+
+
