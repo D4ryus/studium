@@ -1,5 +1,4 @@
-/********************* symbol.cxx ************************/
-/*
+/********************* symbol.cxx ************************
  * enthält Funktionen zum Erzeugen einer Symboltabelle,
  * Eintragen eines Bezeichners, Suchen eines Bezeichners in der
  * Symboltabelle und Ausgabe der Symboltabelle
@@ -22,11 +21,10 @@ symtable *firstsym;		/* Zeiger auf die zum äussersten Block gehörende Symboltabe
 /********** aktuelle Symboltabelle  (actym) ************************/
 /********** Ergebnis ist ein Zeiger auf die neue Symboltabelle *****/
 
-
 symtable *
 create_newsym()
 {
-	symtable * newsym;
+	symtable *newsym;
 
 	newsym = new symtable;		/* Neue ST erzeugen */
 	newsym->precsym = actsym;	/* Zeiger auf akt. ST eintragen */
@@ -37,9 +35,7 @@ create_newsym()
 }
 
 
-/********** Suchen eines Bezeichners (char *s) in der gesamten Symboltabelle *************/
-
-/*
+/********** Suchen eines Bezeichners (char *s) in der gesamten Symboltabelle *************
  * Die Suche beginnt in der aktuellen Block gehörenden Symboltabelle (actsym),
  * und weiter in den Symboltabellen der übergeordneten Blöcke.
  * Wird der Bezeichner gefunden, wird ein Zeiger auf den zugehörigen
@@ -56,7 +52,7 @@ lookup(char *s)
 
 	/* Symboltabellen durchsuchen bis zur obersten (==NULL)*/
 	while (sptr != NULL) { /* Durchsuche Einträge in der ST */
-		for (i =0; i < sptr->anzahl; i++) {
+		for (i = 0; i < sptr->anzahl; i++) {
 			if (strcmp(sptr->eintrag[i].name, s) == 0) {
 				/* Name gefunden --> Zeiger auf ST-Eintrag zurückliefern */
 				return &sptr->eintrag[i];
@@ -72,9 +68,7 @@ lookup(char *s)
 	return(NULL); /* Name in keiner ST gefunden */
 }
 
-/********** Suchen eines Bezeichners (char *s) in der lokalen  Symboltabelle *************/
-
-/*
+/********** Suchen eines Bezeichners (char *s) in der lokalen  Symboltabelle *************
  * Ein Bezeichner wird in der lokal gültigen (aktuellen = actsym) ST gesucht.
  * Die Funktion wird verwendet bei Deklarationen, um Doppeldeklarationen aufzudecken.
  * Wird der Bezeichner gefunden, wird ein Zeiger auf den zugehörigen
@@ -87,7 +81,7 @@ lookup_in_actsym(char *s)
 	int i;
 
 	/* Durchsuche Einträge in actsym */
-	for (i =0; i < actsym->anzahl; i++) {
+	for (i = 0; i < actsym->anzahl; i++) {
 		if (strcmp(actsym->eintrag[i].name, s) == 0) {
 			/* Name gefunden --> Zeiger auf ST-Eintrag zurückliefern */
 			return(&actsym->eintrag[i]);
@@ -97,23 +91,22 @@ lookup_in_actsym(char *s)
 	return(NULL); /* Name in actsym nicht  gefunden */
 }
 
-/********** Neuen Eintrag der Art tok in ST einfügen  *************/
-/*
+/********** Neuen Eintrag der Art tok in ST einfügen  *************
+ *
  * Parameter ist die Art des Eintrags (int tok)
- * tok == KONST f. Konstante : Wert der Konstante wird aus num entnommen
- * tok == INTIDENT f. Bezeichner  vom Typ int
+ * tok == KONST     f. Konstante : Wert der Konstante wird aus num entnommen
+ * tok == INTIDENT  f. Bezeichner  vom Typ int
  * tok == REALIDENT f. Bezeichner vom Typ real
  * tok == BOOLIDENT f. Bezeichner vom Typ boolean
- * tok == PROC f. Prozedur; für die Prozedur wird eine neue Symboltabelle
- * 		angelegt und im Feld subsym des neuen Eintrags eingetragen
+ * tok == PROC      f. Prozedur; für die Prozedur wird eine neue Symboltabelle
+ *                  angelegt und im Feld subsym des neuen Eintrags eingetragen
  *
  * Ein Zeiger auf den einzutragenden Namen befindet sich in idname
  *
  *
  * Rückgabe ist ein Zeiger auf den neuen ST-EIntrag
+ * st_entry * insert(int tok, char * name, int wert)
  */
-
-//st_entry * insert(int tok, char * name, int wert)
 st_entry *
 insert(int tok)
 {
@@ -127,7 +120,7 @@ insert(int tok)
 	if (actsym->anzahl >= SYMMAX) {		/* Maximale Grösse überschritten ? */
 		error(28);
 	}
-	if (lastchar +len+1 >= STRMAX) {	/* Länge des Stringpuffers überschritten ?*/
+	if (lastchar + len + 1 >= STRMAX) {	/* Länge des Stringpuffers überschritten ?*/
 		error(29);
 	}
 
@@ -140,31 +133,31 @@ insert(int tok)
 	neu.subsym = NULL;			/* Zeiger auf Unter-ST initialisieren */
 	neu.wertaddr = 0;             		/* wertaddr initialisieren  */
 
-	switch(tok) { /* Art eintragen abhängig von tok */
-	case KONST:
-		/* Bei Konstante: Wert eintragen */
-		neu.wertaddr = num;
-		break;
-	case INTIDENT:
-		/* Bei Identifikator vom Typ int */
-		neu.wertaddr = 0;
-		trace << "\n Zeile:" << lineno << " in insert INTIDENT";
-		break;
-	case REALIDENT:   /* Bei Identifikator vom Typ real  */
-		neu.wertaddr = 0;
-		trace << "\n Zeile:" << lineno << " in insert REALIDENT";
-		break;
-	case PROC:
-		/*
-		 * bei Prozedur: ST für lokale Deklarationen der neuen Prozedur
-		 * erzeugen und Zeiger eintragen
-		 */
-		neu.subsym = create_newsym();
-		break;
-	default:
-		/* falsche Eintragsart */
-		errortext("falsche Eintragsrt in Symboltabelle\n");
-		break;
+	switch (tok) { /* Art eintragen abhängig von tok */
+		case KONST:
+			/* Bei Konstante: Wert eintragen */
+			neu.wertaddr = num;
+			break;
+		case INTIDENT:
+			/* Bei Identifikator vom Typ int */
+			neu.wertaddr = 0;
+			trace << lineno << ": insert() - INTIDENT\n";
+			break;
+		case REALIDENT:   /* Bei Identifikator vom Typ real  */
+			neu.wertaddr = 0;
+			trace << lineno << ": insert() - REALIDENT\n";
+			break;
+		case PROC:
+			/*
+			 * bei Prozedur: ST für lokale Deklarationen der neuen Prozedur
+			 * erzeugen und Zeiger eintragen
+			 */
+			neu.subsym = create_newsym();
+			break;
+		default:
+			/* falsche Eintragsart */
+			errortext("falsche Eintragsart in Symboltabelle\n");
+			break;
 	}
 
 	actsym->eintrag[actsym->anzahl] = neu; /* Neuen Eintrag in ST eintragen */
@@ -176,7 +169,9 @@ insert(int tok)
 	actsym->anzahl++;
 
 	/* Testausgabe */
-	trace  << "\n  ST-Eintrag: " << lastentry -> token  <<  lastentry->name << lastentry-> wertaddr;
+	trace  << "\tnew entry: token: " << lastentry -> token
+	    << " name: " << lastentry->name
+	    << " addr: " << lastentry-> wertaddr << "\n";
 
 	/* Zeiger auf Eintrag als Returnwert liefern */
 	return lastentry;
@@ -189,12 +184,12 @@ printsymtab(symtable *sptr)
 	int i;
 	st_entry *act;
 
-	fsym << "\nAnzahl der Einträge:" << sptr->anzahl << "\n";
+	fsym << "Anzahl der Einträge:" << sptr->anzahl << "\n";
 	fsym << "Blockniveau:" << sptr->level << "\n";
 
 	/* alle Einträge der ST ausgeben */ 
-	for (i = 0; i < sptr->anzahl; i++) {
-		act =&( sptr->eintrag[i]);
+	for (i =  0; i < sptr->anzahl; i++) {
+		act = &(sptr->eintrag[i]);
 		fsym << "Eintrag-Nr:" << i + 1;
 
 		/* Name, Art, Wert ausgeben */
@@ -202,21 +197,10 @@ printsymtab(symtable *sptr)
 
 		/* Bei PROC-Einträgen --> zur Prozedur gehörende ST ausgében */
 		if (act->token == PROC) {
-			fsym << "\nSymboltabelle zu\t" << act->name << "\n";
+			fsym << "Symboltabelle zu\t" << act->name << "\n";
 
 			printsymtab(act->subsym);
-			fsym << "\nEnde Symboltabelle zu\t" << act->name << "\n";
+			fsym << "Ende Symboltabelle zu\t" << act->name << "\n";
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

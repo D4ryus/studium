@@ -64,7 +64,7 @@ lookforres(char *s)
 	struct ressw *ptr;
 
 	for (ptr = restable; ptr < &restable[NORW]; ptr++) {
-		if (strcmp (ptr->ressymbol,s) == 0) {
+		if (strcmp(ptr->ressymbol,s) == 0) {
 			/* Symbol gefunden */
 			return ptr->token;
 		}
@@ -87,7 +87,7 @@ initlexan()
 {
 	num = NONE;
 	realnum = -0.0;
-	idname [0] = NULL;
+	idname[0] = '\0';
 	lineno = 1;
 	/* Erstes Zeichen der Eingabe lesen */
 	fin.get(actchar);
@@ -119,11 +119,11 @@ nextsymbol()
 	/* Eingabe-Dateiende nicht erreicht */
 	while (!fin.eof()) {
 		/*Blank und Tab in Ausgabedatei kopieren und entfernen */
-		if (actchar== ' ' || actchar== '\t') {
+		if (actchar == ' ' || actchar == '\t') {
 			fout.put(actchar);
 			fin.get(actchar);
 		/* Newline in Ausgabedatei kopieren, entfernen, Zeilennummer erhöhen */
-		} else if (actchar== '\n' ||  actchar == '\r') {
+		} else if (actchar == '\n' ||  actchar == '\r') {
 			fout.put(actchar);
 			fin.get(actchar);
 			lineno++;
@@ -135,11 +135,11 @@ nextsymbol()
 			int doubleflag = 0;
 
 			/*
-			 * eg. Ausdruck (digit)+ '.' (digit) + erkennen ==>
+			 * eg. Ausdruck (digit) + '.' (digit) + erkennen ==>
 			 * solange Ziffern vorhanden --> Konstante
 			 */
 
-			while (isdigit(actchar) || actchar == '.') {
+			while (isdigit(actchar) || (actchar == '.')) {
 				if (actchar == '.') {
 					doubleflag = 1;
 				}
@@ -164,10 +164,9 @@ nextsymbol()
 
 		/***** actchar ist Buchstabe -->  Identifikatoren erkennen ****/
 		} else if (isalpha(actchar)) {
-			int b = 0;	/* Zeichenzahl */
-
+			int b = 0; /* Zeichenzahl */
 			/*
-			 * reg. Ausdruck   letter (letter|digit)*  erkennen ==>
+			 * reg. Ausdruck letter (letter|digit)* erkennen ==>
 			 * solange Buchstaben oder Ziffern folgen --> Identifikator
 			 */
 			while (isalpha(actchar) || isdigit(actchar)) {
@@ -196,57 +195,57 @@ nextsymbol()
 
 			lexbuf[++b] = '\0';
 
-			switch(lexbuf[0]) {
-			case '=':
-				return EQ;
-			case '!':
-				if (actchar == '=') {
-					fout.put(actchar);
-					fin.get(actchar);
-					return NE;
-				}
-				exit(333);
-			case '<':
-				if (actchar == '=') {
-					fout.put(actchar);
-					fin.get(actchar);
-					return LE;
-				}
-				return LT;
-			case '>':
-				if (actchar == '=') {
-					fout.put(actchar);
-					fin.get(actchar);
-					return GE;
-				}
-				return GT;
-			case ':':
-				if (actchar == '=') {
-					fout.put(actchar);
-					fin.get(actchar);
-					return ASS;
-				}
-				return COLON;;
-			case ',':
-				return KOMMA;
-			case ';':
-				return SEMICOLON;
-			case '+':
-				return PLUS;
-			case '-':
-				return MINUS;
-			case '*':
-				return MULT;
-			case '/':
-				return DIV;
-			case '(':
-				return KLAUF;
-			case ')':
-				return KLZU;
-			case '.':
-				return PUNKT;
-			default:
-				error(0);
+			switch (lexbuf[0]) {
+				case '=':
+					return EQ;
+				case '!':
+					if (actchar == '=') {
+						fout.put(actchar);
+						fin.get(actchar);
+						return NE;
+					}
+					exit(333);
+				case '<':
+					if (actchar == '=') {
+						fout.put(actchar);
+						fin.get(actchar);
+						return LE;
+					}
+					return LT;
+				case '>':
+					if (actchar == '=') {
+						fout.put(actchar);
+						fin.get(actchar);
+						return GE;
+					}
+					return GT;
+				case ':':
+					if (actchar == '=') {
+						fout.put(actchar);
+						fin.get(actchar);
+						return ASS;
+					}
+					return COLON;;
+				case ',':
+					return KOMMA;
+				case ';':
+					return SEMICOLON;
+				case '+':
+					return PLUS;
+				case '-':
+					return MINUS;
+				case '*':
+					return MULT;
+				case '/':
+					return DIV;
+				case '(':
+					return KLAUF;
+				case ')':
+					return KLZU;
+				case '.':
+					return PUNKT;
+				default:
+					error(0);
 			}
 		}
 

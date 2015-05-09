@@ -4,6 +4,7 @@
 #ifndef GLOBAL_H
 #include "global.h"
 #endif
+#include <stdio.h>
 
 ifstream fin;   /* Zu übersetzende Eingaben */
 ofstream fout,  /* Ausgabedatei */
@@ -19,44 +20,46 @@ int level = 0;
 void
 initialize()
 {
-	char c;
-	char filename[20];
+	/* char c; */
+	/* char filename[256]; */
 
-	cout <<"\nName der Eingabedatei eingeben--> ";
-	cin >> filename;
+	/* cout <<"\nName der Eingabedatei eingeben--> "; */
+	/* cin >> filename; */
 
 	/* Eingabefile öffnen*/
-	fin.open(filename, ios::in);
+	fin.open("testprog1.tst", ios::in);
 
-	cout << "\nName der Ausgabedatei eingeben--> ";
-	cin >> filename;
+	/* cout << "\nName der Ausgabedatei eingeben--> "; */
+	/* filename = ; */
+	/* cin >> filename; */
 
 	/* Ausgabedatei öffnen */
-	fout.open(filename, ios::out);
+	fout.open("stdout.out", ios::out);
 	// fout.open("out.txt", ios::out);
-	fout << "\n\n***************** Ausgabe ***************\n";
+	fout << "***************** Ausgabe ***************\n";
 
-	cout << "\nName der Fehlerdatei eingeben-->";
-	cin >> filename;
+	/* cout << "\nName der Fehlerdatei eingeben-->"; */
+	/* filename = "err.TEST"; */
+	/* cin >> filename; */
 
 	/* Fehlerdatei öffnen */
-	ferr.open(filename, ios::out);
+	ferr.open("error.out", ios::out);
 	// ferr.open("err.txt",ios::out);
 
-	ferr << "\n\n**************** Fehlermeldungen*************\n";
+	ferr << "**************** Fehlermeldungen*************\n";
 
-	cout << "\nTrace gewünscht ? (y/n): ";
-	cin >> c;
-	if (c == 'y') { /* Datei für Trace  öffnen */
+	/* cout << "\nTrace gewünscht ? (y/n): "; */
+	/* cin >> c; */
+	/* if (c == 'y') { /1* Datei für Trace  öffnen *1/ */
 		trace.open("trace.out", ios::out);
 		tracesw = TRUE;
-	} else {
-		tracesw = FALSE;
-	}
+	/* } else { */
+	/* 	tracesw = FALSE; */
+	/* } */
 
 	/* Datei für Symboltabellenausgabe öffnen */
 	fsym.open("table.out", ios::out);
-	fsym << "\n\n**************** Symboltabellen*************\n";
+	fsym << "**************** Symboltabellen*************\n";
 
 	/* Initialisieren des Scanners */
 	initlexan();

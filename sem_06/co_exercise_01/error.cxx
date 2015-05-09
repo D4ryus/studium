@@ -22,6 +22,8 @@ verwendet werden, die den angebebenen Text ausgibt
 #include "global.h"
 #endif
 
+extern int lookahead;
+
 /***************** Fehlertexte **********************/
 
 char *errtxt[] =
@@ -64,7 +66,10 @@ char *errtxt[] =
 /*35*/	"Doppelpunkt erwartet",
 /*36*/	"Unzulässiger Typ",
 /*37*/	"Falsche Eintragsart in Symboltabelle",
-/*38*/	"Keine korrekte reelle Konstante "
+/*38*/	"Keine korrekte reelle Konstante ",
+/*39*/	"Identifier expected",
+/*40*/	"we did not define this error yet!",
+/*41*/	"expected procedure"
 };
 
 /***************** Fehlerfunktion **********************/
@@ -73,8 +78,8 @@ char *errtxt[] =
 void
 error(int nr)
 {
-	ferr << "Zeile" << lineno << " " << errtxt[nr];
-
+	ferr << "Zeile " << lineno << " " << errtxt[nr];
+	ferr << " Token " << lookahead;
 	exit(1);
 }
 
@@ -83,7 +88,7 @@ void
 errortext(char *text)
 {
 	ferr << "Zeile" << lineno << text;
-
+	ferr << " Token " << lookahead;
 	exit(1);
 }
 
