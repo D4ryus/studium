@@ -133,12 +133,10 @@ nextsymbol()
 			int b = 0;		/* Zeichenzahl*/
 			const char **error = NULL;
 			int doubleflag = 0;
-
 			/*
 			 * eg. Ausdruck (digit) + '.' (digit) + erkennen ==>
 			 * solange Ziffern vorhanden --> Konstante
 			 */
-
 			while (isdigit(actchar) || (actchar == '.')) {
 				if (actchar == '.') {
 					doubleflag = 1;
@@ -147,9 +145,7 @@ nextsymbol()
 				fout.put(actchar);
 				fin.get(actchar);
 			}
-
 			zahl[b] = '\0'; /* now its a string, just to be sure */
-
 			if (doubleflag) {
 				realnum = strtod(zahl, NULL);
 				token = REALNUM;
@@ -159,10 +155,8 @@ nextsymbol()
 					errx(1, "strtonum: %s", *error);
 				token = INTNUM;
 			}
-
 			return token;
-
-		/***** actchar ist Buchstabe -->  Identifikatoren erkennen ****/
+		/***** actchar ist Buchstabe --> Identifikatoren erkennen ****/
 		} else if (isalpha(actchar)) {
 			int b = 0; /* Zeichenzahl */
 			/*
@@ -251,5 +245,5 @@ nextsymbol()
 
 	} /* end while */
 
-	return DONE; /* EIngabe -Ende erreicht */
+	return DONE; /* Eingabe-Ende erreicht */
 }

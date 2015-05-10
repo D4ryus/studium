@@ -55,7 +55,7 @@ char *errtxt[] =
 /*24*/	"Zahl zu groﬂ ",
 /*25*/	"Programm zu groﬂ",
 /*26*/	"Prozedurschachtelung zu tief",
-/*27*/	"kein Faktor: Name oder Konstante oder ( E) ",
+/*27*/	"kein Faktor: Name oder Konstante oder (E) ",
 /*28*/	"Symboltabelle voll",
 /*29*/	"Lexemfeld voll",
 /*30*/	"Statement erwartet" ,
