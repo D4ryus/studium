@@ -4,8 +4,11 @@
         <!ELEMENT Semester (#PCDATA)>
         <!ELEMENT Hochschule (#PCDATA)>
         <!ELEMENT SWS (#PCDATA)>
-        <!ELEMENT Kapitel (#PCDATA)>
+        <!ELEMENT Kapitel (Name, Termin+)>
                 <!ATTLIST Kapitel nummer CDATA #REQUIRED>
                 <!ATTLIST Kapitel quelle IDREF #IMPLIED>
-        <!ELEMENT Quelle (Autor+, Titel)>
-                <!ATTLIST Quell quelleID ID #REQUIRED>
+        <!ELEMENT Quelle (Author+, Titel)>
+                <!ATTLIST Quelle quelleID ID #REQUIRED>
+        <!ELEMENT Author (#PCDATA)>
+        <!ELEMENT Name (#PCDATA)>
+        <!ELEMENT Termin (#PCDATA)>

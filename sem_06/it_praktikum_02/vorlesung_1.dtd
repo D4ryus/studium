@@ -4,8 +4,13 @@
         <!ELEMENT Hochschule (#PCDATA)>
         <!ELEMENT SWS (#PCDATA)>
         <!ELEMENT Semester (#PCDATA)>
-        <!ELEMENT Kapitel (#PCDATA)>
-                <!ATTLIST Kapitel bewertung CDATA #REQUIRED "1">
-        <!ELEMENT Quelle >
-                <!ATTLIST Quelle quelleID ID #REQUIRED>
-                <!ATTLIST Quelle type (Monographie|Artikel|Dissertation|Abschlussarbeit)>
+        <!ELEMENT Kapitel (Name, Termin+)>
+                <!ATTLIST Kapitel bewertung CDATA "1">
+                <!ATTLIST Kapitel nummer CDATA #REQUIRED>
+                <!ATTLIST Kapitel quelle IDREF #IMPLIED>
+        <!ELEMENT Quelle (Author+, Titel)>
+                <!ATTLIST Quelle id ID #REQUIRED>
+                <!ATTLIST Quelle type (Monographie|Artikel|Dissertation|Abschlussarbeit) #REQUIRED>
+        <!ELEMENT Author (#PCDATA)>
+        <!ELEMENT Name (#PCDATA)>
+        <!ELEMENT Termin (#PCDATA)>

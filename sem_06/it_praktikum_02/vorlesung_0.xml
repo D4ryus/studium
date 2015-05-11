@@ -6,15 +6,9 @@
   <Hochschule>HAW Landshut</Hochschule>
   <SWS>4</SWS>
   <?myTool align = left ?>
-  <Kapitel nummer="1">
-    <Name>Einführung</Name>
-    <Termin>1</Termin>
-  </Kapitel>
-  <Kapitel nummer="2" quelle="Q1">
-    <Name>Grundlagen von Netzwerk</Name>
-    <Termin>2</Termin>
-  </Kapitel>
-  <Quelle>
+  <Kapitel nummer="1">Einführung </Kapitel>
+  <Kapitel nummer="2" quelle="Q1">Grundlagen von Netzwerk</Kapitel>
+  <Quelle quelleID="Q1">
     <Author>someone</Author>
     <Titel>Lehrbuch 1.23</Titel>
   </Quelle>
