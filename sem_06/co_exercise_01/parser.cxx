@@ -238,8 +238,17 @@ statement()
 		trace << lineno << ": statement()\n";
 	}
 
+	st_entry *tmp;
+
 	switch (lookahead) {
 		case ID:
+			tmp = lookup(idname);
+			if (tmp == NULL) {
+				error(10);
+			}
+			if (tmp->token == KONST || tmp->token == PROC) {
+				error(11);
+			}
 			lookahead = nextsymbol();
 			if (lookahead != ASS) {
 				error(12);
@@ -252,6 +261,17 @@ statement()
 			if (lookahead != ID) {
 				error(40);
 			}
+			tmp = lookup(idname);
+			if (tmp == NULL) {
+				error(10);
+			}
+			if (tmp->token == KONST
+			    || tmp->token == INTIDENT
+			    || tmp->token == REALIDENT
+			    || tmp->token == BOOLIDENT)
+			{
+				error(14);
+			}
 			lookahead = nextsymbol();
 			break;
 		case BEGIN:
@@ -261,7 +281,7 @@ statement()
 				error(16);
 			}
 			lookahead = nextsymbol();
-			break;
+			return;
 		case IF:
 			lookahead = nextsymbol();
 			condition();
@@ -306,19 +326,25 @@ statement()
 void
 procdecl()
 {
-	symtable * neusym; // Zeiger auf neue Symboltabelle
-
 	if (tracesw) {
 		trace << lineno << ": procdecl()\n";
 	}
 
+	symtable *neusym; // Zeiger auf neue Symboltabelle
+	st_entry *tmp;
+
 	lookahead = nextsymbol();
 
-	if (lookahead == ID) {
-		insert(PROC);
-	} else {
+	if (lookahead != ID) {
 		error(39);
 	}
+
+	tmp = lookup(idname);
+	if (tmp != NULL) {
+		error(34);
+	}
+
+	insert(PROC);
 
 	lookahead = nextsymbol();
 
@@ -329,6 +355,9 @@ procdecl()
 	lookahead = nextsymbol();
 	neusym = create_newsym();
 	block(neusym);
+	if (lookahead != SEMICOLON) {
+		error(40);
+	}
 
 	return; // end procdecl
 }
@@ -353,12 +382,17 @@ vardecl()
 	}
 
 	int running;
+	st_entry *tmp;
 
 	running = 1;
 	while (running) {
 		lookahead = nextsymbol();
 		if (lookahead != ID) {
 			error(39);
+		}
+		tmp = lookup_in_actsym(idname);
+		if (tmp != NULL) {
+			error(34);
 		}
 
 		lookahead = nextsymbol();
@@ -408,11 +442,17 @@ constdecl()
 		trace << lineno << ": constdecl()\n";
 	}
 
+	st_entry *tmp;
+
 	int running = 1;
 	while (running) {
 		lookahead = nextsymbol();
 		if (lookahead != ID) {
 			error(39);
+		}
+		tmp = lookup(idname);
+		if (tmp != NULL) {
+			error(34);
 		}
 		lookahead = nextsymbol();
 		if (lookahead != EQ) {
@@ -467,9 +507,6 @@ block(symtable *neusym)
 		trace << lineno << ": block()\n";
 	}
 
-	symtable *tmp;
-
-	tmp = actsym;
 	actsym = neusym;
 
 	if (lookahead == CONST) {
@@ -484,7 +521,7 @@ block(symtable *neusym)
 
 	statement();
 
-	actsym = tmp;
+	actsym = neusym->precsym;
 
 	return; // end block
 }
