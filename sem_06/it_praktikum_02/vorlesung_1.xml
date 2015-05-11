@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Vorlesung SYSTEM "vorlesung_1.dtd">
+<Vorlesung>
+  <Titel>Seminar</Titel>
+  <Hochschule>HAW Landshut</Hochschule>
+  <SWS>4</SWS>
+  <Semester>Sommersemester</Semester>
+  <?myTool align = left ?>
+  <Kapitel nummer="1" bewertung="2"> </Kapitel>
+  <Kapitel nummer="2" bewertung="2" quelle="Q1"> </Kapitel>
+  <Quelle id="Q1" type="Monographie"></Quelle>
+</Vorlesung>

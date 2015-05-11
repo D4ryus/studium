@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!ELEMENT Saison (Beginn, Ende, Mannschaften+, Spiel+)>
+        <!ATTLIST Saison typ (Euro|Champions) #IMPLIED>
+<!ELEMENT Mannschaften (Name, Land, Trainer, Spieler+, Erfolge*)>
+        <!ATTLIST Mannschaften id ID #REQUIRED>
+
+<!ELEMENT Spiel EMPTY>
+        <!ATTLIST Spiel heim IDREF #REQUIRED>
+        <!ATTLIST Spiel gast IDREF #REQUIRED>
+        <!ATTLIST Spiel ergebnis CDATA #IMPLIED>
+<!ELEMENT Spieler (#PCDATA)>
+        <!ATTLIST Spieler position (Torwart|Verteidiger|Mittelfeld|Stürmer) #REQUIRED>
+<!ELEMENT Erfolge (#PCDATA|Jahr|Titel)*>
+<!ELEMENT Beginn (#PCDATA)>
+<!ELEMENT Ende (#PCDATA)>
+<!ELEMENT Titel (#PCDATA)>
+<!ELEMENT Jahr (#PCDATA)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Land (#PCDATA)>
+<!ELEMENT Trainer (#PCDATA)>

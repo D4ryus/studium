@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Saison SYSTEM "sml.dtd">
+<Saison typ="Euro">
+  <Beginn>10.10.2014</Beginn>
+  <Ende>0.10.2015</Ende>
+  <Mannschaften id="asdf">
+    <Name>somename</Name>
+    <Land>deutschland</Land>
+    <Trainer>peter</Trainer>
+    <Spieler position="Torwart">Hans</Spieler>
+    <Spieler position="Verteidiger">Georg</Spieler>
+    <Spieler position="Mittelfeld">Sepp</Spieler>
+    <Spieler position="Stürmer">Chris</Spieler>
+    <Erfolge>Gewonn die <Titel>SuperLeague</Titel> im Jahr <Jahr>1991</Jahr>.</Erfolge>
+    <Erfolge>Gewonn die <Titel>SuperSuperLeague</Titel> im Jahr <Jahr>1992</Jahr>.</Erfolge>
+  </Mannschaften>
+  <Mannschaften id="fdsa">
+    <Name>someothername</Name>
+    <Land>deutschland</Land>
+    <Trainer>hand</Trainer>
+    <Spieler position="Torwart">Hans</Spieler>
+    <Spieler position="Verteidiger">Georg</Spieler>
+    <Spieler position="Mittelfeld">Sepp</Spieler>
+    <Spieler position="Stürmer">Chris</Spieler>
+    <Erfolge>Gewonn die <Titel>SuperSuperLeague</Titel> im Jahr <Jahr>1991</Jahr>.</Erfolge>
+    <Erfolge>Gewonn die <Titel>SuperLeague</Titel> im Jahr <Jahr>1992</Jahr>.</Erfolge>
+  </Mannschaften>
+  <Spiel heim="asdf" gast="fdsa" ergebnis="5:3"></Spiel>
+</Saison>
