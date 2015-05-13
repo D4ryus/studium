@@ -13,21 +13,21 @@
 
 //#define TRUE		  1
 //#define FALSE		  0
-#define BSIZE		512	/* Puffergrösse */
-#define NONE		 -1	/* Vorbesetzung für num */
+#define BSIZE		512	/* PuffergrÃ¶sse */
+#define NONE		 -1	/* Vorbesetzung fÃ¼r num */
 #define EOS	       '\0'	/* End of String */
 
-#define NESTMAX		 10	/* Max. Schachtelungstiefe von Blöcken */
-#define STRMAX		999	/* Länge des Stringfeldes */
-#define SYMMAX		 20	/* Größe der Teil-Symboltabelle */
+#define NESTMAX		 10	/* Max. Schachtelungstiefe von BlÃ¶cken */
+#define STRMAX		999	/* LÃ¤nge des Stringfeldes */
+#define SYMMAX		 20	/* GrÃ¶ÃŸe der Teil-Symboltabelle */
 
-/* Definition der Codierung für Tokentypen */
+/* Definition der Codierung fÃ¼r Tokentypen */
 #define INTNUM	       2561	/* Int-Konstante */
 #define REALNUM	       2562	/* Real-Konstante */
 
 #define ID		257	/* Identifikator */
-#define CONST 		258	/* Schlüsselwort const */
-#define VAR		259	/* Schlüsselwort var */
+#define CONST 		258	/* SchlÃ¼sselwort const */
+#define VAR		259	/* SchlÃ¼sselwort var */
 #define PROCEDURE	260	/* Procedure */
 #define CALL		261	/* call */
 #define BEGIN 		262	/* begin */
@@ -62,14 +62,14 @@
 
 #define DONE		300	/* Ende-Token */
 
-/* Definition der Art der ST- Einträge  */
+/* Definition der Art der ST- EintrÃ¤ge  */
 #define KONST		310	/* Konstante */
 #define INTIDENT	320	/* Identifikator vom Typ int  */
 #define REALIDENT	330	/* Identifikator vom Typ real */
 #define BOOLIDENT	340	/* Identifikator vom Typ boolean */
 #define PROC		400	/* Procedure */
 
-/* Definition der Typen für Typprüfungen   */
+/* Definition der Typen fÃ¼r TypprÃ¼fungen   */
 #define INT_TYPE	321
 #define REAL_TYPE	331
 #define BOOL_TYPE	341
@@ -95,12 +95,12 @@ struct st_entry
 /* Aufbau der (Teil- )Symboltabelle */
 struct symtable
 {
-	struct symtable *precsym;/* Zeiger auf übergeordnete Symboltabelle;
+	struct symtable *precsym;/* Zeiger auf Ã¼bergeordnete Symboltabelle;
 				  * bei oberster NULL
 				  */
 	int level;		/* Schachtelungstiefe */
-	int anzahl;		/* Anzahl der Symboltabelleneinträge */
-	struct st_entry eintrag[SYMMAX]; /* Feld für Einträge */
+	int anzahl;		/* Anzahl der SymboltabelleneintrÃ¤ge */
+	struct st_entry eintrag[SYMMAX]; /* Feld fÃ¼r EintrÃ¤ge */
 };
 
 extern FILE *fsym;
@@ -114,9 +114,9 @@ extern double realnum; 		/* Wert einer Real-Konstanten */
 extern int lineno;		/* Zeilennummer */
 extern struct symtable *actsym;	/* Zeiger auf aktuelle Symboltabelle */
 extern struct symtable *firstsym;	/* Zeiger auf oberste (globale) Symboltabelle */
-extern int tracesw;		/* Kennung, ob Trace gewünscht */
+extern int tracesw;		/* Kennung, ob Trace gewÃ¼nscht */
 
-/******************** Prototypen für Prozeduren *******************/
+/******************** Prototypen fÃ¼r Prozeduren *******************/
 void initialize();		/* Compiler initialisieren */
 void stop();			/* Beenden */
 
@@ -125,7 +125,7 @@ int lookforres(char *);		/*
 				 * sucht in Tabelle der
 				 * res. Symbole nach Zeichenkette
 				 */
-int nextsymbol();		/* liest nächstes Symbol der Eingabe */
+int nextsymbol();		/* liest nÃ¤chstes Symbol der Eingabe */
 
 struct symtable *create_newsym(); /* Neue ST erzeugen */
 struct st_entry *lookup(char *s); /* Namen in ganzer Symboltabelle suchen */
@@ -142,7 +142,7 @@ int term();			/* Verarbeiten eines Terms */
 int expr();			/* Verarbeiten eines Ausdrucks */
 int condition(); 		/* Verarbeiten einer Bedingung */
 void statement();		/* Verarbeiten Statement */
-void program();			/* Programm übersetzen */
+void program();			/* Programm Ã¼bersetzen */
 void block(struct symtable *neusym); /* Bearbeiten eines Blockes */
 
 void error(int);		/* Fehlerausgabe */

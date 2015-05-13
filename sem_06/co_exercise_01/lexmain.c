@@ -12,7 +12,7 @@ main()
 {
 	int lookahead = -1;
 
-	/* Initialisierungen durchführen */
+	/* Initialisierungen durchfÃ¼hren */
 	initialize();
 
 	/* Symbole aus Eingabedatei lesen bis Dateiende */

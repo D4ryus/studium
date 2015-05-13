@@ -6,7 +6,7 @@
 #endif
 
 #define NORW 12		/* Zahl der reservierten Worte */
-#define RWSYMLEN 15	/* Max. Länge reservierter Symbole */
+#define RWSYMLEN 15	/* Max. LÃ¤nge reservierter Symbole */
 
 int lineno;		/* Zeilennummer */
 int num;		/* Wert einer nt-Konstanten  */
@@ -15,24 +15,24 @@ char idname[BSIZE];	/* Name eines Bezeichners */
 char actchar;		/* gelesenes Zeichen */
 
 /*
- * Um Bezeichner vor reservierten Symbolene unterscheiden zu können,
+ * Um Bezeichner vor reservierten Symbolene unterscheiden zu kÃ¶nnen,
  * wird eine Tabelle reservierte Worte verwendet (restable).
  *
- * Die Tabelle enthält Einträge für jedes Schlüsselwort, bestehend aus
- * dem Schlüsselwort selbst und dem zugehörigen Tokentyp
+ * Die Tabelle enthÃ¤lt EintrÃ¤ge fÃ¼r jedes SchlÃ¼sselwort, bestehend aus
+ * dem SchlÃ¼sselwort selbst und dem zugehÃ¶rigen Tokentyp
  * (Codierung vgl.global.h):
  *
- * Bei Erkennen eines möglichen Bezeichners wird zuerst die Tabelle
+ * Bei Erkennen eines mÃ¶glichen Bezeichners wird zuerst die Tabelle
  * der reservierten Symbole durchsucht (lookforres);
- * wird ein Schlüsselwort gefunden, liefert lookforres den dem Schlüsselwort
- * zugeordneten Tokentyp; sonst 0. Bei Ergebnis 0 liegt dann tatsächlich ein
+ * wird ein SchlÃ¼sselwort gefunden, liefert lookforres den dem SchlÃ¼sselwort
+ * zugeordneten Tokentyp; sonst 0. Bei Ergebnis 0 liegt dann tatsÃ¤chlich ein
  * Bezeichner vor.
  */
 
 /* Struktur eines Eintrags in der Tabelle reservierter Symbole */
 struct ressw {
 	char ressymbol[RWSYMLEN];	/* Symbol */
-	int token;			/* zugehöriger Tokentyp */
+	int token;			/* zugehÃ¶riger Tokentyp */
 };
 
 /* Tabelle reservierter Worte */
@@ -56,7 +56,7 @@ struct ressw restable[] = {
 
 /*
  * Suchen nach einem reservierten Symbol
- * Sucht in Tabelle reservierter Worte nach s und liefert zugehörigen Token
+ * Sucht in Tabelle reservierter Worte nach s und liefert zugehÃ¶rigen Token
  * falls gefunden,sonst 0
  */
 int
@@ -95,10 +95,10 @@ initlexan()
 }
 
 /******* Funktion nextsymbol **************************************************/
-/******* zentrale Funktion zum Lesen des nächsten lexikalischen Symbols *******/
+/******* zentrale Funktion zum Lesen des nÃ¤chsten lexikalischen Symbols *******/
 /*
- * identifiziert nächstes lexikalisches Symbol der Eingabe ;
- * bei Aufruf muss sich das nächste Eingabezeichen in actchar befinden,
+ * identifiziert nÃ¤chstes lexikalisches Symbol der Eingabe ;
+ * bei Aufruf muss sich das nÃ¤chste Eingabezeichen in actchar befinden,
  */
 
 /*
@@ -106,7 +106,7 @@ initlexan()
  *
  * - Konstante:		token == NUM und Wert der Konstanten in Variable num
  * - Bezeichner:	token == ID  und Zeiger auf Name in idname
- * - Schlüsselwort:	token == Tokentyp des resevierten Symbols nach
+ * - SchlÃ¼sselwort:	token == Tokentyp des resevierten Symbols nach
  * Suche in restable
  * - Operatoren,Sonderzeichen :entsprechende Token
  */
@@ -115,7 +115,7 @@ int
 nextsymbol()
 {
 	int token;
-	char lexbuf[BSIZE]; /* Puffer für Eingabezeichen */
+	char lexbuf[BSIZE]; /* Puffer fÃ¼r Eingabezeichen */
 
 	/* Eingabe-Dateiende nicht erreicht */
 	while (actchar != EOF) {
@@ -125,7 +125,7 @@ nextsymbol()
 			actchar = fgetc(stdin);
 		/*
 		 * Newline in Ausgabedatei kopieren, entfernen,
-		 * Zeilennummer erhöhen
+		 * Zeilennummer erhÃ¶hen
 		 */
 		} else if (actchar == '\n' ||  actchar == '\r') {
 			fputc(actchar, stdout);
@@ -133,7 +133,7 @@ nextsymbol()
 			lineno++;
 		/***** actchar ist Ziffer --> Konstanten erkennen  *****/
 		} else if (isdigit(actchar)) {
-			char zahl [BSIZE];	/* Puffer für Ziffern */
+			char zahl [BSIZE];	/* Puffer fÃ¼r Ziffern */
 			int b = 0;		/* Zeichenzahl*/
 			const char **error = NULL;
 			int doubleflag = 0;

@@ -1,6 +1,6 @@
 /******************************** init.cxx ************************/
 
-/* Initialisierungen für Compiler PL0  */
+/* Initialisierungen fÃ¼r Compiler PL0  */
 #ifndef GLOBAL_H
 #include "global.h"
 #endif
@@ -12,7 +12,7 @@ FILE *ftra;
 int tracesw;
 int level = 0;
 
-/***************** Initialisierungen durchführen ******************/
+/***************** Initialisierungen durchfÃ¼hren ******************/
 
 void
 initialize()
@@ -24,7 +24,7 @@ initialize()
 	}
 	tracesw = TRUE;
 
-	/* Datei für Symboltabellenausgabe öffnen */
+	/* Datei fÃ¼r Symboltabellenausgabe Ã¶ffnen */
 	fsym = fopen("table.out", "w+");
 	if (fsym == NULL) {
 		printf("could not open table file\n");
@@ -36,7 +36,7 @@ initialize()
 	initlexan();
 }
 
-/************ Endebehandlung bei fehlerfreier Übersetzung *****/
+/************ Endebehandlung bei fehlerfreier Ãœbersetzung *****/
 /* zur Zeit nur Ausgabe der Symboltabelle */
 
 void
