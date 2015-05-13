@@ -6,7 +6,7 @@
 
 int lookahead; /* lookahead enthält nächsten EIngabetoken */
 
-int exp();
+int expr();
 int nextsymbol();
 
 /** FACTOR *********************************************************************
@@ -25,18 +25,17 @@ int
 factor()
 {
 	int kind;
-	st_entry *found; // Zeiger auf Eintrag in ST
-	int factor_typ;
+	struct st_entry *found; // Zeiger auf Eintrag in ST
 
 	if (tracesw) {
-		trace << lineno << ": faktor()\n";
+		fprintf(ftra, "%4d: faktor()\n", lineno);
 	}
 
 	// je nach nächstem Eingabesymbol in lookahead
 	switch (lookahead) { // je nach nächstem Eingabesymbol in lookahead
 		case KLAUF: /* Symbol '(' folgt --> (EXPRESSION) erwartet*/
 			lookahead = nextsymbol();
-			factor_typ = exp();
+			expr();
 			if (lookahead == KLZU) {
 				// korrekt ; nächstes Symbol lesen --> Ende
 				lookahead = nextsymbol();
@@ -62,7 +61,7 @@ factor()
 			 */
 			found = lookup(idname);
 			if (found == NULL) {
-				/* nicht gefunden --> Fehler: Id nicht deklariert*/
+				/* Id nicht deklariert */
 				error(10);
 			} else { // Id in ST gefunden ; Art prüfen
 				kind = found->token; // Art des ST-Eintrags
@@ -71,10 +70,10 @@ factor()
 						// Konstantenname --> okay
 						break;
 					case INTIDENT:
-						// einfache Variable, Typ int --> okay
+						// Typ int --> okay
 						break;
 					case REALIDENT:
-						// einfache Variable, Typ real --> okay
+						// Typ real --> okay
 						break;
 					case PROC:
 						// Name einer Prozedur in
@@ -109,14 +108,11 @@ factor()
 int
 term()
 {
-	int typ_left;
-	int typ_right;
-
 	if (tracesw) {
-		trace << lineno << ": term()\n";
+		fprintf(ftra, "%4d: term()\n", lineno);
 	}
 
-	typ_left = factor();
+	factor();
 	// korrekter Factor
 
 	// solange * oder / folgt, muss Factor kommen
@@ -124,7 +120,7 @@ term()
 		// nächstes Symbol lesen
 		lookahead = nextsymbol();
 		// Factor prüfen
-		typ_right = factor();
+		factor();
 		// nach korrektem Ende wurde nächstes Symbol gelesen
 	}
 
@@ -145,16 +141,13 @@ term()
  */
 
 int
-exp()
+expr()
 {
-	int typ_left;
-	int typ_right;
-
 	if (tracesw) {
-		trace << lineno << ": exp()\n";
+		fprintf(ftra, "%4d: expr()\n", lineno);
 	}
 
-	typ_left = term();
+	term();
 	// korrekter Term
 
 	// solange + oder - folgt, muss Term kommen
@@ -162,12 +155,12 @@ exp()
 		// nächstes Symbol lesen
 		lookahead = nextsymbol();
 		// Term prüfen
-		typ_right = term();
+		term();
 		// nach korrektem Ende wurde nächstes Symbol gelesen
 	}
 
 	return 0;
-} // end exp
+}
 
 /** CONDITION ******************************************************************
  *
@@ -186,10 +179,10 @@ condition()
 	int typ_right;
 
 	if (tracesw) {
-		trace << lineno << ": condition()\n";
+		fprintf(ftra, "%4d: condition()\n", lineno);
 	}
 
-	typ_left = exp();
+	typ_left = expr();
 	// korrekter Ausdruck
 	// relationaler Operator muss folgen
 
@@ -203,7 +196,7 @@ condition()
 			// nächstes Symbol lesen
 			lookahead = nextsymbol();
 			// Ausdruck muss folgen
-			typ_right = exp();
+			typ_right = expr();
 
 			break;
 		default:
@@ -235,10 +228,10 @@ void
 statement()
 {
 	if (tracesw) {
-		trace << lineno << ": statement()\n";
+		fprintf(ftra, "%4d: statement()\n", lineno);
 	}
 
-	st_entry *tmp;
+	struct st_entry *tmp;
 
 	switch (lookahead) {
 		case ID:
@@ -254,8 +247,8 @@ statement()
 				error(12);
 			}
 			lookahead = nextsymbol();
-			exp();
-			break;
+			expr();
+			return;
 		case CALL:
 			lookahead = nextsymbol();
 			if (lookahead != ID) {
@@ -273,10 +266,14 @@ statement()
 				error(14);
 			}
 			lookahead = nextsymbol();
-			break;
+			return;
 		case BEGIN:
 			lookahead = nextsymbol();
 			statement();
+			while (lookahead == SEMICOLON) {
+				lookahead = nextsymbol();
+				statement();
+			}
 			if (lookahead != END) {
 				error(16);
 			}
@@ -291,7 +288,7 @@ statement()
 			}
 			lookahead = nextsymbol();
 			statement();
-			break;
+			return;
 		case WHILE:
 			lookahead = nextsymbol();
 			condition();
@@ -300,12 +297,9 @@ statement()
 			}
 			lookahead = nextsymbol();
 			statement();
-			break;
-	}
-
-	if (lookahead == SEMICOLON) {
-		lookahead = nextsymbol();
-		statement();
+			return;
+		default:
+			error(6);
 	}
 
 	return; // end statement
@@ -327,11 +321,10 @@ void
 procdecl()
 {
 	if (tracesw) {
-		trace << lineno << ": procdecl()\n";
+		fprintf(ftra, "%4d: procdecl()\n", lineno);
 	}
 
-	symtable *neusym; // Zeiger auf neue Symboltabelle
-	st_entry *tmp;
+	struct st_entry *tmp;
 
 	lookahead = nextsymbol();
 
@@ -344,7 +337,7 @@ procdecl()
 		error(34);
 	}
 
-	insert(PROC);
+	tmp = insert(PROC);
 
 	lookahead = nextsymbol();
 
@@ -353,11 +346,11 @@ procdecl()
 	}
 
 	lookahead = nextsymbol();
-	neusym = create_newsym();
-	block(neusym);
+	block(tmp->subsym);
 	if (lookahead != SEMICOLON) {
 		error(40);
 	}
+	lookahead = nextsymbol();
 
 	return; // end procdecl
 }
@@ -378,11 +371,11 @@ void
 vardecl()
 {
 	if (tracesw) {
-		trace << lineno << ": vardecl()\n";
+		fprintf(ftra, "%4d: vardecl()\n", lineno);
 	}
 
 	int running;
-	st_entry *tmp;
+	struct st_entry *tmp;
 
 	running = 1;
 	while (running) {
@@ -439,10 +432,10 @@ void
 constdecl()
 {
 	if (tracesw) {
-		trace << lineno << ": constdecl()\n";
+		fprintf(ftra, "%4d: constdecl()\n", lineno);
 	}
 
-	st_entry *tmp;
+	struct st_entry *tmp;
 
 	int running = 1;
 	while (running) {
@@ -501,10 +494,10 @@ constdecl()
  * bei korrektem Ende: nächstes Eingabesymbol befindet sich in lookahead
  */
 void
-block(symtable *neusym)
+block(struct symtable *neusym)
 {
 	if (tracesw) {
-		trace << lineno << ": block()\n";
+		fprintf(ftra, "%4d: block()\n", lineno);
 	}
 
 	actsym = neusym;
@@ -515,7 +508,7 @@ block(symtable *neusym)
 	if (lookahead == VAR) {
 		vardecl();
 	}
-	if (lookahead == PROCEDURE) {
+	while (lookahead == PROCEDURE) {
 		procdecl();
 	}
 
@@ -540,30 +533,24 @@ void
 program()
 {
 	if (tracesw) {
-		trace << lineno << ": program()\n";
+		fprintf(ftra, "%4d: program()\n", lineno);
 	}
 
-	// globale Symboltabelle  anlegen (firstsym)
 	firstsym = create_newsym();
 	actsym = firstsym;
 
-	// erstes Symbol lesen
 	lookahead = nextsymbol();
 
-	// Block muss folgen
 	block(firstsym);
-	// am programmende muss '.' folgen
-	if (lookahead == PUNKT) {
-		// nächstes Symbol lesen
-		lookahead = nextsymbol();
-	} else {
-		// Punkt fehlt
+
+	if (lookahead != PUNKT) {
 		error(31);
 	}
 
-	// Dateiende erreicht ?
+	lookahead = nextsymbol();
+
 	if (lookahead != DONE) {
-		error(33); // noch Symbole in Eingabedatei nach RPOGRAM
+		error(33);
 	}
-}	// end program
+}
 

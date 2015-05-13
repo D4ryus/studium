@@ -11,6 +11,10 @@ procedure fak;
 				i := i+1
 			end
 	end;
+
+procedure xyz;
+n := 3;
+
 begin
 	n := c;
 	call fak

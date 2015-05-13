@@ -17,12 +17,12 @@ main()
 
 	/* Symbole aus Eingabedatei lesen bis Dateiende */
 	lookahead = nextsymbol();
-	fout << "\t\tTokentyp =    " << lookahead;
+	printf("\t\tTokentyp = %d", lookahead)
 
 
 	while (lookahead != DONE) {
 		lookahead = nextsymbol();
-		fout << "\t\tTokentyp=    " << lookahead;
+		printf("\t\tTokentyp = %d", lookahead)
 	}
 
 	exit(0); /* Erfolg */

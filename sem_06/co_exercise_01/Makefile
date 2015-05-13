@@ -21,40 +21,25 @@
 #		Hier wird % als Wildcard verwendet.
 
 # Variablendeklarationen
-CC=g++
-CFLAGS=-Wall -g
-LDFLAGS=-lbsd
+CC = gcc
+CFLAGS = -Wall -g
+LFLAGS = -lbsd
+OBJS = error.o init.o lexan.o parsemain.o parser.o symbol.o
 
-all: parsemain lexmain
+all : depend parsemain lexmain
 
-# Regeln, die _keine_ Dateien mit dem Namen der Regel erstellen, sind "phony"
-.PHONY: clean
+parsemain : $(OBJS)
+	$(CC) -o $@ $(OBJS) $(LFLAGS)
 
-# Uebersetzung des Scanners aus Aufgabe 1
-lexmain: lexmain.o init.o error.o lexan.o symbol.o parser.o
-	$(CC) $(LDFLAGS) -o $@ $^
+lexmain : $(OBJS)
+	$(CC) -o $@ $(OBJS) $(LFLAGS)
 
-# Uebersetzung des Parsers aus Aufgabe 1
-parsemain: parsemain.o init.o error.o lexan.o symbol.o parser.o
-	$(CC) $(LDFLAGS) -o $@ $^
+.PHONY : depend
+depend:
+	$(CC) -E -MM *.c > .depend
 
-# allgemeine Regel zur Erstellung eines Object-Files aus einer
-# C++ Quelldatei
-%.o: %.cxx
-	$(CC) $(CFLAGS) $(LDFLAGS) -c -o $@ $<
+-include .depend
 
-# da C++-Dateien Header-Dateien inkludieren, sollten deren Abhaengigkeiten
-# bekannt gemacht werden. Dies geschieht in den Dateien mit der Endung .d
-# GCC kann diese automatisch mit dem Schalter -M aus Quelltexten erstellen.
-%.d: %.cxx
-	$(CC) -M $(LDFLAGS)  $^ > $@
-
-# hier werden sie inkludiert
-# Falls sie nicht existieren, wird make das zwar melden, diese Dateien
-# jedoch sofort mit der obigen Regel erzeugen und einbinden.
-include  $(patsubst %.cxx,%.d,$(wildcard *.cxx))
-
-# Aufraeumen
-clean:
-	-rm $(patsubst %.cxx,%.d,$(wildcard *.cxx))
-	-rm $(patsubst %.cxx,%.o,$(wildcard *.cxx))
+.PHONY : clean
+clean :
+	rm $(OBJS)
