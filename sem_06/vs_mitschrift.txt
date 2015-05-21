@@ -493,3 +493,99 @@
 
     Problem: Minimierung von Datentransferkosten von Anfragen
     Problem: Dekomprition von Anfragen
+
+5.4. Verteilte Transaktionen
+5.4.1. Begriffe und Transaktionsmodell
+
+    Motivation: Transaktionsabwicklung wiederum notwendig: ACID!
+
+    Modell einer verteilten Transaktion:
+
+        - lokale Transaktionen, die auf lokalen Datenbank-Teilen arbeiten:
+          Participants, Worker kontrolliert durch einen lokalen
+          Transaktionsmanager
+
+        - ein Steuerprozess der das nebenläufige Arbeiten und eine eventuelle
+          Recovery aller lokalen Transaktionen steuert:
+            Koordinator
+
+        Zusätzlich: 1 oder mehrere lock-Manager
+        Grundprinzip:
+            Eine verteilte Transaktion endet, wenn entweder:
+                - alle ihre lokalen Transaktionen positiv terminieren
+                - (comitten) oder negativ terminieren (aborten).
+
+5.4.2. Concurrency Control durch 2PL-Verfahren
+                                  `-> Two Phase Locking
+    Praktisch verwendet: mehrere 2PL-Verfahren
+
+    Alle involvieren: ein oder mehrere Lock Manager
+                      ein Transaktions-Koordinator
+                      lokale Transaktions-Manager, die jeweils lokal das
+                          2PL-Protokoll umsetzten.
+
+    Zentralisiertes 2PC:
+
+        1 Transaktions-Koordinator
+        1 zentraler Lock-Manager
+        n lokale Transaktions-Manager
+
+        2 Varianten: mit oder ohne Replikate von DB-Elementen.
+
+    Primary Copy 2 PL
+
+        1 Transaktions-Koordinator
+        m Lock-Manager (m < n)
+        n lokale Transaktions-Manager
+
+    für jedes DB-Element:
+
+        1 Primary Copy
+        mehrere Slave Copies.
+
+    Verteiltes 2PL:
+
+        1 Transaktions-Koordinator
+        n lokale Lock-Manager
+        n lokale Transaktions-Manager
+
+5.4.3. Recovery Control durch 2PC-Verfahren
+
+    2PC stellt sicher: Global Commit Rule:
+        - eine verteilte Transaktion kann nur dann commiten,
+          wenn alle ihre lokalen Transaktionen committed haben
+        - eine verteilte Transaktion muss aborten, wenn nur eine ihrer lokalen
+          Transaktionen aborted.
+
+    2PC hat 2 Phasen:
+        Voting   Phase: Vorbereitung des Beendens einer verteilten Transaktion,
+        Decision Phase: Beenden einer verteilten Transaktion
+
+    Anlaufen des 2PC:
+        - Koordinator hat den Participants genug Zeit gegeben,
+        - Participants haben die Willen zur Beendigung signalisiert,
+        - der Anwender der verteilten Transaktion hat "Ende" signalisiert.
+
+    Beispiel für 2PC-Implementierung: CORBA-Transaktionsdienst.
+
+    In der Praxis benutzt: primary copy 2PL + 2PC
+                           für ACID mit einem verteilten System!
+
+6. Grundalgorithmen in verteilten Systemen
+6.1. Wahlalgorithmen
+
+    Problem: Koordination ausgefallen,
+             neuer Koordinator muss bestimmt/gewählt werden.
+
+             => Algorithmus für Neuwahl nötig.
+
+    Voraussetzung:
+        - jeder Prozess im VS hat eine eindeutige Nr. oder ID,
+          nach der die Prozesse geordnet werden können,
+        - jeder Prozess kennt die Num. bzw. IDs aller anderen Prozesse des VS
+        - kein Prozess im VS weiß über die Zustände der anderen Prozesse
+          Bescheid ("arbeitet gerade", "wartet", "ausgefallen", ...)
+
+    Algorithmen: Bully-Algorithmus
+                 Ring-Algorithmus: Participants sind in einem logischem Ring
+                                   organisiert.
