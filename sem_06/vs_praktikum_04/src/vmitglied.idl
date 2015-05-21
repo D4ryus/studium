@@ -1,0 +1,9 @@
+module Verein {
+	interface VereinsMitglied {
+		readonly attribute string mname;
+		struct verein {string vname; short vbeitrag;};
+		typedef sequence<verein> VereinSeq;
+		readonly attribute VereinSeq mvereine;
+		short erhoeheBeitrag(in string verein, in short erhoehung);
+	};
+};
