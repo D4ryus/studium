@@ -405,7 +405,7 @@
     Ablauf der CORBA-Kommunikation mit Hilfe eines IOR:
         Ein Client besitzt die IOR eines Server-Objekts, das es ansprechen
         möchte. Dann baut er mit Hilfe von Internet-Adresse und
-        Post-Nummer in der IOR eine TCP-Verbindung auf. Danach auf diese
+        Post-Nummer in der IOR eine TCP-Verbindung auf. Danach auf dieser
         TCP-Verbindung Austausch von Request und Reply. Dabei enthalten die
         Requests: Object Key des Server Objekts, die Operation und ihre
                   Argumente.
