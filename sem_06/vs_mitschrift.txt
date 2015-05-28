@@ -589,3 +589,93 @@
     Algorithmen: Bully-Algorithmus
                  Ring-Algorithmus: Participants sind in einem logischem Ring
                                    organisiert.
+
+6.2. Wechselseitiger Ausschluss
+
+    Grundbegriffe: Betriebsmittel
+                   Kritischer Bereich (kritischer Abschnitt)
+                     `--> Benutzung: Eintritt
+                                     Arbeiten u.a. Zugriffe auf Betriebsmittel
+
+    Anforderungen an Algorithmen für den wechselseitigen Ausschluss:
+        - Exklusivität
+        - Liveness
+        - Reihenfolge-Einhaltung
+
+6.2.1. Zentraler Algorithmus
+
+    - Koordinator mit Warteschlange
+    - mehrere Konkurierende Prozesse
+    - Messages: Request- Grant- Release-Ressource
+
+    Nachteile:
+        - Koordinator ist zentraler Ausfallpunkt
+        - Anforderung der Reihenfolge-Einhaltung ist nicht garantiert.
+
+6.2.2. Verteiler Algorithmus
+
+    - Kein Zentraler Koordinator
+    - nur gleichberechtigte Anwendungsprozesse
+    - Messages: Request, OK
+    - Ablauf: Wenn ein Prozess eine Ressource anfordern möchte, schickt er ein
+        Request mit Prozessnummer, gewünschter Ressource mit Zeitstempel an alle
+        Prozesse des verteilten Systems, also auch an sich selbst. Benutzung
+        einer Ressource bedeutet, das ein Prozess sich im entsprechenden
+        kritischen Bereich befindet.
+        Reaktion auf ein Request:
+            - Befindet sich der Empfänger im angeforderten kritischen Bereich,
+              antwortet er nicht und stellt die Anforderung in seine
+              Warteschlange.
+            - Befindet sich der Empfänger nicht im kritischen Bereich und will
+              auch nicht in ihn eintreten, sendet er eine OK-Nachricht zurück,
+            - Befindet er sich nicht im kritischen Bereich, will aber in ihn
+              eintreten so vergleicht er den Zeitstempel aus dem eingehenden
+              Request mit dem Zeitstempel aus der Request-Nachricht, die er
+              selbst an die anderen Komponenten des Systems und an sich selbst
+              geschickt hat. Je nach Zeitstempel sendet er eine OK-Nachricht
+              zurück (eigene Anforderung nicht zurückgestellt), oder er sendet
+              nicht und stellt eigene Anforderung in die eigene Warteschlange
+              (eigene Anforderung hat Vorrang).
+    - Nachteile:
+        - hohes Nachrichtenaufkommen (Requests, OKs)
+        - alle Prozesse sind kritische Ausfallpunkte
+
+6.2.3. Ring-Algorithmus
+
+    - Token: Exklusivrecht auf kritischen Bereich
+    - Token kreist in logischem Ring.
+    - Nachteile:
+        - Reaktion bei Token-Verlust
+        - Repräsentiert den Besitz eines Tokens
+        - Exklusivrecht auf: - eine
+                             - mehrere kritischen Bereiche im System?
+                             - alle
+
+6.3. Deadlocks
+
+    problematische Systemzustände
+    4 notwendige Bedingungen für Deadlocks
+    Deadlock-Behandlung:
+        - Deadlock-Erkennung und -Auflösung
+        - Deadlock-Vermeidung
+        - Deadlock-Verhinderung
+
+6.3.1. Deadlock-Erkennung mit Auflösung
+
+    Belegung-Anforderung-Graph:
+        - zwei Arten von Knoten: Prozesse, Ressourcen
+        - zwei Arten von Kanten: P -> R => Prozess hat Ressource angefordert
+                                 R -> P => Ressource ist von Prozess belegt
+                                           worden
+
+    Deadlock-Erkennung durch zentrales Verfahren:
+        - beteiligte Systeme (Komponenten) senden ihren lokalen
+          Belegungs-Anforderungs-Graphen an einen Zentralen Koordinator.
+          Koordinator kombiniert die Graphen und sucht nach Zyklen. Bei
+          Vorhandensein eines Zyklus: Abbruch mindestens eines Prozesses.
+
+    Deadlock-Erkennung durch verteiltes Verfahren: Edge Chasing.
+     `--> verwendet: Management-Nachricht: Probe
+
+    Ein involvierter Prozess erkennt über den Empfang einer Probe, dass ein
+    Zyklus vorliegt, und beendet sich.
