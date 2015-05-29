@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!ENTITY at "@">
+<!NOTATION JPG PUBLIC "JPG 1.0">
+<!NOTATION GIF PUBLIC "GIF 1.0">
+<!ENTITY genjpg SYSTEM "genjpg.jpg" NDATA JPG>
+<!ENTITY gengif SYSTEM "genjpg.gif" NDATA GIF>
+<!ENTITY StringElem "(#PCDATA)">
+<!ENTITY StringAttr "CDATA">
+
+<!ELEMENT Preisübersicht (Tankstelle+, Pächter+, Mineralölgesellschaft*, Option?)>
+        <!ATTLIST Preisübersicht datum CDATA #REQUIRED>
+
+<!ELEMENT Tankstelle (Name, Adresse, Geodaten, Beschreibung*, Preis*)>
+        <!ATTLIST Tankstelle pid IDREF #REQUIRED>
+        <!ATTLIST Tankstelle mid IDREF #REQUIRED>
+        <!ATTLIST Tankstelle rating (1|2|3|4|5|6) #IMPLIED>
+        <!ATTLIST Tankstelle pic CDATA #IMPLIED>
+
+<!ELEMENT Preis (#PCDATA)>
+        <!ATTLIST Preis Kraftstoffart (E10|Super|Diesel|SuperPlus) #REQUIRED>
+
+<!ELEMENT Mineralölgesellschaft (Name, Adresse, Email)>
+
+<!ELEMENT Option ANY>
+<!ELEMENT Geodaten (Länge, Breite)>
+<!ELEMENT Pächter (Name, Adresse)>
+<!ELEMENT Email (#PCDATA)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Adresse (#PCDATA)>
+<!ELEMENT Länge (#PCDATA)>
+<!ELEMENT Breite (#PCDATA)>
+<!ELEMENT Beschreibung (#PCDATA)>

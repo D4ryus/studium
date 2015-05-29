@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Preisübersicht SYSTEM "bpml.dtd">
+<Preisübersicht datum="12.12.12">
+        <Tankstelle pid="id1" mid="id2" rating="5">
+                <Name>T1</Name>
+                <Adresse>A1</Adresse>
+                <Geodaten>
+                        <Länge>123</Länge>
+                        <Breite>321</Breite>
+                </Geodaten>
+                <Beschreibung>asdf</Beschreibung>
+                <Preis Kraftstoffart="Diesel">80.00</Preis>
+                <Preis Kraftstoffart="E10">100.00</Preis>
+                <Preis Kraftstoffart="Super">110.00</Preis>
+                <Preis Kraftstoffart="SuperPlus">120.00</Preis>
+        </Tankstelle>
+        <Pächter>
+                <Name>Hans</Name>
+                <Adresse>A2</Adresse>
+        </Pächter>
+        <Mineralölgesellschaft>
+                <Name>M1</Name>
+                <Adresse>str3</Adresse>
+                <Email>something@anotherthing.net</Email>
+        </Mineralölgesellschaft>
+        <Option>none</Option>
+</Preisübersicht>
