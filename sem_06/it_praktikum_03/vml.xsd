@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.w3schools.com"
+        xmlns="http://www.w3schools.com"
+        elementFormDefault="qualified">
+
+    <xs:simpleType name="Wahltypen">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Landtagswahl" />
+            <xs:enumeration value="Bundestagswahl" />
+            <xs:enumeration value="Europawahl" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Prozent">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.00"/>
+            <xs:maxInclusive value="100.00"/>
+            <xs:totalDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="Wahl">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Wahltag" type="xs:date"/>
+                <xs:element name="Wahlbeginn" type="xs:time"/>
+                <xs:element name="Wahlende" type="xs:time"/>
+                <xs:element name="Partei" minOccurs="2" maxOccurs="100">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Name" type="xs:string"/>
+                            <xs:element name="Kandidat" minOccurs="3" maxOccurs="25">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Name" type="xs:string"/>
+                                        <xs:element name="Geburtsdatum" type="xs:date"/>
+                                        <xs:element name="Beruf" type="xs:string"/>
+                                        <xs:element name="Listenplatz" type="xs:integer"/>
+                                        <xs:element name="Erststimmen" type="Prozent"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Wahlergebniss">
+                    <xs:complexType mixed="true">
+                        <xs:sequence>
+                            <xs:element name="Zweitstimme" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="Prozent">
+                                            <xs:attribute name="partei" type="xs:IDREF"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Wahltyp" type="Wahltypen"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

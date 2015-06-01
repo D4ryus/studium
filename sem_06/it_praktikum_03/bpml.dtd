@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!ENTITY at "@">
+<!ENTITY AT "&#x040;">
 <!NOTATION JPG PUBLIC "JPG 1.0">
 <!NOTATION GIF PUBLIC "GIF 1.0">
 <!ENTITY genjpg SYSTEM "genjpg.jpg" NDATA JPG>
@@ -23,10 +23,10 @@
 
 <!ELEMENT Option ANY>
 <!ELEMENT Geodaten (Länge, Breite)>
+<!ELEMENT Länge (#PCDATA)>
+<!ELEMENT Breite (#PCDATA)>
 <!ELEMENT Pächter (Name, Adresse)>
 <!ELEMENT Email (#PCDATA)>
 <!ELEMENT Name (#PCDATA)>
 <!ELEMENT Adresse (#PCDATA)>
-<!ELEMENT Länge (#PCDATA)>
-<!ELEMENT Breite (#PCDATA)>
 <!ELEMENT Beschreibung (#PCDATA)>
