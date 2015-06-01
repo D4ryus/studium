@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <style type="text/css">
+      input[type="number"] {
+        width:50px; height:30px;
+        text-align:center;
+        margin:3px;
+        float:left;
+      }
+      .pluss, .equals {
+        margin:3px;
+        float:left;
+      }
+      output {
+        display:block;
+        border:1px solid #333333;
+        border-radius:5px;
+        min-width:25px; height:25px;
+        margin:3px; padding:2px;
+        text-align:center;
+        background:#000000;
+        color:#ffffff;
+        float:left;
+      }
+    </style>
+    <script type="text/javascript">
+function save() {
+  var form = document.getElementById("calc");
+  var table = document.getElementById("myTable");
+  var row = table.insertRow(0);
+  var cell = row.insertCell(0);
+  cell.innerHTML = form.elements["z"].value;
+}
+function del() {
+  var table = document.getElementById("myTable");
+  table.deleteRow(1);
+}
+function updateOutput() {
+  var form = document.getElementById("calc");
+  form.elements["z"].value = (parseInt(form.elements["x"].value)
+      + parseInt(form.elements["y"].value)).toFixed(1);
+}
+    </script>
+  </head>
+  <body>
+    <form id="calc" oninput="updateOutput()">
+      <input name="x" value="0" type="number">
+      <div class="pluss"> + </div>
+      <input name="y" value="0" type="number">
+      <div class="equals"> = </div>
+      <output name="z" for="x y">0</output>
+    </form>
+    <br></br>
+    <button onclick="save()">Save</button>
+    <button onclick="del()">Delete</button>
+    <br></br>
+    <table id="myTable">
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+    <br></br>
+  </body>
+</html>
