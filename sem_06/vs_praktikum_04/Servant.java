@@ -1,10 +1,16 @@
+import java.util.LinkedList;
+
 import Verein._VereinsMitgliedImplBase;
-import Verein.VereinsMitgliedPackage.verein;
+import Verein.VereinsMitgliedPackage.*;
 
 public class Servant extends _VereinsMitgliedImplBase {
 	private static final long serialVersionUID = -2832463024059762637L;
 	private String mname;
-	private verein[] mvereine;
+	LinkedList<verein>mvereine = new LinkedList<verein>();
+
+	public Servant(String mname) {
+		this.mname = mname;
+	}
 
 	@Override
 	public String mname() {
@@ -13,7 +19,7 @@ public class Servant extends _VereinsMitgliedImplBase {
 
 	@Override
 	public verein[] mvereine() {
-		return mvereine;
+		return mvereine.toArray(new verein[mvereine.size()]);
 	}
 
 	@Override
@@ -25,5 +31,9 @@ public class Servant extends _VereinsMitgliedImplBase {
 			}
 		}
 		return 0;
+	}
+
+	public void addVerein(String verein) {
+		mvereine.push(new verein(verein, (short)0));
 	}
 }

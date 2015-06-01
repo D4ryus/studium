@@ -1,6 +1,6 @@
 #idlj -fall -OldImplBase vmitglied.idl
 
-javac *.java Verein/*.java
+#javac *.java Verein/*.java
 
 tnameserv -ORBInitialPort 1050
 
