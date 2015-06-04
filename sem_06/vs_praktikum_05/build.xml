@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="."
+         default="build"
+         name="vs_05">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target"     value="1.7"/>
+    <property name="source"     value="1.7"/>
+
+    <property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="bin"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="javadoc.dir" value="${build.dir}/doc"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+
+    <path id="vs_05.classpath">
+        <pathelement location="${build.dir}"/>
+    </path>
+
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <copy includeemptydirs="false"
+              todir="${build.dir}">
+            <fileset dir="${src.dir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="build"
+            depends="init">
+        <javac debug="true"
+               debuglevel="${debuglevel}"
+               destdir="${build.dir}"
+               includeantruntime="false"
+               source="${source}"
+               target="${target}">
+            <src path="${src.dir}"/>
+            <classpath refid="vs_05.classpath"/>
+        </javac>
+    </target>
+
+    <!-- <target name="bank"> -->
+    <!--     <java classname="Bank" -->
+    <!--             classpath="${build.dir}" -->
+    <!--             fork="true" -->
+    <!--             failonerror="true"> -->
+    <!--     </java> -->
+    <!-- </target> -->
+
+    <!-- <target name="customer"> -->
+    <!--     <java classname="CustomerClient" -->
+    <!--             classpath="${build.dir}" -->
+    <!--             fork="true" -->
+    <!--             failonerror="true"> -->
+    <!--     </java> -->
+    <!-- </target> -->
+
+    <!-- <target name="taxOffice"> -->
+    <!--     <java classname="TaxOfficeClient" -->
+    <!--             classpath="${build.dir}" -->
+    <!--             fork="true" -->
+    <!--             failonerror="true"> -->
+    <!--     </java> -->
+    <!-- </target> -->
+
+    <target name="jar">
+        <jar destfile="${jar.dir}/vs_05.jar"
+             filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class"
+                           value="Main"/>
+                <attribute name="Class-Path"
+                           value="."/>
+            </manifest>
+            <fileset dir="${build.dir}"/>
+            <zipfileset excludes="META-INF/*.SF"/>
+        </jar>
+    </target>
+</project>
