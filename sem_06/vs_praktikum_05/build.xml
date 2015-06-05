@@ -44,30 +44,6 @@
         </javac>
     </target>
 
-    <!-- <target name="bank"> -->
-    <!--     <java classname="Bank" -->
-    <!--             classpath="${build.dir}" -->
-    <!--             fork="true" -->
-    <!--             failonerror="true"> -->
-    <!--     </java> -->
-    <!-- </target> -->
-
-    <!-- <target name="customer"> -->
-    <!--     <java classname="CustomerClient" -->
-    <!--             classpath="${build.dir}" -->
-    <!--             fork="true" -->
-    <!--             failonerror="true"> -->
-    <!--     </java> -->
-    <!-- </target> -->
-
-    <!-- <target name="taxOffice"> -->
-    <!--     <java classname="TaxOfficeClient" -->
-    <!--             classpath="${build.dir}" -->
-    <!--             fork="true" -->
-    <!--             failonerror="true"> -->
-    <!--     </java> -->
-    <!-- </target> -->
-
     <target name="jar">
         <jar destfile="${jar.dir}/vs_05.jar"
              filesetmanifest="mergewithoutmain">
