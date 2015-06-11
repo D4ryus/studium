@@ -166,7 +166,7 @@
                    C i (t)  : lokale Zeit eines Rechners i.
     Charakterisierung einer Rechneruhr: μ : universelle Abweichungsrate einer
                                            Rechneruhr
-    Rechnerstellen gibt an:  mit: 1 - <= dc/dt <= 1t 
+    Rechnerstellen gibt an:  mit: 1 - <= dc/dt <= 1t
 
     Bedeutung: nach 1 Zeitintervall (z.B. 1 sec) weicht die Rechneruhr um maximal
                Zeiteinheiten von der physikalischen Uhr ab.
@@ -323,7 +323,7 @@
     CORBA-Spezifikation: OMG spezifizierte die OMA (Object Mgt. Arch.)
 
     OMA ---> Core Object Modell
-         `-> Reference Modell ORB (Object Request Broker) und 
+         `-> Reference Modell ORB (Object Request Broker) und
 
     Architektur des ORBs: CORBA: Common ORB Architecture
 
@@ -679,3 +679,106 @@
 
     Ein involvierter Prozess erkennt über den Empfang einer Probe, dass ein
     Zyklus vorliegt, und beendet sich.
+
+7. Replikation und Konsistenz
+7.1. Grundlagen
+
+    Replikation: Halten und Verwalten von mehreren Exemplaren von Daten.
+                                                    `--> Replikate
+
+    Konsistenz: Daten in einem VS sind konsistent wenn sie innerhalb des VS
+                widerspruchsfrei sind. D.h.: sie stoßen nicht gegen ein
+                definiertes Konsistenzmodell
+
+    Replikationsvorteile: Referenz-Verbesserung
+                          Verfügbarkeit
+                          Fehlertoleranz
+
+    Replikationsnachteil: Komplexität
+
+7.2. Konsistenzmodelle
+
+    System-zentrierte (Daten-zentrierte) Konsistenzmodelle:
+        stellen eine systemweit konsistente Sicht auf die Daten in einem VS
+        bereit.
+
+    Benutzer-zentrierte (Client-zentrierte) Konsistenzmodelle:
+        bieten Konsistenz-formatieren (nur) aus Sicht eines einzelnen
+        Benutzers.
+
+7.2.1. System Kons-Modelle
+
+    Strikte (strenge) Konsistenz:
+        Jede Leseoperation auf ein Datenelement x liefert das Ergebnis der
+        letzten Schreiboperation auf x zurück
+        ... zu streng um praktikabel zu sein.
+
+    Sequenzielle Konsistenz:
+        Wenn mehrere nebenläufige Prozesse auf Daten zugreifen, dann ist jede
+        Folge von Lese- und Schreiboperationen akzeptabel, solange alle
+        Prozesse dieselbe Folge setzen.
+
+    Kausale Konsistenz:
+        Die Resultate von Schreiboperationen, die potentiell kausal voneinander
+        abhängen, müssen für alle Prozesse in derselben Reihenfolge sichtbar
+        sein.
+
+        Beispiel für potentiell kausal abhängige Schreiboperationen:
+
+            W1(x)a; R2(x)a; ...; W2(x)b               <-.
+               `-------´     `--> Berechnung von b      |
+                kausal       auf Basis von a (möglich)  |
+               abhängig                                 |
+                  `-------------------------------------´
+                  möglich: die kausale Abhängigkeit: potentiell kausal abhängig
+
+    Es gilt: Kausal K  < Sequentielle K < Strenge K.
+
+    Weitere K-Modelle: linearisierbarkeit - K.
+                       FIFO - K.
+                       Schwache - K.
+                       Freigabe - K.
+                       Eintritte - K.
+
+7.2.2. Benutzer-zentrierte Konsistenzmodelle
+
+    Eventuelle Konsistenz:
+        Alle Replikate in einem VS werden irgendwann konsistent, wenn längere
+        Zeit keine von Clients ausgehender Aktualisierung statt findet.
+
+    Monotone Lesekonsistenz:
+        Wenn ein Benutzer den Wert eines Datenelements x liest (egal welches
+        Replikat)  gilt jede nachfolgende Leseoperation auf x durch diesen
+        Benutzer, egal auf welcher Replikat von x immer denselben oder einen
+        aktuellen Wert zurück.
+
+    Monotone Schreibkonsistenz:
+        Eine Schreiboperation durch einen Benutzer auf ein Datenelement x muss
+        auf allen Replikationen von x abgeschlossen sein bevor ein nachfolgende
+        Schreiboperation auf x durch denselben Benutzer, egal auf welchem
+        Replikat, stattfindet.
+
+7.3. Verteilung- und Konsistenzprotokolle
+
+    V-Protokoll: Protokoll, das für die Verteilung von Aktualisierungen von
+                 Replikaten in einem Verteilten System sorgt.
+
+    Beispiel: Primär-Backup-Protokoll
+    Phasen: Anforderung: Client initiiert Schreibop.
+            Weiterleitung: Schreibanforderung wird an Primary Copy
+                           weitergeleitet
+            Anführung: Die Anforderung geht an die lokalen Kopien und wird
+                       bestätigt.
+            Bestätigung: Schreib-Op wird dem schreibenden Client bestätigt.
+
+
+            Das Primäre Debug Protokoll implementiert die sequentielle
+            Konsistenz
+
+    Quorum-basierte Replikation:
+        Von lesen bzw. Schreiben müssen Cleitns sich eine ausreichende Menge
+        von Berechtigungen zum Zugriff auf Replikate beschaffen (sog. Quronen)
+
+        Bedingungen: Schreibquoronen Nw > N²/2 <-- Anzahl der Rplikate
+                                                   von x im VS
+                     Lesequoronen Nw + Lesequoronen Nr > N
