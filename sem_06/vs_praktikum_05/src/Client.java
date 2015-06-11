@@ -126,7 +126,7 @@ class Client extends UnicastRemoteObject implements ClientInterface {
                         continue;
                     }
                     server.registerClient(address, port, name);
-                    System.out.println ("Registert on Server" + lines[3]);
+                    System.out.println ("Registert on Server " + lines[3]);
                 case "update":
                     if (server == null) {
                         System.out.print("not registered on any server\n" );
@@ -148,12 +148,10 @@ class Client extends UnicastRemoteObject implements ClientInterface {
                     System.out.print("Connection to Server closed\n");
                     break;
                 case "quit":
-                    if (server == null) {
-                        System.out.print("not registered on any server\n" );
-                        continue;
+                    if (server != null) {
+                        server.deregisterClient(name);
+                        server = null;
                     }
-                    server.deregisterClient(name);
-                    server = null;
                     System.out.print("Connection to Server closed\n");
                     System.exit(1);
                 default:

@@ -69,12 +69,17 @@ class Server extends UnicastRemoteObject implements ServerInterface {
 
     @Override
     public void deregisterClient(String clientName) throws RemoteException {
+        int i = 0;
         for (ClientInterface c : clients) {
             if (c.getName().equals(clientName)) {
-                clients.remove(clientName);
+                clients.remove(i);
                 System.out.println("Client deregistered: " + clientName);
+                for (ClientInterface cc : clients) {
+                    cc.notifyClientChange();
+                }
                 return;
             }
+            i++;
         }
     }
 
