@@ -782,3 +782,77 @@
         Bedingungen: Schreibquoronen Nw > N²/2 <-- Anzahl der Rplikate
                                                    von x im VS
                      Lesequoronen Nw + Lesequoronen Nr > N
+
+8. Verteilte Dateisysteme
+8.1. Einführung
+
+    Verteiltes Dateisystem: SW-System zur Unterstützung der gemeinsamen Nutzung
+    von Information, die ein in einem Rechnernetz verteiltem Dateien gespeichert
+    sind.
+
+    Zweck eines verteilten Dateissytems: transparenter entfernter Datenzugriff
+
+    stellt zur Verfügung: Dateien (File Service)
+
+    Beispiele: NFS: Network File System
+               DFS: Distributed File System
+
+8.2. NFS
+
+    Prinzip: Beim NFS stellt ein File Server Teile seines Dateisystems anderen
+             Rechnern zum transparenten Zugriff zur Verfügung. D.h.: Ein File
+             Server exportiert an andere Rechner ein Verzeichnis zusammen mit
+             seinen Unterverzeichnissen und Dateien. Ein Client-Rechner kann
+             dieses Verzeichnis logisch in sein Dateisystem einhängen.
+
+8.2.1. NFS-Architektur-Modell:
+
+    Verteiltes File-System zur Differenzierung der Zugriffe auf lokale bzw.
+    entfernte Dateien.
+
+    NFS-Client / NFS-Server
+    Kommunikation über: RPC (Remote Procedure Call)
+
+8.2.2. NFS-Dateisystem-Modell
+
+    - Dateien besitzen unter NFS Attribute
+    - NFS enthält Dateisystem Operationen, sehr unterschiedlich für die
+      gängigen NFS-Versionen 3 und 4.
+    - Datei-Handle: Referenz auf eine Datei in einem (möglicherweise
+      entfernten Dateisystem.
+        - identifiziert eine über NFS zugreifbare Datei (kann auch Verzeichnis
+          sein) eindeutig.
+        - wird von (File -) Server erzeugt.
+        - wird von Client benutzt, ist unter für ihn nicht lesbar (opaque).
+
+8.2.3. NFS Mount Protokoll
+
+    Zweck: Einhängen eines entferntes Teilbaums in ein lokales Verzeichnis:
+           Mount Point.
+
+    Mittel: Mount Kommando.
+            Format: mount -t nfs [...] server:/directorypath mountpoint
+
+    NFS-Version 3 ist nicht sehr effizient: lookup() remote `
+                                            ...              | viele entfernte
+                                            lookup() remote  | Operationen
+                                            read()   remote ´
+
+    Höhere Performance bei NFS Version 4: zusammengesetzte Prozeduren.
+
+8.3. DFS
+
+    NFS: ermöglicht Zugriff auf entfernte Dateien ohne ihren physikalischen
+         Standort zu ändern.
+
+    DFS: Client kopiert gewünschte Dateien auf seinen Rechner.
+
+    DFS-Begriffe: - DFS-Client: Maschine die auf Dateien in einem File Set File
+                    Servers zugreift
+                  - DFS-Server: Maschine die Dateien eines File Set's zur
+                    Verfügung stellt.
+
+    DFS-Fileorganisation: Dateien in Verzeichnissen in File Sets und Aggregation
+
+    File-Zugriff über: File Access Model      ,--> "exklusiver Besitz"
+                       File Sharing Model (verwendet Tokens)
