@@ -856,3 +856,86 @@
 
     File-Zugriff über: File Access Model      ,--> "exklusiver Besitz"
                        File Sharing Model (verwendet Tokens)
+
+9. Verteilte Hashtabellen (Distributed Hash Tables, DHTs)
+9.1. Einführung Hashing
+
+    Hashfunktion: Abb.: große Schlüsselmenge -> kleine Zielmenge (Menge von
+                                                Hashwerten, Hashräumen)
+                  h: K -> Z
+                  h(k) = k und p (p i.H. Primzahl)
+
+    Anwendungsgebiete: Speicherzuweisung an zu speichernde Objekte
+                       Prüfsummenbezeichnung.
+
+    Eine Hashfunktion h:K -> Z liefert eine Hashtabelle der Größe |Z|.
+
+9.2. Konsistentes Hashing
+
+    Voraussetzung: viele Daten, viele DB-Server
+    -> Probleme: Welche Server sollen welche Daten speichern?
+                 Wie werden Daten bei neu hinzukommenden bzw. ausfallenden
+                 Servern neu verteilt?
+
+    -> Verbesserung: konsistentes Hashing
+
+    Prinzip: Sowohl die Server (identifiziert durch einen Schlüssel) als auch
+             die Daten (ebenfalls identifiziert durch einen Schlüssel) werden
+             über eine eigene Hashfunktion auf einen vorgegebenen Hashraum
+             abgebildet. Dann werden die Server für ganz bestimmte Bereiche
+             ("um ihrerm Hashwert herum") verantwortlich gemacht und ihre Daten
+             sind die jeweils in diesem Bereich gespeichert.
+
+9.3. DHTs
+
+    Prinzip: viele Daten werden auf mehreren Servern gespeichert.
+             Daten sollen mit Hilfe von Hashing verteilt und gefunden werden
+             Die hierfür verwendete Datenstruktur (~Hashtabelle) soll verteilt
+             sein. => verteilte Hashtabelle (Datenstruktur)
+
+    Andere Def. Hastabelle: Das verteilte System aus vielen Datenbankservern
+                            mit dieser Datenstruktur.
+
+    Beispiele für solide Segmente: Chord, Pastry, CAN, ...
+
+9.4. Chord
+
+    Schlüsselraum: {0, ..., 2^n -1} m = Bitlänge des Schlüssels.
+
+    Ein Server speichert die Daten mit allen Schlüsseln für die er
+    verantwortlich ist
+
+    Hashfunktion: h Server: {1, ..., n} -> {0, ...., 2^m -1}
+                  h Daten:  {1, ..., k} -> {0, ...., 2^m -1}
+
+    Speicherprinzip:
+
+        +--------------+  im Uhrzeigersinn   +-------------------------+
+        | Datenelement |-------------------->| verantwortlicher Server |
+        +--------------+                     +-------------------------+
+
+        Der für sein Datenelement verantwortliche Server ist derjenige, der im
+        Uhrzeigersinn ausgehend von Datenelement als erster angetroffen wird.
+
+    Chord implementiert:
+        - Such-Prozedur für Daten
+        - Einfüge/Herausnahme - Prozedur für Server
+        - "Stabilisierungstsprozedur"
+
+    durch sog. Fingertabellen:
+        Einträge: (Index, Sprungadresse, nächster Server)
+                   |      |                    |
+                   i      (i+2^id) mod 2^m     successor
+
+    Such-Prozedur für Daten:
+        Wenn ein Server ein Request für ein Datenelement id erhielt:
+            - prüft er zunächst, ob es bei ihm lokal gespeichert ist.
+            - andernfalls prüft er, ob sein Nachfolger (1. Zeile Fingertabelle)
+              verantwortlich ist.
+            - andernfalls reicht er den Request an den Server mit der größten
+              Sprungadresse weiter, die id nicht übersteigt, dieser arbeitet
+              analog mit der Such-Prozedur.
+
+9.5. Verwendung von DHTs
+
+    Amazon Dynamo, BitTorrent, Twitter, ...
