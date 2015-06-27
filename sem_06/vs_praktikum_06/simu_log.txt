@@ -1,0 +1,97 @@
+starting simulation.
+
+starting P1
+7732>> started client with PID 7732
+    multicast: register 7732
+
+starting P2
+7740>> started client with PID 7740
+    multicast: register 7740
+
+starting P3
+7749>> started client with PID 7749
+    multicast: register 7749
+
+starting P4
+7758>> started client with PID 7758
+    multicast: register 7758
+
+    multicast: register_ok 7732
+    multicast: register_ok 7740
+    multicast: register_ok 7732
+    multicast: register_ok 7749
+    multicast: register_ok 7740
+    multicast: register_ok 7732
+
+sending request from P1 (10 sec) tick 0.0
+    multicast: request 318197806 1 1435398959.798158
+7732>> wanted_list:
+    id: 1
+        msg_id: 318197806
+        block_time: 10000ms
+        timestamp: 1435398959.798158
+        ok_needed: 4
+        ok_count: 0
+    multicast: request_ok 318197806 1
+    multicast: request_ok 318197806 1
+    multicast: request_ok 318197806 1
+    multicast: request_ok 318197806 1
+7732>> blocking 1, for 10000ms
+
+sending request from P2 (2 sec)  tick 4.8
+    multicast: request 2135153997 1 1435398964.599691
+7740>> wanted_list:
+    id: 1
+        msg_id: 2135153997
+        block_time: 2000ms
+        timestamp: 1435398964.599691
+        ok_needed: 4
+        ok_count: 0
+    multicast: request_ok 2135153997 1
+    multicast: request_ok 2135153997 1
+    multicast: request_ok 2135153997 1
+
+sending request from P4 (3 sec)  tick 4.9
+    multicast: request 1176608649 1 1435398964.701228
+7758>> wanted_list:
+    id: 1
+        msg_id: 1176608649
+        block_time: 3000ms
+        timestamp: 1435398964.701228
+        ok_needed: 4
+        ok_count: 2
+    multicast: request_ok 1176608649 1
+    multicast: request_ok 1176608649 1
+
+sending request from P3 (5 sec)  tick 5.2
+    multicast: request 1499883111 1 1435398965.260300
+7749>> wanted_list:
+    id: 1
+        msg_id: 1499883111
+        block_time: 5000ms
+        timestamp: 1435398965.260300
+        ok_needed: 4
+        ok_count: 0
+    multicast: request_ok 1499883111 1
+
+7732>> removed resource 1 from blocked list
+    multicast: request_ok 2135153997 1
+    multicast: request_ok 1176608649 1
+    multicast: request_ok 1499883111 1
+
+7740>> blocking 1, for 2000ms
+7740>> removed resource 1 from blocked list
+    multicast: request_ok 1176608649 1
+    multicast: request_ok 1499883111 1
+
+7758>> blocking 1, for 3000ms
+7758>> removed resource 1 from blocked list
+    multicast: request_ok 1499883111 1
+
+7749>> blocking 1, for 5000ms
+7749>> removed resource 1 from blocked list
+
+7732>> sending deregister
+7740>> sending deregister
+7749>> sending deregister
+7758>> sending deregister
