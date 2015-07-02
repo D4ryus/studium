@@ -939,3 +939,61 @@
 9.5. Verwendung von DHTs
 
     Amazon Dynamo, BitTorrent, Twitter, ...
+
+10. Lokalisionsdatenbanken
+10.1. Einführung
+
+    Motiv: In Mobilfunknetzen sind Lokalisationsinformationen zu speichern:
+
+    Lokations-Datenbanken: Datenbasen, die die Aufenthaltsorte (Location Areas)
+                           von mobilen Geräten speichert.
+
+    Anforderung: Schnelle Suche nach mobile Geräte
+                 Effiziente Aktualisierung
+
+    Lok-DB sind i.A. verteilt.
+
+    Model: Lokationsarchitektur: innere Knoten können lok-DB besitzen,
+            Blätter: Zugangspunkte für mobile Geräte
+
+    lok-DB können enthalten:
+        "genau"    Info: Zugangspunkt eines mobilen Gerätes
+        "ungenaue" Info: z.B. die aktuelle Location Area eines mobilen Geräts
+        "Verweis"  Info: Hinweis auf weitere Lok-Infos.
+
+10.2. Basisoperationen auf Lokationsdatenbanken
+
+    Suchen eines mobilen Teilnehmers/Gerätes
+        - im Baum von unten nach oben bis zum ersten gemeinsamen Knoten von
+          rufenden mit gerufenen mobilen Gerät
+        - aufwendig, wenn die mobilen Geräte weit auseinander liegen
+        - schnell bei möglichst vielen "genauen" Informationen.
+
+    Wechseln der Lokation
+        - Knoten im Baum müssen auf zu ändernde Einträge durchsucht werden
+        - es kann geändert werden: lokation selbst
+                                   die Art des Eintrags: "genau", "ungenau",
+                                   "Verweis"
+
+10.3. Optimierung der Basisoperationen
+
+    Replikation von lok-Infos: Redundanz
+        Beispiel: Häufiger Aufruf von Zugangspunkt 15 auf mobiles Gerät x
+                  (Folie 10.4)
+            => günstig: Lok-Info im Knoten L: (x, 2)
+
+    Caching von lok-Infos:
+        Aufgrund eines Verbindungsaufbau-Vorgangs wird eine lok-Info zusätzlich
+        in einer lok-DB gepeichert.
+
+        Beispiel: 1. Verbindungsaufbau von Zugangspunkt 15 auf Zugangspunkt 2
+                      => lok-Info für das Mobilgerät an Zugangspunkt 2 ist
+                         bekannt bei 15 oder Knoten L => Speicherung von (x, 2)
+
+    Nachsendeauftrag:
+
+        Verweis, der beim (temporären) Lokationswechsel eines mobilen Gerätes
+        vom Benutzer angelegt wird, mit der Absicht begrenzter Gültigkeitsdauer
+
+    -> Praxis (GSM):
+        2 Hierarchieebenen von lok-DB: HCR VLRs
