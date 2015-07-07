@@ -847,12 +847,13 @@
 
     DFS: Client kopiert gewünschte Dateien auf seinen Rechner.
 
-    DFS-Begriffe: - DFS-Client: Maschine die auf Dateien in einem File Set File
-                    Servers zugreift
+    DFS-Begriffe: - DFS-Client: Maschine die auf Dateien in einem File Set des
+                                File Servers zugreift
                   - DFS-Server: Maschine die Dateien eines File Set's zur
-                    Verfügung stellt.
+                                Verfügung stellt.
 
-    DFS-Fileorganisation: Dateien in Verzeichnissen in File Sets und Aggregation
+    DFS-Fileorganisation: Dateien in Verzeichnissen in File Set's und
+                          Aggregation
 
     File-Zugriff über: File Access Model      ,--> "exklusiver Besitz"
                        File Sharing Model (verwendet Tokens)
@@ -997,3 +998,4 @@
 
     -> Praxis (GSM):
         2 Hierarchieebenen von lok-DB: HCR VLRs
+
