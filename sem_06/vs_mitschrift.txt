@@ -29,7 +29,7 @@
 1. Remote Method Invocation (RMI)
 1.1. Einführung
 
-    CIS-Modell
+    C/S-Modell
 
     Server-Aufgaben: erzeugt entfernte Objekte
                      macht ihre Existenz bekannt
@@ -86,7 +86,7 @@
 
     RFC 5521,4506,1833
         RPCv2 XDR Postmapper
-    CIS-Modell
+    C/S-Modell
     Remote Procedure Call: Aufruf einer Prozedur in einem anderen Adressraum als
                            dem des Aufrufers.
     Remote Procedure
@@ -315,7 +315,7 @@
 4. CORBA
 4.1. Einführung
 
-    CIS-Systeme: - RMI
+    C/S-Systeme: - RMI
                  - RPC
                  - CORBA
                  - ESB
@@ -327,14 +327,14 @@
 
     Architektur des ORBs: CORBA: Common ORB Architecture
 
-    CORBA ---> IDC Schnittstelle
+    CORBA ---> IDL Schnittstelle
            `-> Komponenten
 
-4.2. Interface Description Language IDC
+4.2. Interface Description Language IDL
 
-    Definition: IDC ist eine Spezifikation für Schnittstellen.
+    Definition: IDL ist eine Spezifikation für Schnittstellen.
 
-    IDC-Eigenschaften:
+    IDL-Eigenschaften:
 
         - Unabhängigkeit von: Programmiersprachen,
                               Betriebssystemen,
@@ -343,7 +343,7 @@
         - Reine Spez. Sprache: keine Statements
                                keine Variablen
 
-    IDC-Grundkonstrukte: Types, ..., Operations, ..., Interfaces, ...
+    IDL-Grundkonstrukte: Types, ..., Operations, ..., Interfaces, ...
 
         Typen: Menge von Werten.
 
@@ -382,13 +382,13 @@
 
         Modules: dienen der Definition von Narmensbereichen, z.B. für mehrere
                  Interfaces
-                 ! Jedem IDC-Konstante entsprechende Programmsprachen Konstrukte
-                    zugeordnet, von daher: IDC Language Mapping.
+                 ! Jedem IDL-Konstante entsprechende Programmsprachen Konstrukte
+                    zugeordnet, von daher: IDL Language Mapping.
 
 4.3. Inter-ORB-Kommunikation
 4.3.1. Interoperable Object References
 
-    Notwendig für CIS-Kommunikation unter CORBA: IORs
+    Notwendig für C/S-Kommunikation unter CORBA: IORs
 
     Bestandteile: Schnittstelleninformation
                   Profildaten (häufig über Server-Objekte: Adressen...Object
@@ -998,4 +998,3 @@
 
     -> Praxis (GSM):
         2 Hierarchieebenen von lok-DB: HCR VLRs
-
