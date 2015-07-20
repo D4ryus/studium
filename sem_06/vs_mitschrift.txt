@@ -24,7 +24,8 @@
         - wird vom Object auf Client-Maschine benutzt über eine Schnittstelle
 
     Entfernte Methode: Methode eines entfernten Objektes
-    Entfernte Prozedur: Prozedur/Funktionen die auf einer Server Maschine aufgerufen wird.
+    Entfernte Prozedur: Prozedur/Funktionen die auf einer Server Maschine
+                        aufgerufen wird.
 
 1. Remote Method Invocation (RMI)
 1.1. Einführung
@@ -168,8 +169,8 @@
                                            Rechneruhr
     Rechnerstellen gibt an:  mit: 1 - <= dc/dt <= 1t
 
-    Bedeutung: nach 1 Zeitintervall (z.B. 1 sec) weicht die Rechneruhr um maximal
-               Zeiteinheiten von der physikalischen Uhr ab.
+    Bedeutung: nach 1 Zeitintervall (z.B. 1 sec) weicht die Rechneruhr um
+               maximal Zeiteinheiten von der physikalischen Uhr ab.
     Bedeutung: nach 1 Zeitintervall (z.B. 1 sec) weichen 2 Rechneruhren maximal
                2 μ Zeiteinheiten voneinander ab.
 
@@ -363,11 +364,13 @@
         Exceptions: Typen, deren Werte dem Aufrufer einer Operation das
                     Auftreten von Fehlern mitteilen.
 
-        Operations: Spezifikation von zu implementierenden Methoden bestehend aus:
+        Operations: Spezifikation von zu implementierenden Methoden bestehend
+                    aus:
 
                     - Rückgabetype, auch void möglich
                     - Name
-                    - Argumentteile (in Liste von Argumenten mit jeweils Mode, Typ)
+                    - Argumentteile (in Liste von Argumenten mit jeweils Mode,
+                      Typ)
                     - Exceptions (optional)
                     Spezialfall angegebene Operationen: Operationen
 
