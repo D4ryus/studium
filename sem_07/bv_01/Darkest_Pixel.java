@@ -28,24 +28,25 @@ public class Darkest_Pixel implements PlugInFilter {
 
 		ip_gray = get_gray_image(ip);
 		grayImage = new ImagePlus("Gray Image", ip_gray);
-		block_size = 19;
 
 		gd = new GenericDialog("Magic!");
-		gd.addNumericField("Block Size: ", block_size, 0);
+		gd.addNumericField("Block Size: ", 19, 0);
 		gd.showDialog();
 		if (gd.wasCanceled()) {
 			return;
 		}
-
 		block_size = (int)gd.getNextNumber();
 
 		time = System.currentTimeMillis();
+
 		darkest = get_darkest_pixel((byte [])ip_gray.getPixels(),
 									ip_gray.getWidth(),
 									ip_gray.getHeight(),
 									block_size);
-		System.out.print("time: "
-				+ ((System.currentTimeMillis() - time) / 1000.f) + "s\n");
+
+		System.out.printf("time: %fs\n",
+				(System.currentTimeMillis() - time) / 1000.f);
+
 		grayImage.setOverlay(get_block_overlay(darkest[0], darkest[1],
 				block_size));
 		grayImage.show();
